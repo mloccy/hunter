@@ -76,6 +76,19 @@ hunter_add_version(
     9c287054f1b2c0bb258c1a2832bad505f37fe30b
 )
 
+
+hunter_add_version(
+    PACKAGE_NAME
+    OpenEXR
+    VERSION
+    3.1.5-p1
+    URL
+    "https://github.com/mloccy/openexr/archive/refs/tags/hunter-3.1.5-r1.tar.gz"
+    SHA1
+    517b7c7015439fb412200ce3155c22f65b1f84db
+)
+
+
 hunter_cmake_args(
     OpenEXR
     CMAKE_ARGS
