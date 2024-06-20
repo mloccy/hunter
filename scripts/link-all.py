@@ -4,6 +4,7 @@ import argparse
 import os
 import sys
 import multiprocessing
+import math
 
 parser = argparse.ArgumentParser(description='File link script')
 
