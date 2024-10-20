@@ -64,6 +64,28 @@ hunter_add_version(
     a66c861dc95da15fb155f8852ede8a4492b7f929
 )
 
+hunter_add_version(
+    PACKAGE_NAME
+    abseil
+    VERSION
+    20230802.1
+    URL
+    "https://github.com/abseil/abseil-cpp/archive/20230802.1.tar.gz"
+    SHA1
+    45c33cf7a07016f87fc3863880027bef383e5509
+)
+
+hunter_add_version(
+    PACKAGE_NAME
+    abseil
+    VERSION
+    20240116.2
+    URL
+    "https://github.com/abseil/abseil-cpp/archive/20240116.2.tar.gz"
+    SHA1
+    bb8a766f3aef8e294a864104b8ff3fc37b393210
+)
+
 hunter_cmake_args(
     abseil
     CMAKE_ARGS

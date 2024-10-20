@@ -98,21 +98,58 @@ hunter_add_version(
     8b14c6f33af3ef0595094cee2e6567681a481737
 )
 
+hunter_add_version(
+    PACKAGE_NAME
+    ceres-solver
+    VERSION
+    "2.2.0-p0"
+    URL
+    "https://github.com/cpp-pm/ceres-solver/archive/refs/tags/v2.2.0-p0.tar.gz"
+    SHA1
+    34500d5f4f536d5ea12740d04c6f0a086a735ccb
+)
+
+hunter_add_version(
+    PACKAGE_NAME
+    ceres-solver
+    VERSION
+    "2.2.0-p1"
+    URL
+    "https://github.com/cpp-pm/ceres-solver/archive/refs/tags/v2.2.0-p1.tar.gz"
+    SHA1
+    e7640e7d3a12bb4b3b36a0a6206ad65108c65326
+)
+
+hunter_add_version(
+    PACKAGE_NAME
+    ceres-solver
+    VERSION
+    "2.2.0-p2"
+    URL
+    "https://github.com/cpp-pm/ceres-solver/archive/refs/tags/v2.2.0-p2.tar.gz"
+    SHA1
+    1fe13c3b6188541b4b2d2b8c18119c0caf29e173
+)
+
 hunter_cmake_args(ceres-solver CMAKE_ARGS
     # explicitly remove dependency on gflags (only needed for tests)
     GFLAGS=OFF
     # explicitly disable suitesparse support
     LAPACK=OFF
     SUITESPARSE=OFF
-    CXSPARSE=OFF # since 1.14.0-p0
+    CXSPARSE=OFF # since 1.14.0-p0, option removed with v2.2.0-p0
     # user must explicitly opt in to compile wit CUDA support, since v2.1.0-p0
     CUDA=OFF
+    # CUDA keyword renamed to USE_CUDA since v2.2.0
+    USE_CUDA=OFF
     # OpenBLAS flag, alternative to LAPACK since v2.1.0-p0
     WITH_OPENBLAS=OFF
     # don't build tests
     BUILD_TESTING=OFF
     # also don't build examples: when suitesparse is enabled the examples need Fortran libraries
     BUILD_EXAMPLES=OFF
+    # since SuiteSparse-metis 7.5.1-1 no SuiteSparse::metis target is installed
+    EIGENMETIS=OFF
 )
 
 # Pick a download scheme
