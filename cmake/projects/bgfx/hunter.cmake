@@ -10,8 +10,8 @@ include(hunter_report_broken_package)
 hunter_add_version(
     PACKAGE_NAME bgfx
     VERSION "1.0.0"
-    URL "https://github.com/mloccy/bgfx.cmake/archive/refs/tags/1.0.0.tar.gz"
-    SHA1 b8a5c0d7a1c8933fb50e561dad6fbb9462b9b1b3
+    URL "https://github.com/mloccy/bgfx.cmake/releases/download/1.0.0/bgfx.tar.gz"
+    SHA1 01c5e53c6b43706ec21353bdf4d52e8b47cae856
 )
 
 hunter_cmake_args(bgfx CMAKE_ARGS BGFX_BUILD_EXAMPLES=OFF BGFX_BUILD_TESTS=OFF)
