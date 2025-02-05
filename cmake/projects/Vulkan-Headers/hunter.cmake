@@ -46,11 +46,11 @@ hunter_add_version(
     PACKAGE_NAME
     Vulkan-Headers
     VERSION
-    1.4.307-p0
+    1.4.307-p1
     URL
-    "https://github.com/mloccy/Vulkan-Headers/archive/refs/tags/v1.4.307.tar.gz"
+    "https://github.com/mloccy/Vulkan-Headers/archive/refs/tags/v1.4.307-p1.tar.gz"
     SHA1
-    6c409ba96cd3fef02dee3eab11de9ac618812b21
+    16bf7d2a073bda4bcdb9feb35fcd00b7bbe030ac
 )
 if("${HUNTER_Vulkan-Headers_VERSION}" VERSION_LESS "1.2.182")
     hunter_cmake_args(
