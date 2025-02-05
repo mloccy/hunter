@@ -11,7 +11,7 @@ include(hunter_pick_scheme)
 
 hunter_add_version(
     PACKAGE_NAME
-    Vulkan-Headers
+    Vulkan-Loader
     VERSION
     1.4.307-p0
     URL
@@ -19,20 +19,7 @@ hunter_add_version(
     SHA1
     aa658c03ec4eb407b4897df6c5b9dbb7a5a93d04
 )
-if("${HUNTER_Vulkan-Headers_VERSION}" VERSION_LESS "1.2.182")
-    hunter_cmake_args(
-        Vulkan-Headers
-        CMAKE_ARGS
-          VULKAN_HEADERS_SKIP_INSTALL=OFF
-    )
-else()
-    hunter_cmake_args(
-        Vulkan-Headers
-        CMAKE_ARGS
-          VULKAN_HEADERS_EXPORT_CMAKE_TARGETS=ON
-    )
-endif()
 
 hunter_pick_scheme(DEFAULT url_sha1_cmake)
-hunter_cacheable(Vulkan-Headers)
-hunter_download(PACKAGE_NAME Vulkan-Headers)
+hunter_cacheable(Vulkan-Loader)
+hunter_download(PACKAGE_NAME Vulkan-Loader)
