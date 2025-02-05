@@ -35,10 +35,10 @@ hunter_default_version(BZip2 VERSION 1.0.8-p0)
 hunter_default_version(Beast VERSION 1.0.0-b84-hunter-0)
 
 if(MINGW)
-  # https://github.com/boostorg/build/issues/301
-  hunter_default_version(Boost VERSION 1.64.0)
+# https://github.com/boostorg/build/issues/301
+hunter_default_version(Boost VERSION 1.64.0)
 else()
-  hunter_default_version(Boost VERSION 1.83.0)
+hunter_default_version(Boost VERSION 1.83.0)
 endif()
 
 hunter_default_version(BoostCompute VERSION 0.5-p0)
@@ -214,6 +214,7 @@ hunter_default_version(aws_lambda_cpp VERSION v0.2.7-p0)
 hunter_default_version(basis_universal VERSION 1.16.3-p0)
 hunter_default_version(benchmark VERSION 1.8.3)
 hunter_default_version(bento4 VERSION 1.6.0-638-p0)
+hunter_default_version(bgfx VERSION 1.0.0)
 hunter_default_version(binaryen VERSION 1.38.28-p1)
 hunter_default_version(bison VERSION 3.0.4-p0)
 hunter_default_version(boost-pba VERSION 1.0.0-p0)
