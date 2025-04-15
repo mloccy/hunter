@@ -65,6 +65,30 @@ hunter_add_version(
     49657f53dd391ab9dad0cb1ce47001d673a2c7ab
 )
 
+hunter_add_version(
+    PACKAGE_NAME
+    SPIRV-Headers
+    VERSION
+    1.5.4.raytracing.fixed
+    URL
+    https://github.com/KhronosGroup/SPIRV-Headers/archive/1.5.4.raytracing.fixed.tar.gz
+    SHA1
+    49657f53dd391ab9dad0cb1ce47001d673a2c7ab
+)
+
+hunter_add_version(
+    PACKAGE_NAME
+    SPIRV-Headers
+    VERSION
+    1.4.309.0
+    URL
+    https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/vulkan-sdk-1.4.309.0.tar.gz
+    SHA1
+    51534dac3713f969d05606bb9f5edf4a4c35137a
+)
+
+
+
 hunter_cmake_args(
     SPIRV-Tools
     CMAKE_ARGS
