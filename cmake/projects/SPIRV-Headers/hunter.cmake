@@ -80,11 +80,11 @@ hunter_add_version(
     PACKAGE_NAME
     SPIRV-Headers
     VERSION
-    1.4.309.0
+    1.4.310.0
     URL
-    https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/vulkan-sdk-1.4.309.0.tar.gz
+    https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/vulkan-sdk-1.4.310.0.tar.gz
     SHA1
-    51534dac3713f969d05606bb9f5edf4a4c35137a
+    ef4f6695f339ba44ea9149ee27e64f8ceb3db2e3
 )
 
 
