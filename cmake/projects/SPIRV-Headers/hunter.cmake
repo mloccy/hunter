@@ -82,7 +82,7 @@ hunter_add_version(
     VERSION
     1.4.310.0
     URL
-    https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/vulkan-sdk-1.4.310.0.tar.gz
+    https://github.com/mloccy/SPIRV-Headers/archive/refs/tags/1.4.310.0.tar.gz
     SHA1
     ef4f6695f339ba44ea9149ee27e64f8ceb3db2e3
 )
