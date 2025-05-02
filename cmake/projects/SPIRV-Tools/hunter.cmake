@@ -51,7 +51,7 @@ hunter_add_version(
     URL
     https://github.com/mloccy/SPIRV-Tools/archive/refs/tags/v2025.1.tar.gz
     SHA1
-    72c2fe3bc7c794da0924f840bc7ac48a0954f6cd
+    dda52ea8de67603146577c909df43e3e8612a0f9
 )
 
 hunter_cmake_args(
