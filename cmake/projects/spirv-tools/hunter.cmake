@@ -64,5 +64,5 @@ hunter_cmake_args(
 )
 
 hunter_pick_scheme(DEFAULT url_sha1_cmake)
-hunter_cacheable(SPIRV-Tools)
-hunter_download(PACKAGE_NAME SPIRV-Tools)
+hunter_cacheable(spirv-tools)
+hunter_download(PACKAGE_NAME spirv-tools)
