@@ -36,10 +36,21 @@ hunter_add_version(
     glslang
     VERSION
     8.13.3743-9eef54b2-p0
-    URL 
+    URL
     "https://github.com/cpp-pm/glslang/archive/v8.13.3743-9eef54b2-p0.tar.gz"
-    SHA1 
+    SHA1
     fb8593f4671116d318909394d2fba3774f027ca0
+)
+
+hunter_add_version(
+    PACKAGE_NAME
+    glslang
+    VERSION
+    15.3.0-p0
+    URL
+    "https://github.com/mloccy/glslang/archive/refs/tags/15.3.0.tar.gz"
+    SHA1
+    3037e23e80d89df79b691b5fef7f035a388e5e76
 )
 
 if(IOS OR ANDROID)
