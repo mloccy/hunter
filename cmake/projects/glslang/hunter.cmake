@@ -50,7 +50,7 @@ hunter_add_version(
     URL
     "https://github.com/mloccy/glslang/archive/refs/tags/15.3.0.tar.gz"
     SHA1
-    9384f2368ff0f46ad518fbb8c1de071093bd8467
+    e0db553a08e5155216223cfaa6332a12075e30a7
 )
 
 if(IOS OR ANDROID)
