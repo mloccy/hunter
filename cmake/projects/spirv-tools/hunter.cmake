@@ -12,7 +12,7 @@ include(hunter_cmake_args)
 
 hunter_add_version(
     PACKAGE_NAME
-    SPIRV-Tools
+    spirv-tools
     VERSION
     2019.4-p0
     URL
@@ -23,28 +23,39 @@ hunter_add_version(
 
 hunter_add_version(
     PACKAGE_NAME
-    SPIRV-Tools
+    spirv-tools
     VERSION
     2020.1-p0
-    URL 
+    URL
     https://github.com/cpp-pm/SPIRV-Tools/archive/v2020.1-p0.tar.gz
-    SHA1 
+    SHA1
     695e9abf892fe939fbe61398a06b6f177cd43e77
 )
 
 hunter_add_version(
     PACKAGE_NAME
-    SPIRV-Tools
+    spirv-tools
     VERSION
     2020.4-p0
-    URL 
+    URL
     https://github.com/cpp-pm/SPIRV-Tools/archive/v2020.4-p0.tar.gz
-    SHA1 
+    SHA1
     e408dd86040ba66dbd7cdd386af96cdb11484c44
 )
 
+hunter_add_version(
+    PACKAGE_NAME
+    spirv-tools
+    VERSION
+    2025.1-p0
+    URL
+    https://github.com/mloccy/SPIRV-Tools/archive/refs/tags/v2025.1.tar.gz
+    SHA1
+    ffba302fcf5248a7d73e6d08c802d038ac309485
+)
+
 hunter_cmake_args(
-    SPIRV-Tools
+    spirv-tools
     CMAKE_ARGS
       BUILD_TESTING=OFF
       SPIRV_SKIP_EXECUTABLES=ON
@@ -53,5 +64,5 @@ hunter_cmake_args(
 )
 
 hunter_pick_scheme(DEFAULT url_sha1_cmake)
-hunter_cacheable(SPIRV-Tools)
-hunter_download(PACKAGE_NAME SPIRV-Tools)
+hunter_cacheable(spirv-tools)
+hunter_download(PACKAGE_NAME spirv-tools)

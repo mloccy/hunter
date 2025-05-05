@@ -65,6 +65,30 @@ hunter_add_version(
     49657f53dd391ab9dad0cb1ce47001d673a2c7ab
 )
 
+hunter_add_version(
+    PACKAGE_NAME
+    SPIRV-Headers
+    VERSION
+    1.5.4.raytracing.fixed
+    URL
+    https://github.com/KhronosGroup/SPIRV-Headers/archive/1.5.4.raytracing.fixed.tar.gz
+    SHA1
+    49657f53dd391ab9dad0cb1ce47001d673a2c7ab
+)
+
+hunter_add_version(
+    PACKAGE_NAME
+    SPIRV-Headers
+    VERSION
+    1.4.310.0
+    URL
+    https://github.com/mloccy/SPIRV-Headers/archive/refs/tags/1.4.310.0.tar.gz
+    SHA1
+    ef4f6695f339ba44ea9149ee27e64f8ceb3db2e3
+)
+
+
+
 hunter_cmake_args(
     SPIRV-Tools
     CMAKE_ARGS
