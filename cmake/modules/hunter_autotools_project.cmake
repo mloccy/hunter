@@ -205,18 +205,18 @@ function(hunter_autotools_project target_name)
           ${PARAM_PATCH_COMMAND}
         CONFIGURE_COMMAND
           "${PARAM_BOOTSTRAP}"
+        # COMMAND
+        #   "${autoupdate}"
+        # COMMAND
+        #   "${automake}" --add-missing
+        # COMMAND
+        #   "${libtoolize}"
+        # COMMAND
+        #   "${aclocal}"
         COMMAND
-          "${autoupdate}"
-        COMMAND
-          "${automake}" --add-missing
-        COMMAND
-          "${libtoolize}"
-        COMMAND
-          "${aclocal}"
-        COMMAND
-          "${reconf}"
-        COMMAND
-          ${configure_command}
+          "${reconf}" -fi
+        # COMMAND
+        #   ${configure_command}
         BUILD_COMMAND
           ${build_command}
         BUILD_IN_SOURCE
