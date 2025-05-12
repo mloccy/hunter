@@ -16,7 +16,7 @@ hunter_add_version(
     VERSION
     "1.17"
     URL
-    "https://xcb.freedesktop.org/dist/libxcb-1.17.tar.bz2"
+    "https://xcb.freedesktop.org/dist/libxcb-1.17.tar.gz"
     SHA1
     220ec81181bcd8bf5a8367610858673e8de6e705
 )
