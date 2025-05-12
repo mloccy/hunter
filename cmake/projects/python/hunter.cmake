@@ -9,7 +9,7 @@ include(hunter_report_broken_package)
 
 
 
-if (NOT UNIX AND NOT APPLE)
+if (NOT UNIX OR APPLE)
     hunter_add_version(
         PACKAGE_NAME python
         VERSION "v0.1.0"
@@ -27,7 +27,7 @@ else ()
 
 endif()
 
-if (NOT UNIX AND NOT APPLE)
+if (NOT UNIX OR APPLE)
     hunter_pick_scheme(DEFAULT url_sha1_cmake)
 else()
     include(hunter_configuration_types)
@@ -37,7 +37,7 @@ endif()
 
 
 hunter_cacheable(python)
-if (NOT UNIX AND NOT APPLE)
+if (NOT UNIX OR APPLE)
     hunter_download(PACKAGE_NAME python)
 else()
     hunter_download(PACKAGE_NAME python 
