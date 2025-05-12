@@ -84,7 +84,7 @@ function(hunter_get_toolchain_binaries)
   string(COMPARE NOTEQUAL "${PARAM_OUT_CPP}" "" has_out_cpp)
   string(COMPARE NOTEQUAL "${PARAM_OUT_CC}" "" has_out_cc)
   string(COMPARE NOTEQUAL "${PARAM_OUT_CXX}" "" has_out_cxx)
-  string(COMPARE NOTEQUAL "${PARAM_OUT_CXX}" "" has_out_autoreconf)
+  string(COMPARE NOTEQUAL "${PARAM_OUT_AUTORECONF}" "" has_out_autoreconf)
 
   # Sets the toolchain binaries
   #   AR=${CMAKE_AR}
@@ -169,9 +169,11 @@ function(hunter_get_toolchain_binaries)
   if(has_out_autoreconf)
     find_program(AUTORECONF autoreconf)
     hunter_status_debug("  AUTORECONF=${AUTORECONF}")
+    
     if (autoreconf)
       set(${PARAM_OUT_AUTORECONF} ${AUTORECONF} PARENT_SCOPE)
     endif()
-  endif()
+  
+    endif()
 endfunction()
 
