@@ -28,6 +28,7 @@ else ()
 endif()
 
 if (NOT UNIX AND NOT APPLE)
+    hunter_configuration_types(xcb-proto CONFIGURATION_TYPES Release)
     hunter_pick_scheme(DEFAULT url_sha1_cmake)
 else()
     hunter_pick_scheme(DEFAULT url_sha1_autotools)
