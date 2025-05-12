@@ -65,7 +65,7 @@ hunter_cmake_args(
 )
 hunter_cacheable(xcb-proto)
 
-if (HUNTER_xcb-proto-VERSION STREQUAL "1.17.0")
+if (HUNTER_xcb-proto_VERSION STREQUAL "1.17.0")
     hunter_download(
         PACKAGE_NAME xcb-proto
         PACKAGE_INTERNAL_DEPS_ID "3"
