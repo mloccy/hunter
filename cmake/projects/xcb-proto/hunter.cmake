@@ -19,7 +19,7 @@ hunter_add_version(
     URL
     "https://xcb.freedesktop.org/dist/xcb-proto-1.17.0.tar.gz"
     SHA1
-    82a568559235fc6e26d0a38911c5ea18f8e8455c
+    9b0c92edd2ec32cc086ac3f67cbefb90e2e945ab
 )
 
 hunter_add_version(
