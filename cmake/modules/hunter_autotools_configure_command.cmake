@@ -111,7 +111,8 @@ function(hunter_autotools_configure_command out_command_line)
   )
 
   # Build the configure command line options
-  set(configure_command ${reconf})
+  set(configure_command)
+  list(APPEND configure_command ${reconf})
 
   list(APPEND configure_command "./configure")
 
