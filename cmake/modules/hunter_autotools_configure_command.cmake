@@ -112,9 +112,7 @@ function(hunter_autotools_configure_command out_command_line)
 
   # Build the configure command line options
   set(configure_command)
-  
-
-  list(APPEND configure_command "${reconf} && ./configure")
+  list(APPEND configure_command "./configure")
 
   string(COMPARE NOTEQUAL "${configure_host}" "" has_configure_host)
   if(has_configure_host)
