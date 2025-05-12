@@ -53,6 +53,17 @@ hunter_add_version(
     e0db553a08e5155216223cfaa6332a12075e30a7
 )
 
+hunter_add_version(
+    PACKAGE_NAME
+    glslang
+    VERSION
+    15.3.0-p1
+    URL
+    "https://github.com/mloccy/glslang/archive/refs/tags/15.3.0-p1.tar.gz"
+    SHA1
+    29918352ba720c6076a8e07d9533bf8c95a608e0
+)
+
 if(IOS OR ANDROID)
 hunter_cmake_args(
     glslang
