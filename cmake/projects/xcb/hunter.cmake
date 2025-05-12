@@ -14,6 +14,17 @@ hunter_add_version(
     PACKAGE_NAME
     xcb
     VERSION
+    "1.17"
+    URL
+    "https://xcb.freedesktop.org/dist/libxcb-1.17.tar.bz2"
+    SHA1
+    220ec81181bcd8bf5a8367610858673e8de6e705
+)
+
+hunter_add_version(
+    PACKAGE_NAME
+    xcb
+    VERSION
     "1.13"
     URL
     "https://xcb.freedesktop.org/dist/libxcb-1.13.tar.bz2"
