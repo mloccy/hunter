@@ -211,7 +211,7 @@ function(hunter_autotools_project target_name)
         COMMAND
           "${reconf}"
         COMMAND
-          "${automake}"
+          "${automake}" --add-missing
         COMMAND
           ${configure_command}
         BUILD_COMMAND
