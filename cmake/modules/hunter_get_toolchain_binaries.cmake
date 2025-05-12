@@ -171,6 +171,8 @@ function(hunter_get_toolchain_binaries)
     hunter_status_debug("  AUTORECONF=${AUTORECONF}")
     
     if (autoreconf)
+      hunter_status_debug("Setting autoreconf with value: ${AUTORECONF} to param ${PARAM_OUT_AUTORECONF}")
+
       set(${PARAM_OUT_AUTORECONF} ${AUTORECONF} PARENT_SCOPE)
     endif()
   
