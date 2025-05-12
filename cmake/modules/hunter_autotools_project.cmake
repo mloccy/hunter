@@ -126,7 +126,7 @@ function(hunter_autotools_project target_name)
   
   set(system_aclocal_path "/usr/share/aclocal")
   set(hunter_aclocal_path "${PARAM_GLOBAL_INSTALL_DIR}/share/aclocal")
-  set(shell_aclocal_path "ACLOCAL_PATH=${hunter_aclocal_path}${system_aclocal_path}")
+  set(shell_aclocal_path "ACLOCAL_PATH=${hunter_aclocal_path}:${system_aclocal_path}")
 
   set(clear_vars_shell_script "${PARAM_HUNTER_SELF}/scripts/clear-all.sh")
 
