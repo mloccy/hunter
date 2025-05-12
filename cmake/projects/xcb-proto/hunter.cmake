@@ -15,6 +15,17 @@ hunter_add_version(
     PACKAGE_NAME
     xcb-proto
     VERSION
+    "1.17.0"
+    URL
+    "https://xcb.freedesktop.org/dist/xcb-proto-1.17.0.tar.gz"
+    SHA1
+    82a568559235fc6e26d0a38911c5ea18f8e8455c
+)
+
+hunter_add_version(
+    PACKAGE_NAME
+    xcb-proto
+    VERSION
     "1.13"
     URL
     "https://xcb.freedesktop.org/dist/xcb-proto-1.13.tar.bz2"
