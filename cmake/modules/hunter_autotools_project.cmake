@@ -123,6 +123,10 @@ function(hunter_autotools_project target_name)
   set(d1 "${PARAM_GLOBAL_INSTALL_DIR}/lib/pkgconfig")
   set(d2 "${PARAM_GLOBAL_INSTALL_DIR}/share/pkgconfig")
   set(shell_pkg_config_libdir "PKG_CONFIG_LIBDIR=${d1}:${d2}")
+  
+  set(system_aclocal_path "/usr/share/aclocal")
+  set(hunter_aclocal_path "${PARAM_GLOBAL_INSTALL_DIR}/share/aclocal")
+  set(shell_aclocal_path "ACLOCAL_PATH=\"${hunter_aclocal_path}${system_aclocal_path}\"")
 
   set(clear_vars_shell_script "${PARAM_HUNTER_SELF}/scripts/clear-all.sh")
 
@@ -132,6 +136,7 @@ function(hunter_autotools_project target_name)
       &&
       ${shell_env_path}
       ${shell_pkg_config_libdir}
+      ${shell_aclocal_path}
       ${shell_ld_path}
   )
 

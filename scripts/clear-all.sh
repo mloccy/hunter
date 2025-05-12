@@ -292,6 +292,7 @@ unset XPCSERVICES_FOLDER_PATH
 unset YACC
 unset arch
 unset variant
+unset ACLOCAL_PATH
 
 # Problems with Xcode and boost
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
