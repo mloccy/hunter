@@ -184,7 +184,8 @@ function(hunter_autotools_project target_name)
       OUT_AUTORECONF reconf
       OUT_ACLOCAL aclocal
       OUT_AUTOMAKE automake
-      OUT_LIBTOOLIZE libtoolize)
+      OUT_LIBTOOLIZE libtoolize
+      OUT_AUTOUPDATE autoupdate)
     
     ExternalProject_Add(${target_name}
         URL
@@ -205,13 +206,15 @@ function(hunter_autotools_project target_name)
         CONFIGURE_COMMAND
           "${PARAM_BOOTSTRAP}"
         COMMAND
+          "${autoupdate}"
+        COMMAND
+          "${automake}" --add-missing
+        COMMAND
           "${libtoolize}"
         COMMAND
           "${aclocal}"
         COMMAND
           "${reconf}"
-        COMMAND
-          "${automake}" --add-missing
         COMMAND
           ${configure_command}
         BUILD_COMMAND

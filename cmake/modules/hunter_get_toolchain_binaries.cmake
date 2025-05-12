@@ -21,6 +21,7 @@ function(hunter_get_toolchain_binaries)
        OUT_ACLOCAL
        OUT_AUTOMAKE
        OUT_LIBTOOLIZE
+       OUT_AUTOUPDATE
   )
   set(multi_value_params)
   cmake_parse_arguments(
@@ -92,7 +93,9 @@ function(hunter_get_toolchain_binaries)
   string(COMPARE NOTEQUAL "${PARAM_OUT_ACLOCAL}" "" has_out_aclocal)
   string(COMPARE NOTEQUAL "${PARAM_OUT_OUT_AUTOMAKE}" "" has_out_automake)
   string(COMPARE NOTEQUAL "${PARAM_OUT_LIBTOOLIZE}" "" has_out_libtoolize)
+  string(COMPARE NOTEQUAL "${PARAM_OUT_AUTOUPDATE}" "" has_out_autoupdate)
 
+  
   # Sets the toolchain binaries
   #   AR=${CMAKE_AR}
   #   AS=${CMAKE_ASM_COMPILER}
@@ -199,6 +202,14 @@ function(hunter_get_toolchain_binaries)
     hunter_status_debug("  LIBTOOLIZE=${LIBTOOLIZE}")
     if (LIBTOOLIZE)
       set(${PARAM_OUT_LIBTOOLIZE} ${LIBTOOLIZE} PARENT_SCOPE)
+    endif()
+  endif()
+
+  if(has_out_autoupdate)
+    find_program(AUTOUPDATE autoupdate)
+    hunter_status_debug("  AUTOUPDATE=${AUTOUPDATE}")
+    if (AUTOUPDATE)
+      set(${PARAM_OUT_AUTOUPDATE} ${AUTOUPDATE} PARENT_SCOPE)
     endif()
   endif()
 
