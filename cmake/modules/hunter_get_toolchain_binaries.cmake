@@ -17,6 +17,7 @@ function(hunter_get_toolchain_binaries)
        OUT_CPP
        OUT_CC
        OUT_CXX
+       OUT_AUTORECONF
   )
   set(multi_value_params)
   cmake_parse_arguments(
@@ -83,6 +84,7 @@ function(hunter_get_toolchain_binaries)
   string(COMPARE NOTEQUAL "${PARAM_OUT_CPP}" "" has_out_cpp)
   string(COMPARE NOTEQUAL "${PARAM_OUT_CC}" "" has_out_cc)
   string(COMPARE NOTEQUAL "${PARAM_OUT_CXX}" "" has_out_cxx)
+  string(COMPARE NOTEQUAL "${PARAM_OUT_CXX}" "" has_out_autoreconf)
 
   # Sets the toolchain binaries
   #   AR=${CMAKE_AR}
@@ -163,6 +165,13 @@ function(hunter_get_toolchain_binaries)
     if(CMAKE_CXX_COMPILER)
       set(${PARAM_OUT_CXX} ${CMAKE_CXX_COMPILER} PARENT_SCOPE)
     endif()
+  endif()
+  if(has_out_autoreconf)
+    find_program(AUTORECONF autoreconf)
+    hunter_status_debug("  AUTORECONF=${AUTORECONF}")
+    if (autoreconf)
+      set(${PARAM_OUT_AUTORECONF} ${AUTORECONF} PARENT_SCOPE)
+
   endif()
 endfunction()
 

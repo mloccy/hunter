@@ -83,18 +83,6 @@ function(hunter_autotools_configure_command out_command_line)
     set(configure_host --host=${CROSS_COMPILE_TOOLCHAIN_PREFIX})
   endif()
 
-
-
-  # Build the configure command line options
-  set(configure_command)
-
-  list(APPEND configure_command "./configure")
-
-  string(COMPARE NOTEQUAL "${configure_host}" "" has_configure_host)
-  if(has_configure_host)
-    list(APPEND configure_command ${configure_host})
-  endif()
-
   hunter_get_toolchain_binaries(
       OUT_AR
         ar
@@ -118,7 +106,21 @@ function(hunter_autotools_configure_command out_command_line)
         cc
       OUT_CXX
         cxx
+      OUT_AUTORECONF
+        reconf
   )
+
+  # Build the configure command line options
+  set(configure_command)
+
+  list(APPEND configure_command "${reconf} && ./configure")
+
+  string(COMPARE NOTEQUAL "${configure_host}" "" has_configure_host)
+  if(has_configure_host)
+    list(APPEND configure_command ${configure_host})
+  endif()
+
+
 
   set(toolchain_binaries)
   if(ar)
