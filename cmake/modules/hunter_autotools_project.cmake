@@ -180,7 +180,11 @@ function(hunter_autotools_project target_name)
     )
 
     set(configure_command ${shell_env} ${autotools_configure_command})
-    hunter_get_toolchain_binaries(OUT_AUTORECONF reconf)
+    hunter_get_toolchain_binaries(
+      OUT_AUTORECONF reconf
+      OUT_ACLOCAL aclocal
+      OUT_AUTOMAKE automake
+      OUT_LIBTOOLIZE libtoolize)
     
     ExternalProject_Add(${target_name}
         URL
@@ -201,7 +205,13 @@ function(hunter_autotools_project target_name)
         CONFIGURE_COMMAND
           "${PARAM_BOOTSTRAP}"
         COMMAND
+          "${libtoolize}"
+        COMMAND
+          "${aclocal}"
+        COMMAND
           "${reconf}"
+        COMMAND
+          "${automake}"
         COMMAND
           ${configure_command}
         BUILD_COMMAND

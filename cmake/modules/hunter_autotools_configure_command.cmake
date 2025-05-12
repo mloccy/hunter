@@ -106,8 +106,6 @@ function(hunter_autotools_configure_command out_command_line)
         cc
       OUT_CXX
         cxx
-      OUT_AUTORECONF
-        reconf
   )
 
   # Build the configure command line options

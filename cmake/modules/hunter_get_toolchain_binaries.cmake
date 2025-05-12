@@ -18,6 +18,9 @@ function(hunter_get_toolchain_binaries)
        OUT_CC
        OUT_CXX
        OUT_AUTORECONF
+       OUT_ACLOCAL
+       OUT_AUTOMAKE
+       OUT_LIBTOOLIZE
   )
   set(multi_value_params)
   cmake_parse_arguments(
@@ -84,7 +87,11 @@ function(hunter_get_toolchain_binaries)
   string(COMPARE NOTEQUAL "${PARAM_OUT_CPP}" "" has_out_cpp)
   string(COMPARE NOTEQUAL "${PARAM_OUT_CC}" "" has_out_cc)
   string(COMPARE NOTEQUAL "${PARAM_OUT_CXX}" "" has_out_cxx)
+
   string(COMPARE NOTEQUAL "${PARAM_OUT_AUTORECONF}" "" has_out_autoreconf)
+  string(COMPARE NOTEQUAL "${PARAM_OUT_ACLOCAL}" "" has_out_aclocal)
+  string(COMPARE NOTEQUAL "${PARAM_OUT_OUT_AUTOMAKE}" "" has_out_automake)
+  string(COMPARE NOTEQUAL "${PARAM_OUT_LIBTOOLIZE}" "" has_out_libtoolize)
 
   # Sets the toolchain binaries
   #   AR=${CMAKE_AR}
@@ -169,11 +176,31 @@ function(hunter_get_toolchain_binaries)
   if(has_out_autoreconf)
     find_program(AUTORECONF autoreconf)
     hunter_status_debug("  AUTORECONF=${AUTORECONF}")
-    
     if (AUTORECONF)
       set(${PARAM_OUT_AUTORECONF} ${AUTORECONF} PARENT_SCOPE)
     endif()
-  
+  endif()
+  if(has_out_aclocal)
+    find_program(ACLOCAL aclocal)
+    hunter_status_debug("  ACLOCAL=${ACLOCAL}")
+    if (ACLOCAL)
+      set(${PARAM_OUT_ACLOCAL} ${ACLOCAL} PARENT_SCOPE)
     endif()
+  endif()
+  if(has_out_automake)
+    find_program(AUTOMAKE automake)
+    hunter_status_debug("  AUTOMAKE=${AUTOMAKE}")
+    if (AUTOMAKE)
+      set(${PARAM_OUT_AUTOMAKE} ${AUTOMAKE} PARENT_SCOPE)
+    endif()
+  endif()
+  if(has_out_libtoolize)
+    find_program(LIBTOOLIZE libtoolize)
+    hunter_status_debug("  LIBTOOLIZE=${LIBTOOLIZE}")
+    if (LIBTOOLIZE)
+      set(${PARAM_OUT_LIBTOOLIZE} ${LIBTOOLIZE} PARENT_SCOPE)
+    endif()
+  endif()
+
 endfunction()
 
