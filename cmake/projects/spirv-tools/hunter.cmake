@@ -42,7 +42,6 @@ hunter_add_version(
     SHA1
     e408dd86040ba66dbd7cdd386af96cdb11484c44
 )
-
 hunter_add_version(
     PACKAGE_NAME
     spirv-tools
@@ -53,6 +52,18 @@ hunter_add_version(
     SHA1
     a5415ae0a114045bdd1b90aa4069ed43411048ad
 )
+
+hunter_add_version(
+    PACKAGE_NAME
+    spirv-tools
+    VERSION
+    2025.2-p0
+    URL
+    https://github.com/mloccy/SPIRV-Tools/archive/refs/tags/v2025.2.tar.gz
+    SHA1
+    4a74920139acec81bbc75548cd59eb352fcb938f
+)
+
 
 hunter_cmake_args(
     spirv-tools

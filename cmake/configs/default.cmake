@@ -546,7 +546,7 @@ else()
 endif()
 
 hunter_default_version(spirv-cross VERSION 20210115)
-hunter_default_version(spirv-tools VERSION 2025.1-p0)
+hunter_default_version(spirv-tools VERSION 2025.2-p0)
 hunter_default_version(sqlite3 VERSION 3.43.2-p0)
 hunter_default_version(sse2neon VERSION 1.0.0-p0)
 hunter_default_version(stanhull VERSION 0.0.1)
