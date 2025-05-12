@@ -22,7 +22,7 @@ else ()
         PACKAGE_NAME python
         VERSION "v0.1.0"
         URL "https://www.python.org/ftp/python/3.9.17/Python-3.9.17.tgz"
-        SHA1 da39a3ee5e6b4b0d3255bfef95601890afd80709
+        SHA1 bd75def230af4e8602be83ebb9ebeb5f46f97c8b
     )
 
 endif()
