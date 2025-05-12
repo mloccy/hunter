@@ -64,8 +64,18 @@ hunter_cmake_args(
     PKGCONFIG_EXPORT_TARGETS=xcb-proto
 )
 hunter_cacheable(xcb-proto)
-hunter_download(
-    PACKAGE_NAME xcb-proto
-    PACKAGE_INTERNAL_DEPS_ID "3"
-    PACKAGE_UNRELOCATABLE_TEXT_FILES "lib/pkgconfig/xcb-proto.pc"
-)
+
+if (HUNTER_xcb-proto-VERSION STREQUAL "1.17.0")
+    hunter_download(
+        PACKAGE_NAME xcb-proto
+        PACKAGE_INTERNAL_DEPS_ID "3"
+        PACKAGE_UNRELOCATABLE_TEXT_FILES "share/pkgconfig/xcb-proto.pc"
+    )
+else()
+    hunter_download(
+        PACKAGE_NAME xcb-proto
+        PACKAGE_INTERNAL_DEPS_ID "3"
+        PACKAGE_UNRELOCATABLE_TEXT_FILES "lib/pkgconfig/xcb-proto.pc"
+    )
+endif()
+
