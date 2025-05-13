@@ -52,7 +52,7 @@
 #       ${CMAKE_COMMAND} -E copy "@HUNTER_PACKAGE_SCRIPT_DIR@/patch.sh" "@HUNTER_PACKAGE_SOURCE_DIR@"
 #       COMMAND "./patch.sh"
 #     BOOTSTRAP                               # add a bootstrap command to be run
-#       "./autogen.sh"                        # before ./configure such as 
+#       "./autogen.sh"                        # before ./configure such as
 #                                             # ./autogen.sh or ./bootstrap
 # )
 
@@ -123,7 +123,7 @@ function(hunter_autotools_project target_name)
   set(d1 "${PARAM_GLOBAL_INSTALL_DIR}/lib/pkgconfig")
   set(d2 "${PARAM_GLOBAL_INSTALL_DIR}/share/pkgconfig")
   set(shell_pkg_config_libdir "PKG_CONFIG_LIBDIR=${d1}:${d2}")
-  
+
   set(system_aclocal_path "/usr/share/aclocal")
   set(hunter_aclocal_path "${PARAM_GLOBAL_INSTALL_DIR}/share/aclocal")
   set(shell_aclocal_path "ACLOCAL_PATH=${hunter_aclocal_path}:${system_aclocal_path}")
@@ -182,7 +182,7 @@ function(hunter_autotools_project target_name)
     set(configure_command ${shell_env} ${autotools_configure_command})
     hunter_get_toolchain_binaries(
       OUT_AUTORECONF reconf)
-    
+
     ExternalProject_Add(${target_name}
         URL
           ${PARAM_URL}
@@ -202,7 +202,7 @@ function(hunter_autotools_project target_name)
         CONFIGURE_COMMAND
           "${PARAM_BOOTSTRAP}"
         COMMAND
-          "${reconf}" -fi
+          "${shell_aclocal_path} ${reconf}" -fi
         COMMAND
            ${configure_command}
         BUILD_COMMAND
