@@ -35,7 +35,7 @@ hunter_add_version(
 )
 
 hunter_configuration_types(xproto CONFIGURATION_TYPES Release)
-hunter_pick_scheme(DEFAULT url_sha1_autotools)
+hunter_pick_scheme(DEFAULT url_sha1_autotools_autoreconf)
 hunter_cmake_args(
     xproto
     CMAKE_ARGS
@@ -43,14 +43,6 @@ hunter_cmake_args(
       PKGCONFIG_EXPORT_TARGETS=xproto
 )
 
-hunter_get_toolchain_binaries(OUT_AUTORECONF reconf)
-
-set(system_aclocal_path "/usr/share/aclocal")
-set(hunter_aclocal_path "${HUNTER_INSTALL_PREFIX}/share/aclocal")
-
-set(shell_aclocal_path "ACLOCAL_PATH=${hunter_aclocal_path}:${system_aclocal_path}")
-
-set (BOOTSTRAP "${shell_aclocal_path} ${reconf} -fi")
 hunter_cacheable(xproto)
 hunter_download(
     PACKAGE_NAME xproto
