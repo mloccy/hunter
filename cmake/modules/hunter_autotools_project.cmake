@@ -202,7 +202,7 @@ function(hunter_autotools_project target_name)
         CONFIGURE_COMMAND
           "${PARAM_BOOTSTRAP}"
         COMMAND
-          "${shell_aclocal_path} ${reconf}" -fi
+          ${shell_aclocal_path} "${reconf}" -fi
         COMMAND
            ${configure_command}
         BUILD_COMMAND
