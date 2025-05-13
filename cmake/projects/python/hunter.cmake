@@ -36,11 +36,18 @@ else()
 endif()
 
 
-hunter_cacheable(python)
 if (NOT UNIX OR APPLE)
     hunter_download(PACKAGE_NAME python)
 else()
-    hunter_download(PACKAGE_NAME python 
+    set(python_dependencies autoconf-archive)
+    hunter_cmake_args(
+        python
+        CMAKE_ARGS
+        DEPENDS_ON_PACKAGES=${python_dependencies}
+    )
+    hunter_download(PACKAGE_NAME python
     PACKAGE_INTERNAL_DEPS_ID "26"
     PACKAGE_UNRELOCATABLE_TEXT_FILES lib/pkgconfig/python3.pc)
 endif()
+
+hunter_cacheable(python)
