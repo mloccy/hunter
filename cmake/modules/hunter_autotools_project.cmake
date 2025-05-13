@@ -199,7 +199,7 @@ function(hunter_autotools_project target_name)
         PATCH_COMMAND
           ${PARAM_PATCH_COMMAND}
         CONFIGURE_COMMAND
-          "${PARAM_BOOTSTRAP}"
+          ${PARAM_BOOTSTRAP}
         COMMAND
            ${configure_command}
         BUILD_COMMAND

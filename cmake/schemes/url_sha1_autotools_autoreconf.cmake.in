@@ -42,8 +42,6 @@ set(system_aclocal_path "/usr/share/aclocal")
 set(hunter_aclocal_path "${HUNTER_INSTALL_PREFIX}/share/aclocal")
 set(shell_aclocal_path "ACLOCAL_PATH=${hunter_aclocal_path}:${system_aclocal_path}")
 
-set (BOOTSTRAP "${shell_aclocal_path} ${reconf} -fi")
-
 hunter_autotools_project("@HUNTER_EP_NAME@"
     HUNTER_SELF
       "@HUNTER_SELF@"
@@ -68,7 +66,7 @@ hunter_autotools_project("@HUNTER_EP_NAME@"
     EXTRA_FLAGS
       "${EXTRA_FLAGS}"
     BOOTSTRAP
-      "${BOOTSTRAP}"
+      ${shell_aclocal_path} ${reconf} -fi
 )
 
 string(COMPARE EQUAL "${DEPENDS_ON_PKGCONFIGS}" "" default_pkgconfig)
