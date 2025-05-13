@@ -84,13 +84,13 @@ function(hunter_autotools_project target_name)
       CFLAGS
       CXXFLAGS
       LDFLAGS
-      BOOTSTRAP
   )
   set(multi_value_params
       URL
       PACKAGE_CONFIGURATION_TYPES
       EXTRA_FLAGS
       PATCH_COMMAND
+      BOOTSTRAP
   )
   cmake_parse_arguments(
       PARAM
