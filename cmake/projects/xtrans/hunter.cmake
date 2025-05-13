@@ -35,7 +35,7 @@ hunter_add_version(
 )
 
 hunter_configuration_types(xtrans CONFIGURATION_TYPES Release)
-hunter_pick_scheme(DEFAULT url_sha1_autotools)
+hunter_pick_scheme(DEFAULT url_sha1_autotools_autoreconf)
 hunter_cacheable(xtrans)
 hunter_cmake_args(
     xtrans
