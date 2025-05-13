@@ -42,6 +42,15 @@ hunter_cmake_args(
       DEPENDS_ON_PACKAGES=xorg-macros
       PKGCONFIG_EXPORT_TARGETS=xproto
 )
+
+hunter_get_toolchain_binaries(OUT_AUTORECONF reconf)
+
+set(system_aclocal_path "/usr/share/aclocal")
+set(hunter_aclocal_path "${HUNTER_INSTALL_PREFIX}/share/aclocal")
+
+set(shell_aclocal_path "ACLOCAL_PATH=${hunter_aclocal_path}:${system_aclocal_path}")
+
+set (BOOTSTRAP "${shell_aclocal_path} ${reconf} -fi")
 hunter_cacheable(xproto)
 hunter_download(
     PACKAGE_NAME xproto

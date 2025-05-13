@@ -180,8 +180,7 @@ function(hunter_autotools_project target_name)
     )
 
     set(configure_command ${shell_env} ${autotools_configure_command})
-    hunter_get_toolchain_binaries(
-      OUT_AUTORECONF reconf)
+    # hunter_get_toolchain_binaries(OUT_AUTORECONF reconf)
 
     ExternalProject_Add(${target_name}
         URL
@@ -201,8 +200,6 @@ function(hunter_autotools_project target_name)
           ${PARAM_PATCH_COMMAND}
         CONFIGURE_COMMAND
           "${PARAM_BOOTSTRAP}"
-        COMMAND
-          ${shell_aclocal_path} "${reconf}" -i
         COMMAND
            ${configure_command}
         BUILD_COMMAND
