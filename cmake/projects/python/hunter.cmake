@@ -44,7 +44,6 @@ else()
     hunter_cmake_args(
         python
         CMAKE_ARGS
-        BUILD_SHARED_LIBS=On
         DEPENDS_ON_PACKAGES=${python_dependencies}
     )
     hunter_download(PACKAGE_NAME python
