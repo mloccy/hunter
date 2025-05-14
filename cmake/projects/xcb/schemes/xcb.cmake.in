@@ -39,6 +39,11 @@ hunter_assert_not_empty_string("@HUNTER_PACKAGE_BUILD_DIR@")
 hunter_assert_not_empty_string("@HUNTER_PACKAGE_INSTALL_PREFIX@")
 hunter_assert_not_empty_string("@HUNTER_INSTALL_PREFIX@")
 hunter_assert_not_empty_string("@HUNTER_GLOBAL_SCRIPT_DIR@")
+hunter_get_toolchain_binaries(OUT_AUTORECONF reconf)
+
+set(system_aclocal_path "/usr/share/aclocal")
+set(hunter_aclocal_path "@HUNTER_INSTALL_PREFIX@/share/aclocal")
+set(shell_aclocal_path "ACLOCAL_PATH=${hunter_aclocal_path}:${system_aclocal_path}")
 
 hunter_autotools_project(
     "@HUNTER_EP_NAME@"
@@ -65,6 +70,8 @@ hunter_autotools_project(
     EXTRA_FLAGS
        --without-doxygen
        --disable-devel-docs
+    BOOTSTRAP
+      ${shell_aclocal_path} ${reconf} -fi
 )
 
 set(PKG_CONFIG_MODULE xcb)
