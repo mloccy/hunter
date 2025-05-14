@@ -56,12 +56,14 @@ hunter_add_version(
     82a568559235fc6e26d0a38911c5ea18f8e8455c
 )
 
+set(xcb_proto_dependencies python)
 hunter_configuration_types(xcb-proto CONFIGURATION_TYPES Release)
 hunter_pick_scheme(DEFAULT url_sha1_autotools)
 hunter_cmake_args(
     xcb-proto
     CMAKE_ARGS
     PKGCONFIG_EXPORT_TARGETS=xcb-proto
+    DEPENDS_ON_PACKAGES=${xcb_proto_dependencies}
 )
 hunter_cacheable(xcb-proto)
 
@@ -78,4 +80,3 @@ else()
         PACKAGE_UNRELOCATABLE_TEXT_FILES "lib/pkgconfig/xcb-proto.pc"
     )
 endif()
-
