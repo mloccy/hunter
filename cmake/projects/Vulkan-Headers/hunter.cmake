@@ -52,6 +52,18 @@ hunter_add_version(
     SHA1
     16bf7d2a073bda4bcdb9feb35fcd00b7bbe030ac
 )
+
+hunter_add_version(
+    PACKAGE_NAME
+    Vulkan-Headers
+    VERSION
+    1.4.315-p0
+    URL
+    "https://github.com/KhronosGroup/Vulkan-Headers/archive/refs/tags/v1.4.315.tar.gz"
+    SHA1
+    346706c49b63ad27bbf15331be4426e90326512b
+)
+
 if("${HUNTER_Vulkan-Headers_VERSION}" VERSION_LESS "1.2.182")
     hunter_cmake_args(
         Vulkan-Headers
