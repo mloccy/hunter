@@ -39,7 +39,7 @@ set(
 hunter_get_toolchain_binaries(OUT_AUTORECONF reconf)
 
 set(system_aclocal_path "/usr/share/aclocal")
-set(hunter_aclocal_path "${HUNTER_INSTALL_PREFIX}/share/aclocal")
+set(hunter_aclocal_path "@HUNTER_INSTALL_PREFIX@/share/aclocal")
 set(shell_aclocal_path "ACLOCAL_PATH=${hunter_aclocal_path}:${system_aclocal_path}")
 
 hunter_autotools_project("@HUNTER_EP_NAME@"
