@@ -40,7 +40,7 @@ hunter_cacheable(python)
 if (NOT UNIX OR APPLE)
     hunter_download(PACKAGE_NAME python)
 else()
-    set(python_dependencies autoconf-archive ZLIB)
+    set(python_dependencies ZLIB)
     hunter_cmake_args(
         python
         CMAKE_ARGS
