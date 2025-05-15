@@ -10,7 +10,6 @@ include(hunter_user_error)
 include(hunter_status_debug)
 include(hunter_assert_not_empty_string)
 include(hunter_autotools_project)
-include(hunter_add_package)
 
 hunter_status_debug("Scheme: url_sha1_autotools")
 
