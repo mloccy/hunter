@@ -51,16 +51,63 @@ else()
     hunter_pick_scheme(DEFAULT url_sha1_autotools)
 endif()
 hunter_configuration_types(xproto CONFIGURATION_TYPES Release)
-hunter_cmake_args(
-    xproto
-    CMAKE_ARGS
-      DEPENDS_ON_PACKAGES=xorg-macros
-      PKGCONFIG_EXPORT_TARGETS=xproto
-)
+
+
+
 
 hunter_cacheable(xproto)
-hunter_download(
-    PACKAGE_NAME xproto
-    PACKAGE_INTERNAL_DEPS_ID "4"
-    PACKAGE_UNRELOCATABLE_TEXT_FILES "lib/pkgconfig/xproto.pc"
-)
+if (HUNTER_xproto_VERSION VERSION_GREATER "7.0.31")
+    hunter_cmake_args(
+        xproto
+        CMAKE_ARGS
+        DEPENDS_ON_PACKAGES=xorg-macros
+        PKGCONFIG_EXPORT_TARGETS=applewmproto;bigreqsproto;compositeproto;damageproto;dmxproto;dpmsproto;dri2proto;dri3proto;fixesproto;fontsproto;glproto;inputproto;kbproto;presentproto;randrproto;recordproto;renderproto;resourceproto;scrnsaverproto;videoproto;xproto;xcmiscproto;xextproto;xf86bigfontproto;xf86dgaproto;xf86driproto;xf86vidmodeproto;xineramaproto;
+    )
+
+    hunter_download(
+        PACKAGE_NAME xproto
+        PACKAGE_INTERNAL_DEPS_ID "4"
+        PACKAGE_UNRELOCATABLE_TEXT_FILES
+        "share/pkgconfig/xproto.pc"
+        "share/pkgconfig/applewmproto.pc"
+        "share/pkgconfig/bigreqsproto.pc"
+        "share/pkgconfig/compositeproto.pc"
+        "share/pkgconfig/damageproto.pc"
+        "share/pkgconfig/dmxproto.pc"
+        "share/pkgconfig/dpmsproto.pc"
+        "share/pkgconfig/dri2proto.pc"
+        "share/pkgconfig/dri3proto.pc"
+        "share/pkgconfig/fixesproto.pc"
+        "share/pkgconfig/fontsproto.pc"
+        "share/pkgconfig/glproto.pc"
+        "share/pkgconfig/inputproto.pc"
+        "share/pkgconfig/kbproto.pc"
+        "share/pkgconfig/presentproto.pc"
+        "share/pkgconfig/randrproto.pc"
+        "share/pkgconfig/recordproto.pc"
+        "share/pkgconfig/renderproto.pc"
+        "share/pkgconfig/resourceproto.pc"
+        "share/pkgconfig/scrnsaverproto.pc"
+        "share/pkgconfig/videoproto.pc"
+        "share/pkgconfig/xproto.pc"
+        "share/pkgconfig/xcmiscproto.pc"
+        "share/pkgconfig/xextproto.pc"
+        "share/pkgconfig/xf86bigfontproto.pc"
+        "share/pkgconfig/xf86dgaproto.pc"
+        "share/pkgconfig/xf86driproto.pc"
+        "share/pkgconfig/xf86vidmodeproto.pc"
+        "share/pkgconfig/xineramaproto.pc"
+    )
+else()
+    hunter_cmake_args(
+        xproto
+        CMAKE_ARGS
+        DEPENDS_ON_PACKAGES=xorg-macros
+        PKGCONFIG_EXPORT_TARGETS=xproto
+    )
+    hunter_download(
+        PACKAGE_NAME xproto
+        PACKAGE_INTERNAL_DEPS_ID "4"
+        PACKAGE_UNRELOCATABLE_TEXT_FILES "lib/pkgconfig/xproto.pc"
+    )
+endif()

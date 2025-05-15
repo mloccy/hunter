@@ -40,7 +40,6 @@ set(
         _dependencies
         xproto
         x11
-        xextproto
         xext)
 if (HUNTER_xi_VERSION VERSION_GREATER "1.6.1")
     hunter_pick_scheme(DEFAULT url_sha1_autogen_autotools)
