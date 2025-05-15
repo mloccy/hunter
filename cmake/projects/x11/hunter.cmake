@@ -35,7 +35,7 @@ hunter_add_version(
 )
 
 hunter_configuration_types(x11 CONFIGURATION_TYPES Release)
-hunter_pick_scheme(DEFAULT url_sha1_autotools_autoreconf)
+hunter_pick_scheme(DEFAULT url_sha1_autotools)
 set(x11_dependencies
     xproto
     xextproto

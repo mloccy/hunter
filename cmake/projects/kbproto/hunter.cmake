@@ -35,7 +35,7 @@ hunter_add_version(
 )
 
 hunter_configuration_types(kbproto CONFIGURATION_TYPES Release)
-hunter_pick_scheme(DEFAULT url_sha1_autotools_autoreconf)
+hunter_pick_scheme(DEFAULT url_sha1_autotools)
 hunter_cmake_args(
     kbproto
     CMAKE_ARGS
