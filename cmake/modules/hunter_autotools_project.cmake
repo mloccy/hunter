@@ -55,7 +55,7 @@
 #       "./autogen.sh"                        # before ./configure such as
 #                                             # ./autogen.sh or ./bootstrap
 # )
-cmake_minimum_required(3.24.0)
+cmake_minimum_required(VERSION 3.24)
 include(ExternalProject) # ExternalProject_Add
 include(CMakeParseArguments) # cmake_parse_arguments
 
