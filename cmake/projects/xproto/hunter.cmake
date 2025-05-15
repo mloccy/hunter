@@ -46,7 +46,7 @@ hunter_add_version(
 )
 
 if (HUNTER_xproto_VERSION VERSION_GREATER "7.0.31")
-    hunter_pick_scheme(url_sha1_autogen_autotools)
+    hunter_pick_scheme(DEFAULT url_sha1_autogen_autotools)
 else()
     hunter_pick_scheme(DEFAULT url_sha1_autotools)
 endif()
