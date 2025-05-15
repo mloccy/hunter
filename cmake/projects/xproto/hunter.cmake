@@ -34,8 +34,23 @@ hunter_add_version(
     779fa333c5522cca40ca810c25a8fa60b6ccedfb
 )
 
+hunter_add_version(
+    PACKAGE_NAME
+    xproto
+    VERSION
+    "2021.5"
+    URL
+    "https://gitlab.freedesktop.org/xorg/proto/xorgproto/-/archive/xorgproto-2021.5/xorgproto-xorgproto-2021.5.tar.gz"
+    SHA1
+    a7f19b5ee37e6fb662af913b582378a4a317baf6
+)
+
+if (HUNTER_xproto_VERSION VERSION_GREATER "7.0.31")
+    hunter_pick_scheme(url_sha1_autogen_autotools)
+else()
+    hunter_pick_scheme(DEFAULT url_sha1_autotools)
+endif()
 hunter_configuration_types(xproto CONFIGURATION_TYPES Release)
-hunter_pick_scheme(DEFAULT url_sha1_autotools)
 hunter_cmake_args(
     xproto
     CMAKE_ARGS
