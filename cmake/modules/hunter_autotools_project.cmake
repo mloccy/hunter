@@ -180,6 +180,7 @@ function(hunter_autotools_project target_name)
     )
 
     set(configure_command ${shell_env} ${autotools_configure_command})
+    set(bootstrap_command ${shell_env} ${PARAM_BOOTSTRAP})
     # hunter_get_toolchain_binaries(OUT_AUTORECONF reconf)
 
     ExternalProject_Add(${target_name}
@@ -201,7 +202,7 @@ function(hunter_autotools_project target_name)
         PATCH_COMMAND
           ${PARAM_PATCH_COMMAND}
         CONFIGURE_COMMAND
-          ${PARAM_BOOTSTRAP}
+           ${bootstrap_command}
         COMMAND
            ${configure_command}
         BUILD_COMMAND

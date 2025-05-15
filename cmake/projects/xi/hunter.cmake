@@ -36,7 +36,12 @@ hunter_add_version(
 )
 
 hunter_configuration_types(xi CONFIGURATION_TYPES Release)
-hunter_pick_scheme(DEFAULT url_sha1_autotools)
+
+if (HUNTER_xi_VERSION VERSION_GREATER "1.6.1")
+    hunter_pick_scheme(DEFAULT url_sha1_autogen_autotools)
+else()
+    hunter_pick_scheme(DEFAULT url_sha1_autotools)
+endif()
 
 set(
     _dependencies
