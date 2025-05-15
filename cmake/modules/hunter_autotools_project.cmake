@@ -187,6 +187,8 @@ function(hunter_autotools_project target_name)
           ${PARAM_URL}
         URL_HASH
           ${PARAM_URL_HASH}
+        DOWNLOAD_EXTRACT_TIMESTAMP
+          TRUE
         DOWNLOAD_DIR
           ${PARAM_DOWNLOAD_DIR}
         TLS_VERIFY
