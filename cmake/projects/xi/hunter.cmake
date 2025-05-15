@@ -44,11 +44,8 @@ set(
 if (HUNTER_xi_VERSION VERSION_GREATER "1.6.1")
     hunter_pick_scheme(DEFAULT url_sha1_autogen_autotools)
 else()
-    list(APPEND _dependencies inputproto)
     hunter_pick_scheme(DEFAULT url_sha1_autotools)
 endif()
-
-
 
 hunter_cmake_args(
     xi

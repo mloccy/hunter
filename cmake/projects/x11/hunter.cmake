@@ -38,11 +38,8 @@ hunter_configuration_types(x11 CONFIGURATION_TYPES Release)
 hunter_pick_scheme(DEFAULT url_sha1_autotools)
 set(x11_dependencies
     xproto
-    xextproto
     xtrans
     xcb
-    kbproto
-    inputproto
 )
 hunter_cmake_args(
     x11
