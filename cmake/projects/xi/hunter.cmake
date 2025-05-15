@@ -11,6 +11,18 @@ include(hunter_configuration_types)
 include(hunter_download)
 include(hunter_pick_scheme)
 
+
+hunter_add_version(
+    PACKAGE_NAME
+    xi
+    VERSION
+    "1.8.2"
+    URL
+    "https://gitlab.freedesktop.org/xorg/lib/libxi/-/archive/libXi-1.8.2/libxi-libXi-1.8.2.tar.gz"
+    SHA1
+    6b22d08e04aa3da7d9dd4eacef8aee83cb29c785
+)
+
 # http://www.x.org/releases/X11R7.7/src/lib
 hunter_add_version(
     PACKAGE_NAME
