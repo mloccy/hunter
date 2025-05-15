@@ -34,6 +34,17 @@ hunter_add_version(
     5076f7853713d7db958a05f6fd1c18f7e111a0ad
 )
 
+hunter_add_version(
+    PACKAGE_NAME
+    x11
+    VERSION
+    "1.8.12"
+    URL
+    "https://www.x.org/releases/individual/lib/libX11-1.8.12.tar.gz"
+    SHA1
+    5600992b00e875f72ad24b8962b5c62f3744a117
+)
+
 hunter_configuration_types(x11 CONFIGURATION_TYPES Release)
 hunter_pick_scheme(DEFAULT url_sha1_autotools)
 set(x11_dependencies

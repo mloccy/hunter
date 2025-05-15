@@ -64,6 +64,7 @@ hunter_cmake_args(
     CMAKE_ARGS
     PKGCONFIG_EXPORT_TARGETS=xcb-proto
     DEPENDS_ON_PACKAGES=${xcb_proto_dependencies}
+    CMAKE_POSITION_INDEPENDENT_CODE=On
 )
 hunter_cacheable(xcb-proto)
 
