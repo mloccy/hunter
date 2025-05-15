@@ -26,7 +26,7 @@ hunter_configuration_types(xrender CONFIGURATION_TYPES Release)
 hunter_pick_scheme(DEFAULT url_sha1_autotools)
 set(xrender_dependencies
     x11
-    renderproto
+    xproto
 )
 hunter_cmake_args(
     xrender

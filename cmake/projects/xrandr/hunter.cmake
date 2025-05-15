@@ -26,11 +26,8 @@ hunter_configuration_types(xrandr CONFIGURATION_TYPES Release)
 hunter_pick_scheme(DEFAULT url_sha1_autotools)
 set(xrandr_dependencies
     x11
-    randrproto
     xext
-    xextproto
     xrender
-    renderproto
 )
 hunter_cmake_args(
     xrandr
