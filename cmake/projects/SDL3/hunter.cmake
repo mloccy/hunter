@@ -15,7 +15,7 @@ hunter_add_version(
         URL
         "https://codeload.github.com/mloccy/SDL/tar.gz/refs/tags/v3.0.4-alpha"
         SHA1
-        db65b2aa698d9c15954e8406912147e38d3724a1
+        99de4ba345f2c88b49d78925954e982b7ef45c8a
 )
 
 hunter_add_version(
