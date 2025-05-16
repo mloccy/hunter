@@ -27,8 +27,6 @@ hunter_pick_scheme(DEFAULT url_sha1_autotools)
 set(xinerama_dependencies
     x11
     xext
-    xextproto
-    xineramaproto
 )
 hunter_cmake_args(
     xinerama

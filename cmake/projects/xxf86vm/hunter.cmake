@@ -28,9 +28,7 @@ set(xxf86vm_dependencies
     xorg-macros
     xproto
     x11
-    xextproto
     xext
-    xf86vidmodeproto
 )
 hunter_cmake_args(
     xxf86vm

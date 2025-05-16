@@ -29,7 +29,7 @@ set(xcursor_dependencies
     xrender
     xfixes
     x11
-    fixesproto
+    xproto
 )
 hunter_cmake_args(
     xcursor

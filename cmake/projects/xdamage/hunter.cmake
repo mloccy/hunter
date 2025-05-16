@@ -26,10 +26,8 @@ hunter_configuration_types(xdamage CONFIGURATION_TYPES Release)
 hunter_pick_scheme(DEFAULT url_sha1_autotools)
 hunter_cacheable(xdamage)
 set(xdamage_dependencies
-    damageproto
     xfixes
-    fixesproto
-    xextproto
+    xproto
     x11
 )
 hunter_cmake_args(

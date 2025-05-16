@@ -37,8 +37,6 @@ hunter_configuration_types(xfixes CONFIGURATION_TYPES Release)
 hunter_pick_scheme(DEFAULT url_sha1_autotools)
 set(xfixes_dependencies
     xproto
-    fixesproto
-    xextproto
     x11
 )
 hunter_cmake_args(
