@@ -36,7 +36,7 @@ hunter_add_version(
 hunter_configuration_types(xrender CONFIGURATION_TYPES Release)
 
 if (HUNTER_xrender_VERSION VERSION_GREATER "0.9.7")
-    hunter_pick_scheme(DEFUALT url_sha1_autogen_autotools)
+    hunter_pick_scheme(DEFAULT url_sha1_autogen_autotools)
 else()
     hunter_pick_scheme(DEFAULT url_sha1_autotools)
 endif()
