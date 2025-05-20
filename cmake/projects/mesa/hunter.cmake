@@ -12,7 +12,7 @@ hunter_add_version(
     URL
     "https://gitlab.freedesktop.org/mesa/mesa/-/archive/mesa-25.0.6/mesa-mesa-25.0.6.tar.gz"
     SHA1
-    42e858514e0d4820fdae8ff5b3185e029dd1c170
+    f3501dbf428f895c658983f9125379b86ba9bc70
 )
 
 hunter_pick_scheme(DEFAULT url_sha1_meson)
