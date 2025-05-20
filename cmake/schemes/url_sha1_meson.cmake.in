@@ -9,6 +9,7 @@ include("@HUNTER_SELF@/cmake/Hunter")
 include(hunter_user_error)
 include(hunter_status_debug)
 include(hunter_assert_not_empty_string)
+include(ExternalProject) # ExternalProject_Add
 
 hunter_status_debug("Scheme: url_sha1_meson")
 
