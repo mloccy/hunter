@@ -31,6 +31,17 @@ if (NOT Python3_FOUND OR Python3_VERSION_MINOR LESS 7)
     hunter_fatal_error("Python at least 3.7 us required")
 endif()
 
+set(binPath "@HUNTER_PACKAGE_INSTALL_PREFIX@/bin")
+
+if (NOT EXISTS "@HUNTER_PACKAGE_INSTALL_PREFIX@")
+    file(MAKE_DIRECTORY "@HUNTER_PACKAGE_INSTALL_PREFIX@")
+endif()
+
+if (NOT EXISTS "${binPath}")
+    file(MAKE_DIRECTORY "${binPath}")
+
+endif()
+
 ExternalProject_Add(
         "@HUNTER_EP_NAME@"
     URL
@@ -50,9 +61,9 @@ ExternalProject_Add(
     CONFIGURE_COMMAND
         ""
     BUILD_COMMAND
-        ${Python3_EXECUTABLE} ./packaging/create_zipapp.py --outfile meson --interpreter ${Python3_EXECUTABLE}
+        ${Python3_EXECUTABLE} ./packaging/create_zipapp.py --outfile ./meson --interpreter ${Python3_EXECUTABLE}
     BUILD_IN_SOURCE
         1
     INSTALL_COMMAND
-        ${CMAKE_COMMAND} -E copy meson "@HUNTER_PACKAGE_INSTALL_PREFIX@/bin"
+        ${CMAKE_COMMAND} -E copy ./meson "@HUNTER_PACKAGE_INSTALL_PREFIX@/bin/"
     )
