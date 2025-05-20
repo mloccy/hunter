@@ -1,0 +1,59 @@
+# Copyright (c) 2025 Colm Vize
+# All rights reserved.
+
+cmake_minimum_required(VERSION 3.24)
+project(Hunter)
+
+include("@HUNTER_SELF@/cmake/Hunter")
+include(hunter_fatal_error)
+include(hunter_status_debug)
+include(hunter_assert_not_empty_string)
+include(ExternalProject) # ExternalProject_Add
+
+hunter_status_debug("Scheme: meson")
+
+# Check preconditions
+hunter_assert_not_empty_string("@HUNTER_SELF@")
+hunter_assert_not_empty_string("@HUNTER_EP_NAME@")
+hunter_assert_not_empty_string("@HUNTER_PACKAGE_URL@")
+hunter_assert_not_empty_string("@HUNTER_PACKAGE_SHA1@")
+hunter_assert_not_empty_string("@HUNTER_PACKAGE_DOWNLOAD_DIR@")
+hunter_assert_not_empty_string("@HUNTER_PACKAGE_SOURCE_DIR@")
+hunter_assert_not_empty_string("@HUNTER_PACKAGE_BUILD_DIR@")
+hunter_assert_not_empty_string("@HUNTER_PACKAGE_INSTALL_PREFIX@")
+hunter_assert_not_empty_string("@HUNTER_INSTALL_PREFIX@")
+hunter_assert_not_empty_string("@HUNTER_GLOBAL_SCRIPT_DIR@")
+find_package (Python3 COMPONENTS Interpreter)
+
+if (NOT Python3_FOUND OR Python3_VERSION_MINOR LESS 7)
+    hunter_add_package(python)
+    find_package (Python3 COMPONENTS Interpreter)
+    hunter_fatal_error("Python at least 3.7 us required")
+endif()
+
+ExternalProject_Add(
+        "@HUNTER_EP_NAME@"
+    URL
+        "@HUNTER_PACKAGE_URL@"
+    URL_HASH
+        "@HUNTER_PACKAGE_SHA1@"
+    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+
+    DOWNLOAD_DIR
+        "@HUNTER_PACKAGE_DOWNLOAD_DIR@"
+    SOURCE_DIR
+        "@HUNTER_PACKAGE_SOURCE_DIR@"
+    BUILD_DIR
+        "@HUNTER_PACKAGE_BUILD_DIR@"
+    INSTALL_DIR
+      "@HUNTER_PACKAGE_INSTALL_PREFIX@"
+
+    PATCH_COMMAND
+        ""
+    CONFIGURE_COMMAND
+        ""
+    BUILD_COMMAND
+        ${Python3_EXECUTABLE} ./packaging/create_zipapp.py --outfile meson --interpreter ${Python3_EXECUTABLE}
+    INSTALL_COMMAND
+        ${CMAKE_COMMAND} -E copy meson "@HUNTER_PACKAGE_INSTALL_PREFIX@/bin"
+    )
