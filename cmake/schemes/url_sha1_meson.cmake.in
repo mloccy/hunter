@@ -70,12 +70,12 @@ ExternalProject_Add(
     INSTALL_DIR
       "@HUNTER_PACKAGE_INSTALL_PREFIX@"
     CONFIGURE_COMMAND
-    ${Python3_EXECUTABLE} ${MESON} setup "@HUNTER_PACKAGE_BUILD+DIR" ${additional_setup_args}
+    ${Python3_EXECUTABLE} ${MESON} setup "@HUNTER_PACKAGE_BUILD_DIR@"
     BUILD_COMMAND
-    ${Python3_EXECUTABLE} ${MESON} compile -C "@HUNTER_PACKAGE_BUILD+DIR"
+    ${Python3_EXECUTABLE} ${MESON} compile -C "@HUNTER_PACKAGE_BUILD_DIR@"
 
     BUILD_IN_SOURCE
         1
     INSTALL_COMMAND
-        ${CMAKE_COMMAND} -E copy ./meson "@HUNTER_PACKAGE_INSTALL_PREFIX@/bin/"
+        ""
     )
