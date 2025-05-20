@@ -44,6 +44,7 @@ if (NOT Python3_FOUND OR Python3_VERSION_MINOR LESS 7)
     endif()
 endif()
 
+set(HUNTER_VENV_PYTHON_VERSION ${Python3_VERSION})
 
 foreach(dependency ${DEPENDS_ON_PACKAGES})
   hunter_add_package(${dependency})
