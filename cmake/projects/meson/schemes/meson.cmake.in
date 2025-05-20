@@ -36,7 +36,7 @@ ExternalProject_Add(
     URL
         "@HUNTER_PACKAGE_URL@"
     URL_HASH
-        SHA1="@HUNTER_PACKAGE_SHA1@"
+        SHA1=@HUNTER_PACKAGE_SHA1@
     DOWNLOAD_EXTRACT_TIMESTAMP
         TRUE
     DOWNLOAD_DIR
