@@ -39,16 +39,18 @@ ExternalProject_Add(
         SHA1=@HUNTER_PACKAGE_SHA1@
     DOWNLOAD_EXTRACT_TIMESTAMP
         TRUE
+    TLS_VERIFY
+        "@HUNTER_TLS_VERIFY@"
     DOWNLOAD_DIR
         "@HUNTER_PACKAGE_DOWNLOAD_DIR@"
     SOURCE_DIR
         "@HUNTER_PACKAGE_SOURCE_DIR@"
-    BUILD_DIR
-        "@HUNTER_PACKAGE_BUILD_DIR@"
     INSTALL_DIR
       "@HUNTER_PACKAGE_INSTALL_PREFIX@"
     BUILD_COMMAND
         ${Python3_EXECUTABLE} ./packaging/create_zipapp.py --outfile meson --interpreter ${Python3_EXECUTABLE}
+    BUILD_IN_SOURCE
+        1
     INSTALL_COMMAND
         ${CMAKE_COMMAND} -E copy meson "@HUNTER_PACKAGE_INSTALL_PREFIX@/bin"
     )
