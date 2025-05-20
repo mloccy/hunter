@@ -78,6 +78,3 @@ ExternalProject_Add(
     INSTALL_COMMAND
         ${CMAKE_COMMAND} -E copy ./meson "@HUNTER_PACKAGE_INSTALL_PREFIX@/bin/"
     )
-
-
-endforeach()
