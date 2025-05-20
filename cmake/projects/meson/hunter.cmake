@@ -12,7 +12,7 @@ hunter_add_version(
     URL
     "https://github.com/mesonbuild/meson/releases/download/1.8.0/meson-1.8.0.tar.gz"
     SHA1
-    da39a3ee5e6b4b0d3255bfef95601890afd80709
+    42e858514e0d4820fdae8ff5b3185e029dd1c170
 )
 
 
