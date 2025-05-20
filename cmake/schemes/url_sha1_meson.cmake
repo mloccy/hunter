@@ -1,16 +1,20 @@
-# Copyright (c) 2025 Colm Vize
+# Copyright (c) 2013, 2015 Ruslan Baratov, Alexandre Pretyman
 # All rights reserved.
 
-cmake_minimum_required(VERSION 3.24)
+cmake_minimum_required(VERSION 3.10)
 project(Hunter)
 
 include("@HUNTER_SELF@/cmake/Hunter")
-include(hunter_fatal_error)
+
+include(hunter_user_error)
 include(hunter_status_debug)
 include(hunter_assert_not_empty_string)
-include(ExternalProject) # ExternalProject_Add
 
-hunter_status_debug("Scheme: meson")
+hunter_status_debug("Scheme: url_sha1_meson")
+
+foreach(dependency ${DEPENDS_ON_PACKAGES})
+  hunter_add_package(${dependency})
+endforeach()
 
 # Check preconditions
 hunter_assert_not_empty_string("@HUNTER_SELF@")
@@ -22,7 +26,17 @@ hunter_assert_not_empty_string("@HUNTER_PACKAGE_SOURCE_DIR@")
 hunter_assert_not_empty_string("@HUNTER_PACKAGE_BUILD_DIR@")
 hunter_assert_not_empty_string("@HUNTER_PACKAGE_INSTALL_PREFIX@")
 hunter_assert_not_empty_string("@HUNTER_INSTALL_PREFIX@")
-hunter_assert_not_empty_string("@HUNTER_GLOBAL_SCRIPT_DIR@")
+
+find_program(MESON meson)
+
+if (NOT MESON)
+    hunter_add_package(meson)
+    find_program(MESON meson)
+    if (NOT MESON)
+        hunter_fatal_error("Meson could not be found or installed")
+    endif()
+endif()
+
 find_package (Python3 COMPONENTS Interpreter)
 
 if (NOT Python3_FOUND OR Python3_VERSION_MINOR LESS 7)
@@ -33,17 +47,11 @@ if (NOT Python3_FOUND OR Python3_VERSION_MINOR LESS 7)
     endif()
 endif()
 
-set(binPath "@HUNTER_PACKAGE_INSTALL_PREFIX@/bin")
+set(additional_setup_args "")
 
-if (NOT EXISTS "@HUNTER_PACKAGE_INSTALL_PREFIX@")
-    file(MAKE_DIRECTORY "@HUNTER_PACKAGE_INSTALL_PREFIX@")
+if (MSVC)
+    list(APPEND additional_setup_args --backend=vs)
 endif()
-
-if (NOT EXISTS "${binPath}")
-    file(MAKE_DIRECTORY "${binPath}")
-
-endif()
-
 ExternalProject_Add(
         "@HUNTER_EP_NAME@"
     URL
@@ -61,11 +69,15 @@ ExternalProject_Add(
     INSTALL_DIR
       "@HUNTER_PACKAGE_INSTALL_PREFIX@"
     CONFIGURE_COMMAND
-        ""
+    ${Python3_EXECUTABLE} ${MESON} setup "@HUNTER_PACKAGE_BUILD+DIR" ${additional_setup_args}
     BUILD_COMMAND
-        ${Python3_EXECUTABLE} ./packaging/create_zipapp.py --outfile ./meson --interpreter ${Python3_EXECUTABLE}
+    ${Python3_EXECUTABLE} ${MESON} compile -C "@HUNTER_PACKAGE_BUILD+DIR"
+
     BUILD_IN_SOURCE
         1
     INSTALL_COMMAND
         ${CMAKE_COMMAND} -E copy ./meson "@HUNTER_PACKAGE_INSTALL_PREFIX@/bin/"
     )
+
+
+endforeach()
