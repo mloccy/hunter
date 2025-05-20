@@ -17,7 +17,7 @@ hunter_add_version(
 
 set(deps pip_mako)
 
-hunter_cmake_args(mesa CMAKE_ARGS DEPENDS_ON_PACKAGES ${deps})
+hunter_cmake_args(mesa CMAKE_ARGS DEPENDS_ON_PACKAGES=${deps})
 hunter_pick_scheme(DEFAULT url_sha1_meson)
 hunter_cacheable(mesa)
 hunter_download(PACKAGE_NAME mesa)
