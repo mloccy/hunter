@@ -47,6 +47,8 @@ ExternalProject_Add(
         "@HUNTER_PACKAGE_SOURCE_DIR@"
     INSTALL_DIR
       "@HUNTER_PACKAGE_INSTALL_PREFIX@"
+    CONFIGURE_COMMAND
+        ""
     BUILD_COMMAND
         ${Python3_EXECUTABLE} ./packaging/create_zipapp.py --outfile meson --interpreter ${Python3_EXECUTABLE}
     BUILD_IN_SOURCE
