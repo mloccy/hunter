@@ -32,6 +32,16 @@ hunter_add_version(
     130d66d80f162d9d5cd706a55f62fcdb9bbdbc9b
 )
 
+hunter_add_version(
+    PACKAGE_NAME
+    hunter_venv
+    VERSION
+    1.0.3
+    URL
+    "https://github.com/mloccy/hunter_venv/archive/refs/tags/v1.0.3.tar.gz"
+    SHA1
+    de9c0f95efdbaaaf4a184cbbc4af3b50bd9a21da
+)
 # DOCUMENTATION_START {
 if(APPLE)
   set(__hunter_venv_default_python "3.7.5")
