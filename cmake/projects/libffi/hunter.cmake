@@ -50,7 +50,7 @@ else()
         URL
         "https://github.com/mloccy/Libffi/archive/refs/tags/3.2.1.tar.gz"
         SHA1
-        fdf85496f1193161cfe588d8dbe9f2f6753740e2
+        0061df2dc637f9deeed76f5213871a1b072079a4
     )
 
     hunter_pick_scheme(DEFAULT url_sha1_cmake)
