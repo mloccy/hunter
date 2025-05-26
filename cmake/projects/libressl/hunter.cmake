@@ -20,5 +20,5 @@ hunter_add_version(
 )
 
 hunter_pick_scheme(DEFAULT url_sha1_cmake)
-hunter_cacheable(hunter_venv)
-hunter_download(PACKAGE_NAME hunter_venv)
+hunter_cacheable(libressl)
+hunter_download(PACKAGE_NAME libressl)
