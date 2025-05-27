@@ -43,6 +43,16 @@ if(MINGW)
     SHA1
     0229799cdbc3b7db93a4b973c52d34e68ef8f0b1
     )
+  hunter_add_version(
+    PACKAGE_NAME
+    NASM
+    VERSION
+    "2.15.03"
+    URL
+    "http://www.nasm.us/pub/nasm/releasebuilds/2.15.03/win32/nasm-2.15.03.tar.gz"
+    SHA1
+    da39a3ee5e6b4b0d3255bfef95601890afd80709
+    )
 else()
   hunter_add_version(
     PACKAGE_NAME
@@ -75,6 +85,17 @@ else()
     "http://www.nasm.us/pub/nasm/releasebuilds/2.15.02/nasm-2.15.02.tar.gz"
     SHA1
     a074a0298e1258d912535fd42e72c07f797bbde5
+    )
+
+  hunter_add_version(
+    PACKAGE_NAME
+    NASM
+    VERSION
+    "2.15.03"
+    URL
+    "http://www.nasm.us/pub/nasm/releasebuilds/2.15.03/nasm-2.15.03.tar.gz"
+    SHA1
+    5081a60c623565346830778468df08f7d82a2239
     )
 endif()
 
