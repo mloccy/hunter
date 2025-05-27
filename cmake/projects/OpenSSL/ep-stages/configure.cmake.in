@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
+include("@HUNTER_SELF@/cmake/Hunter")
 include(hunter_status_debug)
 
 if(NOT "@NASM_ROOT@" STREQUAL "")
