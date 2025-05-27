@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 include("@HUNTER_SELF@/cmake/Hunter")
+list(APPEND CMAKE_MODULE_PATH "@HUNTER_SELF@/cmake/modules")
+
 
 include(hunter_status_debug)
 
