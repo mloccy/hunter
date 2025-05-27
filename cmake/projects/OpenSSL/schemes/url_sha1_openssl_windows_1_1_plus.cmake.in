@@ -80,17 +80,16 @@ if(DEBUG_RUNTIME)
   set(arch "debug-${arch}")
 endif()
 
-if (MSVC OR MINGW)
-  enable_language(C)
-  enable_language(CXX)
-  hunter_add_package(NASM)
-endif()
-
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "WindowsStore")
   hunter_add_package(NASM) # set NASM_ROOT
   set(opt "no-async")
 elseif(ASM_SUPPORT)
-  hunter_add_package(NASM) # set NASM_ROOT
+
+  if (MSVC OR MINGW)
+    enable_language(C)
+    enable_language(CXX)
+    hunter_add_package(NASM) # set NASM_ROOT
+  endif()
   set(opt "")
 else()
   set(NASM_ROOT "")
