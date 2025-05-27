@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
+include(hunter_status_debug)
 
 if(NOT "@NASM_ROOT@" STREQUAL "")
   set(ENV{PATH} "@NASM_ROOT@/bin;$ENV{PATH}")
@@ -11,6 +12,8 @@ endif()
 if("@openssl_dir@" STREQUAL "")
   message(FATAL_ERROR "openssl_dir is empty")
 endif()
+
+hunter_status_debug("Configuring perl with: perl Configure @arch@ @opt@ @shared@ \"--prefix=@openssl_install_dir@\" \"--libdir=lib\" \"--openssldir=@openssl_dir@\"")
 
 execute_process(COMMAND
   perl Configure @arch@ @opt@ @shared@ "--prefix=@openssl_install_dir@" "--libdir=lib" "--openssldir=@openssl_dir@" RESULT_VARIABLE result)
