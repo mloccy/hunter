@@ -81,6 +81,8 @@ if(DEBUG_RUNTIME)
 endif()
 
 if (MSVC OR MINGW)
+  enable_language(C)
+  enable_language(CXX)
   hunter_add_package(NASM)
 endif()
 
