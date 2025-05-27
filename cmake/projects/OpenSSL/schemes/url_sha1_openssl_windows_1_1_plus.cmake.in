@@ -149,6 +149,8 @@ ExternalProject_Add(
     "@CMAKE_COMMAND@" -P "@HUNTER_PACKAGE_BUILD_DIR@/configure_1_1_plus.cmake"
     COMMAND
     nmake install
+    COMMAND
+    nmake install_dev
     BUILD_COMMAND
     "@CMAKE_COMMAND@" -E echo "Dummy build step"
     BUILD_IN_SOURCE
