@@ -91,7 +91,7 @@ else()
   set(opt "no-asm")
 endif()
 
-if("@MSVC@")
+if("@MSVC@" AND ${CMAKE_VERSION} VERSION_LESS_EQUAL "2.8.12")
   # Logging as Workaround for VS_UNICODE_OUTPUT issue:
   # https://public.kitware.com/Bug/view.php?id=14266
   set(log_opts LOG_CONFIGURE 1)
