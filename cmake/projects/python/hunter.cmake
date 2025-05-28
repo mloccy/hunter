@@ -8,12 +8,12 @@ include(hunter_pick_scheme)
 include(hunter_report_broken_package)
 include(hunter_configuration_types)
 
-if (NOT UNIX OR APPLE)
+if (NOT LINUX)
     hunter_add_version(
         PACKAGE_NAME python
         VERSION "v0.1.0"
         URL "https://github.com/mloccy/python-cmake-buildsystem/archive/refs/tags/v0.1.0.tar.gz"
-        SHA1 2533771955744d829e00ffe7ca14606787abfb7b
+        SHA1 86fef49f6f82f359e67ff83b37c169cf97a54d85
     )
 else ()
 
