@@ -772,7 +772,7 @@ hunter_add_version(
     PACKAGE_NAME
     OpenSSL
     VERSION
-    "3.1.4"
+    "3.5.0"
     URL
     "https://github.com/openssl/openssl/releases/download/openssl-3.5.0/openssl-3.5.0.tar.gz"
     SHA1
