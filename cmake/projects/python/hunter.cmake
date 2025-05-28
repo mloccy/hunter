@@ -27,11 +27,12 @@ else ()
 
 endif()
 
+hunter_configuration_types(python CONFIGURATION_TYPES Release)
+
 if (NOT UNIX OR APPLE)
     hunter_pick_scheme(DEFAULT url_sha1_cmake)
 else()
     include(hunter_configuration_types)
-    hunter_configuration_types(python CONFIGURATION_TYPES Release)
     hunter_pick_scheme(DEFAULT url_sha1_autotools)
 endif()
 
