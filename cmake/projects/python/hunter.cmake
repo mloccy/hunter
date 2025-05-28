@@ -13,7 +13,7 @@ if (NOT LINUX)
         PACKAGE_NAME python
         VERSION "v0.1.0"
         URL "https://github.com/mloccy/python-cmake-buildsystem/archive/refs/tags/v0.1.0.tar.gz"
-        SHA1 a84a15a8aa37eebd0c158433fbee77bc73119967
+        SHA1 4a9ba7c91136a1d8371578cc30ff551c5c1356dc
     )
 else ()
 
