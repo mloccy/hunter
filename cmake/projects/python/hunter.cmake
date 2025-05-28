@@ -6,8 +6,7 @@ include(hunter_cmake_args)
 include(hunter_download)
 include(hunter_pick_scheme)
 include(hunter_report_broken_package)
-
-
+include(hunter_configuration_types)
 
 if (NOT UNIX OR APPLE)
     hunter_add_version(
@@ -32,7 +31,6 @@ hunter_configuration_types(python CONFIGURATION_TYPES Release)
 if (NOT UNIX OR APPLE)
     hunter_pick_scheme(DEFAULT url_sha1_cmake)
 else()
-    include(hunter_configuration_types)
     hunter_pick_scheme(DEFAULT url_sha1_autotools)
 endif()
 
