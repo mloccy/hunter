@@ -14,7 +14,7 @@ if (NOT UNIX OR APPLE)
         PACKAGE_NAME python
         VERSION "v0.1.0"
         URL "https://github.com/mloccy/python-cmake-buildsystem/archive/refs/tags/v0.1.0.tar.gz"
-        SHA1 42ddd73b9222f8e6dc5824b1262f31d265f079dd
+        SHA1 1b004de712e7012becbc25cb21e0181759de0832
     )
 else ()
 
