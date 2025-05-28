@@ -12,8 +12,6 @@ if("@openssl_dir@" STREQUAL "")
   message(FATAL_ERROR "openssl_dir is empty")
 endif()
 
-message(STATUS "Configuring perl with: perl Configure @arch@ @opt@ @shared@ \"--prefix=@openssl_install_dir@\" \"--libdir=lib\" \"--openssldir=@openssl_dir@\"")
-
 execute_process(COMMAND
   perl Configure @arch@ @opt@ @shared@ "--prefix=@openssl_install_dir@" "--libdir=lib" "--openssldir=@openssl_dir@" RESULT_VARIABLE result)
 
