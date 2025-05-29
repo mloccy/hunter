@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.10)
 project(Hunter)
 
 include(ExternalProject) # ExternalProject_Add
-
+include("@HUNTER_SELF@/cmake/Hunter")
 # Scheme for CMake projects
 
 # This is universal CMake scheme that will work for
@@ -21,6 +21,10 @@ include(hunter_status_debug)
 include(hunter_assert_not_empty_string)
 include(hunter_user_error)
 include(hunter_add_package)
+
+foreach(dependency ${DEPENDS_ON_PACKAGES})
+  hunter_add_package(${dependency})
+endforeach()
 
 hunter_status_debug("Scheme: url_sha1_cmake")
 
@@ -40,9 +44,6 @@ hunter_assert_not_empty_string("@CMAKE_GENERATOR@")
 hunter_assert_not_empty_string("${CMAKE_TOOLCHAIN_FILE}")
 hunter_assert_not_empty_string("@HUNTER_TLS_VERIFY@")
 
-foreach(dependency ${DEPENDS_ON_PACKAGES})
-  hunter_add_package(${dependency})
-endforeach()
 
 if(IOS)
   if(CMAKE_VERSION VERSION_LESS 3.5)
