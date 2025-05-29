@@ -137,12 +137,16 @@ if(HUNTER_LLVM_VERSION VERSION_GREATER 6.0.1)
     hunter_source_subdir(LLVM SOURCE_SUBDIR llvm)
 endif()
 
+set(deps python)
+
+
 hunter_cmake_args(
   LLVM
   CMAKE_ARGS
     LLVM_INCLUDE_EXAMPLES=OFF
     LLVM_INCLUDE_TESTS=OFF
     LLVM_INCLUDE_DOCS=OFF
+    DEPENDS_ON_PACKAGES=${deps}
 )
 
 hunter_configuration_types(LLVM CONFIGURATION_TYPES Release)
