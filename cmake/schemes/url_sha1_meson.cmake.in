@@ -42,9 +42,15 @@ if (NOT Python3_FOUND OR Python3_VERSION_MINOR LESS 7)
     hunter_add_package(python)
     find_package (Python3 COMPONENTS Interpreter)
     if (NOT Python3_FOUND OR Python3_VERSION_MINOR LESS 7)
-        hunter_fatal_error(
-            "Python at least 3.7 us required"
-            ERROR_PAGE "error.external.build.failed")
+        if (NOT Python3_FOUND)
+            hunter_fatal_error(
+                "Python at least 3.7 is required"
+                ERROR_PAGE "error.external.build.failed")
+        else()
+                hunter_fatal_error(
+                    "Python at least 3.7 is required but only found 3.${Python3_VERSION_MINOR}"
+                    ERROR_PAGE "error.external.build.failed")
+        endif()
     endif()
 endif()
 
