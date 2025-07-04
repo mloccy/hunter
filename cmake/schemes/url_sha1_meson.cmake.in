@@ -30,7 +30,9 @@ if (NOT MESON)
     hunter_add_package(meson)
     find_program(MESON meson)
     if (NOT MESON)
-        hunter_fatal_error("Meson could not be found or installed")
+        hunter_fatal_error(
+            "Meson could not be found or installed"
+            ERROR_PAGE "error.external.build.failed")
     endif()
 endif()
 
@@ -40,7 +42,9 @@ if (NOT Python3_FOUND OR Python3_VERSION_MINOR LESS 7)
     hunter_add_package(python)
     find_package (Python3 COMPONENTS Interpreter)
     if (NOT Python3_FOUND OR Python3_VERSION_MINOR LESS 7)
-        hunter_fatal_error("Python at least 3.7 us required")
+        hunter_fatal_error(
+            "Python at least 3.7 us required"
+            ERROR_PAGE "error.external.build.failed")
     endif()
 endif()
 
