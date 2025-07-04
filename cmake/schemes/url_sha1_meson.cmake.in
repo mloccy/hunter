@@ -36,8 +36,8 @@ if (NOT MESON)
     endif()
 endif()
 
-find_package(Python3 COMPONENTS Interpreter)
-
+set (Python3_ROOT_DIR "@HUNTER_PACKAGE_INSTALL_PREFIX@")
+find_package (Python3 COMPONENTS Interpreter)
 if (NOT Python3_FOUND OR Python3_VERSION_MINOR LESS 7)
     hunter_add_package(python)
     find_package (Python3 COMPONENTS Interpreter)
