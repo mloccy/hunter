@@ -37,10 +37,10 @@ if (NOT MESON)
 endif()
 
 set (Python3_ROOT_DIR "@HUNTER_PACKAGE_INSTALL_PREFIX@")
-find_package (Python3 COMPONENTS Interpreter)
+find_package(Python3 "3.7" COMPONENTS Interpreter)
 if (NOT Python3_FOUND OR Python3_VERSION_MINOR LESS 7)
     hunter_add_package(python)
-    find_package (Python3 COMPONENTS Interpreter)
+    find_package(Python3 "3.7" COMPONENTS Interpreter)
     if (NOT Python3_FOUND OR Python3_VERSION_MINOR LESS 7)
         if (NOT Python3_FOUND)
             hunter_fatal_error(
