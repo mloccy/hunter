@@ -18,6 +18,7 @@ foreach(dependency ${DEPENDS_ON_PACKAGES})
   hunter_add_package(${dependency})
 endforeach()
 
+hunter_add_package(python)
 hunter_add_package(hunter_venv)
 find_package(hunter_venv CONFIG REQUIRED)
 
