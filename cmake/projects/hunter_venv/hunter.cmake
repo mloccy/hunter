@@ -40,7 +40,7 @@ hunter_add_version(
     URL
     "https://github.com/mloccy/hunter_venv/archive/refs/tags/v1.0.3.tar.gz"
     SHA1
-    e72b2b59e9804610098b0067f36a5097b17c50e8
+    da39a3ee5e6b4b0d3255bfef95601890afd80709
 )
 # DOCUMENTATION_START {
 if(APPLE)
