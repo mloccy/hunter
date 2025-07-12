@@ -21,7 +21,14 @@ endforeach()
 hunter_add_package(hunter_venv)
 find_package(hunter_venv CONFIG REQUIRED)
 
-find_package(Python REQUIRED)
+string(COMPARE EQUAL "@HUNTER_REQUIRED_PYTHON_VERSION@" "" python_version_empty)
+
+if (python_version_empty)
+  find_package(Python REQUIRED)
+else()
+  find_package(Python "@HUNTER_REQUIRED_PYTHON_VERSION@" REQUIRED)
+endif()
+
 hunter_status_debug("Using Python: ${Python_EXECUTABLE}")
 hunter_status_debug("Python_SITELIB: ${Python_SITELIB}")
 hunter_status_debug("Root: ${HUNTER_VENV_ROOT}")

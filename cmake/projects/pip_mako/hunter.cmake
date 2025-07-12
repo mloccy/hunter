@@ -18,7 +18,7 @@ hunter_add_version(
     SHA1
     d53e56ec2325984c808cc29da197d6b863df12eb
 )
-
+set(HUNTER_REQUIRED_PYTHON_VERSION "3.8.0")
 hunter_pick_scheme(DEFAULT url_sha1_pip)
 hunter_cacheable(pip_mako)
 hunter_download(PACKAGE_NAME pip_mako)
