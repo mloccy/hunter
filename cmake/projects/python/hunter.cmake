@@ -39,7 +39,7 @@ hunter_cacheable(python)
 if (NOT UNIX OR APPLE)
     hunter_download(PACKAGE_NAME python)
 else()
-    set(python_dependencies ZLIB)
+    set(python_dependencies ZLIB libffi)
     hunter_cmake_args(
         python
         CMAKE_ARGS

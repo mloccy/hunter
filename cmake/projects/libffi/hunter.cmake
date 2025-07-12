@@ -38,7 +38,7 @@ if (UNIX)
         PACKAGE_NAME libffi
         PACKAGE_INTERNAL_DEPS_ID "2"
         PACKAGE_UNRELOCATABLE_TEXT_FILES
-        "lib/libffi.la"
+        "lib64/libffi.la"
         "lib/pkgconfig/libffi.pc"
     )
 else()
