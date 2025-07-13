@@ -24,6 +24,8 @@ find_package(hunter_venv CONFIG REQUIRED)
 
 string(COMPARE EQUAL "@HUNTER_REQUIRED_PYTHON_VERSION@" "" python_version_empty)
 
+set (Python_ROOT_DIR "@HUNTER_INSTALL_PREFIX@")
+set (Python3_ROOT_DIR "@HUNTER_INSTALL_PREFIX@")
 if (python_version_empty)
   find_package(Python REQUIRED)
 else()
