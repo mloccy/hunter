@@ -24,6 +24,16 @@ if (UNIX)
         280c265b789e041c02e5c97815793dfc283fb1e6
     )
 
+    hunter_add_version(
+        PACKAGE_NAME
+        libffi
+        VERSION
+        "3.3.0"
+        URL
+        "https://github.com/libffi/libffi/releases/download/v3.3/libffi-3.3.tar.gz"
+        SHA1
+        8df6cb570c8d6596a67d1c0773bf00650154f7aa
+    )
     hunter_configuration_types(libffi CONFIGURATION_TYPES Release)
     hunter_pick_scheme(DEFAULT url_sha1_autotools)
 
