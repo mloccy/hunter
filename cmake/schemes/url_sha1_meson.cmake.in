@@ -36,11 +36,6 @@ if (NOT MESON)
     endif()
 endif()
 
-set (Python3_ROOT_DIR "@HUNTER_PACKAGE_INSTALL_PREFIX@")
-set (Python_ROOT_DIR "@HUNTER_PACKAGE_INSTALL_PREFIX@")
-set (Python_FIND_STRATEGY LOCATION)
-set (Python3_FIND_STRATEGY LOCATION)
-
 find_package(Python3 "3.7" COMPONENTS Interpreter)
 if (NOT Python3_FOUND OR Python3_VERSION_MINOR LESS 7)
     hunter_add_package(python)
@@ -57,6 +52,9 @@ if (NOT Python3_FOUND OR Python3_VERSION_MINOR LESS 7)
         endif()
     endif()
 endif()
+
+hunter_add_package(hunter_venv)
+find_package(hunter_venv CONFIG REQUIRED)
 
 foreach(dependency ${DEPENDS_ON_PACKAGES})
   hunter_add_package(${dependency})
