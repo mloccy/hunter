@@ -49,7 +49,6 @@ else()
     PACKAGE_INTERNAL_DEPS_ID "26"
     PACKAGE_UNRELOCATABLE_TEXT_FILES
         lib/pkgconfig/python3.pc
-        bin/python
         bin/python3
         bin/python3.9)
 endif()
