@@ -218,6 +218,7 @@ function(hunter_autotools_configure_command out_command_line)
   endif()
 
   list(APPEND configure_command "--prefix=${PARAM_PACKAGE_INSTALL_DIR}")
+  list(APPEND configure_command --disable-multi-os-directory)
 
   # See: https://github.com/ruslo/hunter/pull/1910#discussion_r300725504
   list(
@@ -234,4 +235,3 @@ function(hunter_autotools_configure_command out_command_line)
 
   set(${out_command_line} ${configure_command} PARENT_SCOPE)
 endfunction()
-
