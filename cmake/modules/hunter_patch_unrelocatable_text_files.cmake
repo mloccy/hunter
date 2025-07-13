@@ -29,7 +29,7 @@ function(hunter_patch_unrelocatable_text_files)
     set(text_full_path "${x_INSTALL_PREFIX}/${text_file}")
     if(NOT EXISTS "${text_full_path}")
       hunter_user_error(
-          "File not exists:"
+          "File does not exist:"
           "  ${text_full_path}"
           "(check HUNTER_PACKAGE_UNRELOCATABLE_TEXT_FILES)"
       )
