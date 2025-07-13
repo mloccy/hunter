@@ -11,7 +11,7 @@ include(hunter_configuration_types)
 if (NOT LINUX)
     hunter_add_version(
         PACKAGE_NAME python
-        VERSION "v0.1.0"
+        VERSION "3.9.17"
         URL "https://github.com/mloccy/python-cmake-buildsystem/archive/refs/tags/v0.1.0.tar.gz"
         SHA1 4a9ba7c91136a1d8371578cc30ff551c5c1356dc
     )
@@ -19,7 +19,7 @@ else ()
 
     hunter_add_version(
         PACKAGE_NAME python
-        VERSION "v0.1.0"
+        VERSION "3.9.17"
         URL "https://www.python.org/ftp/python/3.9.17/Python-3.9.17.tgz"
         SHA1 bd75def230af4e8602be83ebb9ebeb5f46f97c8b
     )
@@ -47,5 +47,9 @@ else()
     )
     hunter_download(PACKAGE_NAME python
     PACKAGE_INTERNAL_DEPS_ID "26"
-    PACKAGE_UNRELOCATABLE_TEXT_FILES lib/pkgconfig/python3.pc)
+    PACKAGE_UNRELOCATABLE_TEXT_FILES
+        lib/pkgconfig/python3.pc
+        bin/python
+        bin/python3
+        bin/python3.9)
 endif()
