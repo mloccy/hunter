@@ -12,6 +12,8 @@ include(hunter_patch_unrelocatable_text_files)
 include(hunter_status_debug)
 include(hunter_assert_not_empty_string)
 include(hunter_unpack_directory)
+include(hunter_read_package_archive_format_file)
+include(hunter_set_package_archive_format)
 
 # Try to load package from cache
 # Set DONE stamp on success
@@ -205,7 +207,9 @@ function(hunter_load_from_cache)
       FROMSERVER "${from_server_file}"
   )
 
-  hunter_unpack_directory(${cache_sha1})
+  hunter_read_package_archive_format_file(PACKAGE ${HUNTER_PACKAGE_NAME} RESULT _package_format)
+  hunter_set_package_archive_format(PACKAGE ${HUNTER_PACKAGE_NAME} FORMAT ${_package_format})
+  hunter_unpack_directory(${cache_sha1} ${_package_format})
 
   hunter_patch_unrelocatable_text_files(
       FROM "__HUNTER_PACKAGE_INSTALL_PREFIX__"
