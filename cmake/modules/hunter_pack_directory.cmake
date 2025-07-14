@@ -7,6 +7,7 @@ include(hunter_status_debug)
 include(hunter_status_print)
 include(hunter_assert_not_empty_string)
 include(hunter_archive_options)
+
 function(hunter_pack_directory dir_to_pack dest_dir result_sha1 format)
   file(MAKE_DIRECTORY "${dest_dir}")
   set(temp "${dest_dir}/cache.tar.${format}")
