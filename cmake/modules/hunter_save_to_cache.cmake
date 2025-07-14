@@ -98,7 +98,7 @@ function(hunter_save_to_cache)
       "${HUNTER_PACKAGE_INSTALL_PREFIX}"
       "${cache_directory}/raw"
       archive_sha1
-      ${__package_format}
+      ${_package_format}
   )
 
   hunter_assert_not_empty_string("${archive_sha1}")
