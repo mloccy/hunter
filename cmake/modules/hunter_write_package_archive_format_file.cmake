@@ -9,13 +9,13 @@ include(hunter_status_debug)
 
 function(hunter_write_package_archive_format_file)
 
-    set(one PACKAGE)
+    set(one PACKAGE_NAME)
     cmake_parse_arguments(x "" "${one}" "" "${ARGN}")
-    hunter_assert_not_empty_string(${x_PACKAGE})
+    hunter_assert_not_empty_string(${x_PACKAGE_NAME})
     hunter_assert_not_empty_string("${HUNTER_PACKAGE_HOME_DIR}")
 
     hunter_get_package_archive_format(
-        PACKAGE ${x_PACKAGE}
+        PACKAGE_NAME ${x_PACKAGE_NAME}
         RESULT _package_format)
 
     set(__format_filepath "${HUNTER_PACKAGE_HOME_DIR}/FORMAT")
@@ -29,5 +29,5 @@ function(hunter_write_package_archive_format_file)
             " * '${_package_format}'"
             " * '${_format_sanity_check}'")
     endif()
-    hunter_status_debug("Wrote FORMAT file for ${x_PACKAGE} RESULT: '${_package_format}'")
+    hunter_status_debug("Wrote FORMAT file for ${x_PACKAGE_NAME} RESULT: '${_package_format}'")
 endfunction()

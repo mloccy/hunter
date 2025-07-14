@@ -207,8 +207,8 @@ function(hunter_load_from_cache)
       FROMSERVER "${from_server_file}"
   )
 
-  hunter_read_package_archive_format_file(PACKAGE ${HUNTER_PACKAGE_NAME} RESULT _package_format)
-  hunter_set_package_archive_format(PACKAGE ${HUNTER_PACKAGE_NAME} FORMAT ${_package_format})
+  hunter_read_package_archive_format_file(RESULT _package_format)
+  hunter_set_package_archive_format(PACKAGE_NAME ${HUNTER_PACKAGE_NAME} FORMAT ${_package_format})
   hunter_unpack_directory(${cache_sha1} ${_package_format})
 
   hunter_patch_unrelocatable_text_files(

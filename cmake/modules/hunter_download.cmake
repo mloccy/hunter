@@ -28,8 +28,9 @@ include(hunter_status_debug)
 include(hunter_status_print)
 include(hunter_upload_cache)
 include(hunter_user_error)
-include(hunter_set_default_package_archive_format)
 include(hunter_write_package_archive_format_file)
+include(hunter_archive_options)
+
 # Note: 'hunter_find_licenses' should be called before each return point
 function(hunter_download)
   set(one PACKAGE_NAME PACKAGE_COMPONENT PACKAGE_INTERNAL_DEPS_ID)
@@ -633,11 +634,13 @@ function(hunter_download)
     hunter_find_stamps("${HUNTER_PACKAGE_BUILD_DIR}")
   endif()
 
-  hunter_set_default_package_archive_format(PACKAGE ${HUNTER_PACKAGE_NAME})
+  if (NOT HUNTER_ARCHIVE_${HUNTER_PACKAGE_NAME}_FORMAT)
+    set(HUNTER_ARCHIVE_${HUNTER_PACKAGE_NAME}_FORMAT ${HUNTER_ARCHIVE_DEFAULT_OPTION})
+  endif()
 
   hunter_save_to_cache()
 
-  hunter_write_package_archive_format_file(PACKAGE ${HUNTER_PACKAGE_NAME})
+  hunter_write_package_archive_format_file(PACKAGE_NAME ${HUNTER_PACKAGE_NAME})
 
   hunter_status_debug("Cleaning up build directories...")
 

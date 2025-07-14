@@ -7,18 +7,18 @@ include(hunter_assert_not_empty_string)
 
 function(hunter_get_package_archive_format)
 
-    set(one PACKAGE RESULT)
+    set(one PACKAGE_NAME RESULT)
     cmake_parse_arguments(x "" "${one}" "" "${ARGN}")
 
-    hunter_assert_not_empty_string(${x_PACKAGE})
+    hunter_assert_not_empty_string(${x_PACKAGE_NAME})
     hunter_assert_not_empty_string(${x_RESULT})
 
 
-    if (NOT HUNTER_ARCHIVE_${x_PACKAGE}_FORMAT)
+    if (NOT HUNTER_ARCHIVE_${x_PACKAGE_NAME}_FORMAT)
         hunter_internal_error(
             "'hunter_get_package_archive_format' error,"
-            "'hunter_set_package_archive_format' was not called for ${x_PACKAGE}!")
+            "'hunter_set_package_archive_format' was not called for ${x_PACKAGE_NAME}!")
     else()
-        set(${x_RESULT} ${HUNTER_ARCHIVE_${x_PACKAGE}_FORMAT} PARENT_SCOPE)
+        set(${x_RESULT} ${HUNTER_ARCHIVE_${x_PACKAGE_NAME}_FORMAT} PARENT_SCOPE)
     endif()
 endfunction()

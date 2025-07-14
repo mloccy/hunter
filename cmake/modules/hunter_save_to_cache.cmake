@@ -91,7 +91,7 @@ function(hunter_save_to_cache)
   set(cache_directory "${HUNTER_CACHED_ROOT}/_Base/Cache")
   hunter_lock_directory("${cache_directory}" "")
 
-  hunter_get_package_archive_format(PACKAGE ${HUNTER_PACKAGE_NAME} RESULT _package_format)
+  hunter_get_package_archive_format(PACKAGE_NAME ${HUNTER_PACKAGE_NAME} RESULT _package_format)
 
   ### Save local install directory to cache archive
   hunter_pack_directory(

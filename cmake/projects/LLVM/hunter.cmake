@@ -11,6 +11,8 @@ include(hunter_download)
 include(hunter_pick_scheme)
 include(hunter_report_broken_package)
 include(hunter_source_subdir)
+include(hunter_set_package_archive_format)
+include(hunter_archive_options)
 
 hunter_add_version(
     PACKAGE_NAME
@@ -163,5 +165,6 @@ if(MSVC_IDE AND HUNTER_LLVM_VERSION VERSION_LESS 4.0.1)
   )
 endif()
 
+hunter_set_package_archive_format(PACKAGE_NAME LLVM FORMAT ${HUNTER_ARCHIVE_LZMA_OPTION})
 hunter_cacheable(LLVM)
 hunter_download(PACKAGE_NAME LLVM)
