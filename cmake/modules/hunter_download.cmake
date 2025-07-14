@@ -28,7 +28,6 @@ include(hunter_status_debug)
 include(hunter_status_print)
 include(hunter_upload_cache)
 include(hunter_user_error)
-include(hunter_write_package_archive_format_file)
 include(hunter_archive_options)
 
 # Note: 'hunter_find_licenses' should be called before each return point
@@ -639,8 +638,6 @@ function(hunter_download)
   endif()
 
   hunter_save_to_cache()
-
-  hunter_write_package_archive_format_file(PACKAGE_NAME ${HUNTER_PACKAGE_NAME})
 
   hunter_status_debug("Cleaning up build directories...")
 

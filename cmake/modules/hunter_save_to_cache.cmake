@@ -12,6 +12,7 @@ include(hunter_status_debug)
 include(hunter_assert_not_empty_string)
 include(hunter_unpack_directory)
 include(hunter_get_package_archive_format)
+include(hunter_write_package_archive_format_file)
 
 # Save results of install
 # Note:
@@ -227,6 +228,8 @@ function(hunter_save_to_cache)
 
   file(WRITE "${cache_meta_dir}/cache.sha1" "${archive_sha1}")
   file(WRITE "${cache_meta_dir}/CACHE.DONE" "")
+
+  hunter_write_package_archive_format_file(PACKAGE_NAME ${HUNTER_PACKAGE_NAME} PARENT_PATH ${cache_meta_dir})
 
   # Sanity check
   file(READ "${cache_meta_dir}/cache.sha1" archive_sha1_check)

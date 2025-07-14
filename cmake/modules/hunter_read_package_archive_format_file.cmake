@@ -7,12 +7,12 @@ include(hunter_assert_not_empty_string)
 
 function(hunter_read_package_archive_format_file)
 
-    set(one RESULT)
+    set(one RESULT PARENT_PATH)
     cmake_parse_arguments(x "" "${one}" "" "${ARGN}")
     hunter_assert_not_empty_string("${x_RESULT}")
-    hunter_assert_not_empty_string("${HUNTER_PACKAGE_HOME_DIR}")
+    hunter_assert_not_empty_string(${x_PARENT_PATH})
 
-    set(__format_filepath "${HUNTER_PACKAGE_HOME_DIR}/FORMAT")
+    set(__format_filepath "${x_PARENT_PATH}/FORMAT")
 
     if (NOT EXISTS ${__format_filepath})
         hunter_internal_error(
