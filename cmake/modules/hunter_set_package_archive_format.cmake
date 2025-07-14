@@ -14,12 +14,12 @@ function(hunter_set_package_archive_format)
     hunter_assert_not_empty_string(${x_FORMAT})
     hunter_assert_not_empty_string(${x_PACKAGE})
 
-    if (${x_FORMAT} EQUAL ${HUNTER_ARCHIVE_BZIP2_OPTION})
-        set(${HUNTER_ARCHIVE_${x_PACKAGE}_FORMAT} ${HUNTER_ARCHIVE_BZIP2_OPTION} PARENT_SCOPE)
-    elseif(${x_FORMAT} EQUAL ${HUNTER_ARCHIVE_GZIP_OPTION})
-        set(HUNTER_ARCHIVE_${x_PACKAGE}_FORMAT ${HUNTER_ARCHIVE_GZIP_OPTION} PARENT_SCOPE)
-    elseif(${x_FORMAT} EQUAL ${HUNTER_ARCHIVE_LZMA_OPTION})
-        set(HUNTER_ARCHIVE_${x_PACKAGE}_FORMAT ${HUNTER_ARCHIVE_LZMA_OPTION} PARENT_SCOPE)
+    if ("${x_FORMAT}" STREQUAL "${HUNTER_ARCHIVE_BZIP2_OPTION}")
+        set(${HUNTER_ARCHIVE_${x_PACKAGE}_FORMAT} "${HUNTER_ARCHIVE_BZIP2_OPTION}" PARENT_SCOPE)
+    elseif("${x_FORMAT}" STREQUAL "${HUNTER_ARCHIVE_GZIP_OPTION}")
+        set(HUNTER_ARCHIVE_${x_PACKAGE}_FORMAT "${HUNTER_ARCHIVE_GZIP_OPTION}" PARENT_SCOPE)
+    elseif(${x_FORMAT} STREQUAL "${HUNTER_ARCHIVE_LZMA_OPTION}")
+        set(HUNTER_ARCHIVE_${x_PACKAGE}_FORMAT "${HUNTER_ARCHIVE_LZMA_OPTION}" PARENT_SCOPE)
     else()
         hunter_internal_error(
             "'hunter_set_package_archive_format' incorrect usage,"
