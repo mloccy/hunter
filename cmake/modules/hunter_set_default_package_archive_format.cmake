@@ -13,7 +13,7 @@ function(hunter_set_default_package_archive_format)
     cmake_parse_arguments(x "" "${one}" "" "${ARGN}")
     hunter_assert_not_empty_string(${x_PACKAGE})
 
-    if (NOT ${HUNTER_ARCHIVE_${x_PACKAGE}_FORMAT})
+    if (NOT HUNTER_ARCHIVE_${x_PACKAGE}_FORMAT)
         hunter_status_debug("Setting default format for ${x_PACKAGE} to '${HUNTER_ARCHIVE_BZIP2_OPTION}'")
         hunter_set_package_archive_format(PACKAGE ${x_PACKAGE} FORMAT ${HUNTER_ARCHIVE_BZIP2_OPTION})
     endif()
