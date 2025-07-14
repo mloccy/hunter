@@ -9,6 +9,8 @@ include(hunter_assert_not_empty_string)
 include(hunter_archive_options)
 
 function(hunter_pack_directory dir_to_pack dest_dir result_sha1 package_format)
+  hunter_assert_not_empty_string("${package_format}")
+
   file(MAKE_DIRECTORY "${dest_dir}")
   set(temp "${dest_dir}/cache.tar.${package_format}")
 

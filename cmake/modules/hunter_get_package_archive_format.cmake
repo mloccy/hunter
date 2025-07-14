@@ -14,7 +14,7 @@ function(hunter_get_package_archive_format)
     hunter_assert_not_empty_string(${x_RESULT})
 
 
-    if (NOT ${HUNTER_ARCHIVE_${x_PACKAGE}_FORMAT})
+    if (NOT HUNTER_ARCHIVE_${x_PACKAGE}_FORMAT)
         hunter_internal_error(
             "'hunter_get_package_archive_format' error,"
             "'hunter_set_package_archive_format' was not called for ${x_PACKAGE}!")
