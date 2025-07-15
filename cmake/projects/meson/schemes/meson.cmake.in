@@ -24,20 +24,20 @@ hunter_assert_not_empty_string("@HUNTER_PACKAGE_INSTALL_PREFIX@")
 hunter_assert_not_empty_string("@HUNTER_INSTALL_PREFIX@")
 hunter_assert_not_empty_string("@HUNTER_GLOBAL_SCRIPT_DIR@")
 
+hunter_add_package(python)
+hunter_add_package(hunter_venv)
+find_package(hunter_venv CONFIG REQUIRED)
+
 find_package(Python3 "3.7" COMPONENTS Interpreter)
 if (NOT Python3_FOUND OR Python3_VERSION_MINOR LESS 7)
-    hunter_add_package(python)
-    find_package(Python3 "3.7" COMPONENTS Interpreter)
-    if (NOT Python3_FOUND OR Python3_VERSION_MINOR LESS 7)
-        if (NOT Python3_FOUND)
+    if (NOT Python3_FOUND)
+        hunter_fatal_error(
+            "Python at least 3.7 is required"
+            ERROR_PAGE "error.external.build.failed")
+    else()
             hunter_fatal_error(
-                "Python at least 3.7 is required"
+                "Python at least 3.7 is required but only found 3.${Python3_VERSION_MINOR}"
                 ERROR_PAGE "error.external.build.failed")
-        else()
-                hunter_fatal_error(
-                    "Python at least 3.7 is required but only found 3.${Python3_VERSION_MINOR}"
-                    ERROR_PAGE "error.external.build.failed")
-        endif()
     endif()
 endif()
 
