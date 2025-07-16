@@ -165,6 +165,8 @@ ExternalProject_Add(
     ${build_command}
     BUILD_IN_SOURCE
     1
+    DOWNLOAD_EXTRACT_TIMESTAMP
+    1
     INSTALL_COMMAND
     make install_sw
     # Install without documentation

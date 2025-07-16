@@ -47,6 +47,8 @@ ExternalProject_Add(
     "@HUNTER_MSVC_VCVARSALL@" "@HUNTER_MSVC_ARCH@"
     BUILD_COMMAND
     nmake /f Mkfiles/msvc.mak
+    DOWNLOAD_EXTRACT_TIMESTAMP
+    1
     BUILD_IN_SOURCE
     1
     INSTALL_COMMAND

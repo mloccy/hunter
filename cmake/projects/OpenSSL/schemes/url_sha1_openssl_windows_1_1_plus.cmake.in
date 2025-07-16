@@ -84,7 +84,6 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "WindowsStore")
   hunter_add_package(NASM) # set NASM_ROOT
   set(opt "no-async")
 elseif(ASM_SUPPORT)
-
   if (MSVC OR MINGW)
     enable_language(C)
     enable_language(CXX)
@@ -139,6 +138,8 @@ ExternalProject_Add(
     "@HUNTER_PACKAGE_URL@"
     URL_HASH
     SHA1=@HUNTER_PACKAGE_SHA1@
+    DOWNLOAD_EXTRACT_TIMESTAMP
+    1
     DOWNLOAD_DIR
     "@HUNTER_PACKAGE_DOWNLOAD_DIR@"
     TLS_VERIFY
