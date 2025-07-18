@@ -40,7 +40,7 @@ hunter_add_version(
     URL
     "https://github.com/mloccy/hunter_venv/archive/refs/tags/v1.0.3.tar.gz"
     SHA1
-    cfa67d9248724053a82764bf538b0cae51eea530
+    19f9c5be5d61300e0da0a1df83a0131f9517b5c1
 )
 
 # DOCUMENTATION_START {
@@ -65,5 +65,4 @@ hunter_cmake_args(
 hunter_configuration_types(hunter_venv CONFIGURATION_TYPES Release)
 
 hunter_pick_scheme(DEFAULT url_sha1_cmake)
-hunter_cacheable(hunter_venv)
-hunter_download(PACKAGE_NAME hunter_venv)
+hunter_download(PACKAGE_NAME hunter_venv SPECIFIC_INSTALL_PATH "${HUNTER_INSTALL_PREFIX}/hunter_venv")

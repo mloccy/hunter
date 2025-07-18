@@ -32,7 +32,7 @@ include(hunter_archive_options)
 
 # Note: 'hunter_find_licenses' should be called before each return point
 function(hunter_download)
-  set(one PACKAGE_NAME PACKAGE_COMPONENT PACKAGE_INTERNAL_DEPS_ID)
+  set(one PACKAGE_NAME PACKAGE_COMPONENT PACKAGE_INTERNAL_DEPS_ID SPECIFIC_INSTALL_PATH)
   set(multiple PACKAGE_UNRELOCATABLE_TEXT_FILES)
 
   cmake_parse_arguments(HUNTER "" "${one}" "${multiple}" ${ARGV})
@@ -609,12 +609,20 @@ function(hunter_download)
   )
   hunter_print_cmd("${HUNTER_PACKAGE_HOME_DIR}" "${cmd}")
 
+  if (HUNTER_SPECIFIC_INSTALL_PATH)
+    set(old_install_path ${HUNTER_PACKAGE_INSTALL_PREFIX})
+    set(HUNTER_PACKAGE_INSTALL_PREFIX ${HUNTER_SPECIFIC_INSTALL_PATH})
+  endif()
   execute_process(
       COMMAND ${cmd}
       WORKING_DIRECTORY "${HUNTER_PACKAGE_HOME_DIR}"
       RESULT_VARIABLE build_result
       ${logging_params}
   )
+
+  if (HUNTER_SPECIFIC_INSTALL_PATH)
+    set(HUNTER_PACKAGE_INSTALL_PREFIX ${old_install_path})
+  endif()
 
   if(build_result EQUAL 0)
     hunter_status_print(
