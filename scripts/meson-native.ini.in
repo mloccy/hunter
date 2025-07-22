@@ -1,0 +1,2 @@
+[binaries]
+python3 = '@Python3_EXECUTABLE@'

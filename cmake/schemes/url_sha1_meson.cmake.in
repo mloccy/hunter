@@ -24,41 +24,18 @@ hunter_assert_not_empty_string("@HUNTER_PACKAGE_BUILD_DIR@")
 hunter_assert_not_empty_string("@HUNTER_PACKAGE_INSTALL_PREFIX@")
 hunter_assert_not_empty_string("@HUNTER_INSTALL_PREFIX@")
 
-find_program(MESON meson)
-
-if (NOT MESON)
-    hunter_add_package(meson)
-    find_program(MESON meson)
-    if (NOT MESON)
-        hunter_fatal_error(
-            "Meson could not be found or installed"
-            ERROR_PAGE "error.external.build.failed")
-    endif()
-endif()
-
-find_package(Python3 "3.7" COMPONENTS Interpreter)
-if (NOT Python3_FOUND OR Python3_VERSION_MINOR LESS 7)
-    hunter_add_package(python)
-    find_package(Python3 "3.7" COMPONENTS Interpreter)
-    if (NOT Python3_FOUND OR Python3_VERSION_MINOR LESS 7)
-        if (NOT Python3_FOUND)
-            hunter_fatal_error(
-                "Python at least 3.7 is required"
-                ERROR_PAGE "error.external.build.failed")
-        else()
-                hunter_fatal_error(
-                    "Python at least 3.7 is required but only found 3.${Python3_VERSION_MINOR}"
-                    ERROR_PAGE "error.external.build.failed")
-        endif()
-    endif()
-endif()
-
 hunter_add_package(hunter_venv)
 find_package(hunter_venv CONFIG REQUIRED)
+hunter_add_package(meson)
 
 foreach(dependency ${DEPENDS_ON_PACKAGES})
   hunter_add_package(${dependency})
 endforeach()
+
+set(native_file_path "@HUNTER_PACKAGE_DOWNLOAD_DIR@/meson-native.ini")
+configure_file(
+    "@HUNTER_SELF@/scripts/meson-native.ini.in"
+    "${native_file_path}")
 
 set(additional_setup_args "")
 
@@ -82,9 +59,9 @@ ExternalProject_Add(
     INSTALL_DIR
       "@HUNTER_PACKAGE_INSTALL_PREFIX@"
     CONFIGURE_COMMAND
-    ${Python3_EXECUTABLE} ${MESON} setup "@HUNTER_PACKAGE_BUILD_DIR@"
+    ${Python3_EXECUTABLE} -m mesonbuild.mesonmain setup --native-file "${native_file_path}" "@HUNTER_PACKAGE_BUILD_DIR@"
     BUILD_COMMAND
-    ${Python3_EXECUTABLE} ${MESON} compile -C "@HUNTER_PACKAGE_BUILD_DIR@"
+    ${Python3_EXECUTABLE} -m mesonbuild.mesonmain compile -C "@HUNTER_PACKAGE_BUILD_DIR@"
 
     BUILD_IN_SOURCE
         1

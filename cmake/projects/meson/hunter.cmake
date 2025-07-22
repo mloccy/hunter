@@ -16,7 +16,7 @@ hunter_add_version(
 )
 
 
-hunter_pick_scheme(DEFAULT meson)
+hunter_pick_scheme(DEFAULT url_sha1_pip)
 hunter_cacheable(meson)
 hunter_download(PACKAGE_NAME meson)
 

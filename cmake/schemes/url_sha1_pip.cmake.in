@@ -18,17 +18,10 @@ foreach(dependency ${DEPENDS_ON_PACKAGES})
   hunter_add_package(${dependency})
 endforeach()
 
-hunter_add_package(python)
 hunter_add_package(hunter_venv)
 find_package(hunter_venv CONFIG REQUIRED)
 
 string(COMPARE EQUAL "@HUNTER_REQUIRED_PYTHON_VERSION@" "" python_version_empty)
-
-if (python_version_empty)
-  find_package(Python REQUIRED)
-else()
-  find_package(Python "@HUNTER_REQUIRED_PYTHON_VERSION@" REQUIRED)
-endif()
 
 hunter_status_debug("Using Python: ${Python_EXECUTABLE}")
 hunter_status_debug("Python_SITELIB: ${Python_SITELIB}")
@@ -129,7 +122,7 @@ ExternalProject_Add(
         install
         ${pip_verbose}
         --target
-        "@HUNTER_PACKAGE_INSTALL_PREFIX@/${HUNTER_VENV_INSTALL_SUFFIX}"
+        "${Python_SITELIB}"
         --no-cache-dir # Do not touch user's '~/.cache/pip'
         --no-deps # Dependencies managed by Hunter
         --isolated # Run pip in an isolated mode, ignoring environment variables and user configuration.

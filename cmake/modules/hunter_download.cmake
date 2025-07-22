@@ -565,6 +565,10 @@ function(hunter_download)
       "-DCMAKE_TOOLCHAIN_FILE=${HUNTER_DOWNLOAD_TOOLCHAIN}"
       "-G${CMAKE_GENERATOR}"
   )
+
+  if (HUNTER_STATUS_DEBUG)
+    list(APPEND cmd "-DHUNTER_STATUS_DEBUG=On")
+  endif()
   string(COMPARE NOTEQUAL "${CMAKE_GENERATOR_TOOLSET}" "" has_toolset)
   if(has_toolset)
     hunter_status_debug("Add toolset: '${CMAKE_GENERATOR_TOOLSET}'")
