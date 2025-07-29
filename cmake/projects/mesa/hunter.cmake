@@ -15,7 +15,7 @@ hunter_add_version(
     f3501dbf428f895c658983f9125379b86ba9bc70
 )
 
-set(deps glslang pip_mako pip_pyyaml LLVM)
+set(deps flex glslang pip_mako pip_pyyaml LLVM)
 
 hunter_cmake_args(mesa CMAKE_ARGS DEPENDS_ON_PACKAGES=${deps})
 hunter_pick_scheme(DEFAULT url_sha1_meson)
