@@ -1,0 +1,4 @@
+project("@MESON_PROJECT_NAME@", languages: ['c', 'cpp'])
+
+
+blah_dep = dependency()

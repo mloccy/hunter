@@ -6,7 +6,7 @@ include(hunter_pick_scheme)
 
 hunter_add_version(
     PACKAGE_NAME
-    meson
+    pip_meson
     VERSION
     1.8.0-p0
     URL
@@ -17,6 +17,6 @@ hunter_add_version(
 
 
 hunter_pick_scheme(DEFAULT url_sha1_pip)
-hunter_cacheable(meson)
-hunter_download(PACKAGE_NAME meson)
+hunter_cacheable(pip_meson)
+hunter_download(PACKAGE_NAME pip_meson)
 

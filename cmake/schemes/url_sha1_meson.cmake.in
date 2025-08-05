@@ -6,6 +6,7 @@ project(Hunter)
 
 include("@HUNTER_SELF@/cmake/Hunter")
 
+include(hunter_internal_error)
 include(hunter_user_error)
 include(hunter_status_debug)
 include(hunter_assert_not_empty_string)
@@ -26,23 +27,55 @@ hunter_assert_not_empty_string("@HUNTER_INSTALL_PREFIX@")
 
 hunter_add_package(hunter_venv)
 find_package(hunter_venv CONFIG REQUIRED)
-hunter_add_package(meson)
+hunter_add_package(pip_meson)
 
 foreach(dependency ${DEPENDS_ON_PACKAGES})
   hunter_add_package(${dependency})
 endforeach()
 
-find_program(LLVM_CONFIG llvm-config)
 set(native_file_path "@HUNTER_PACKAGE_DOWNLOAD_DIR@/meson-native.ini")
-configure_file(
-    "@HUNTER_SELF@/scripts/meson-native.ini.in"
-    "${native_file_path}")
+set (meson_configure_args "")
+
+if (MESON_NATIVE_PROGRAMS_OVERRIDES_HINTS AND MESON_NATIVE_PROGRAMS_OVERRIDES_INI_NAMES)
+    list(LENGTH MESON_NATIVE_PROGRAMS_OVERRIDES_HINTS length_1)
+    list(LENGTH MESON_NATIVE_PROGRAMS_OVERRIDES_INI_NAMES length_2)
+    if (NOT ${length_1} EQUAL ${length_2})
+        hunter_internal_error(
+            "Improper configuration:
+            MESON_NATIVE_PROGRAMS_OVERRIDES_HINTS and
+            MESON_NATIVE_PROGRAMS_OVERRIDES_INI_NAMES must have the same length.")
+    endif()
+
+    math(EXPR loop_end "${length_1} - 1")
+
+    file(WRITE ${native_file_path} "[binaries]\n")
+    foreach (idx RANGE 0 ${loop_end})
+        list(GET MESON_NATIVE_PROGRAMS_OVERRIDES_HINTS ${idx} loop_hint)
+        list(GET MESON_NATIVE_PROGRAMS_OVERRIDES_INI_NAMES ${idx} loop_name)
+
+        find_program(${loop_name}_PROGRAM_PATH ${loop_hint} REQUIRED)
+
+        file(APPEND "${native_file_path}" "${loop_name} = '${${loop_name}_PROGRAM_PATH}'\n")
+
+    endforeach()
+
+    file(APPEND "${native_file_path}" "python = '${Python3_EXECUTABLE}'\n")
+endif()
+
+if (MESON_CONFIGURE_OPTIONS)
+    string(REPLACE " " ";" MESON_ADDITIONAL_ARG_LIST ${MESON_CONFIGURE_OPTIONS})
+    foreach (dep ${MESON_ADDITIONAL_ARG_LIST})
+        list(APPEND meson_configure_args "-D${dep}")
+    endforeach()
+endif()
 
 set(additional_setup_args "")
 
 if (MSVC)
     list(APPEND additional_setup_args --backend=vs)
 endif()
+
+set(MESON_BUILD_DIR "@HUNTER_PACKAGE_BUILD_DIR@/MesonBuild")
 ExternalProject_Add(
         "@HUNTER_EP_NAME@"
     URL
@@ -60,12 +93,15 @@ ExternalProject_Add(
     INSTALL_DIR
       "@HUNTER_PACKAGE_INSTALL_PREFIX@"
     CONFIGURE_COMMAND
-    ${Python3_EXECUTABLE} -m mesonbuild.mesonmain setup --native-file "${native_file_path}" "@HUNTER_PACKAGE_BUILD_DIR@"
+    "@HUNTER_MSVC_VCVARSALL@" "@HUNTER_MSVC_ARCH@"
+    COMMAND
+    ${Python3_EXECUTABLE} -m mesonbuild.mesonmain setup --native-file "${native_file_path}" --prefix @HUNTER_PACKAGE_INSTALL_PREFIX@ ${additional_setup_args} ${meson_configure_args} "${MESON_BUILD_DIR}"
     BUILD_COMMAND
-    ${Python3_EXECUTABLE} -m mesonbuild.mesonmain compile -C "@HUNTER_PACKAGE_BUILD_DIR@"
+    ${Python3_EXECUTABLE} -m mesonbuild.mesonmain compile -C "${MESON_BUILD_DIR}"
 
     BUILD_IN_SOURCE
         1
     INSTALL_COMMAND
-        ""
+    ${Python3_EXECUTABLE} -m mesonbuild.mesonmain install -C "${MESON_BUILD_DIR}"
+
     )

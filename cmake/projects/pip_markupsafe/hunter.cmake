@@ -10,20 +10,16 @@ include(hunter_pick_scheme)
 
 hunter_add_version(
     PACKAGE_NAME
-    pip_mako
+    pip_markupsafe
     VERSION
-    1.3.7
+    3.0.2
     URL
-    "https://github.com/sqlalchemy/mako/archive/refs/tags/rel_1_3_10.tar.gz"
+    "https://github.com/pallets/markupsafe/releases/download/3.0.2/markupsafe-3.0.2.tar.gz"
     SHA1
-    d53e56ec2325984c808cc29da197d6b863df12eb
+    b99c84f6c6e966a5221346989fa530afc0997884
 )
-
-set(deps pip_markupsafe)
-
-hunter_cmake_args(pip_mako CMAKE_ARGS DEPENDS_ON_PACKAGES=${deps})
 
 set(HUNTER_REQUIRED_PYTHON_VERSION "3.8.0")
 hunter_pick_scheme(DEFAULT url_sha1_pip)
-hunter_cacheable(pip_mako)
-hunter_download(PACKAGE_NAME pip_mako)
+hunter_cacheable(pip_markupsafe)
+hunter_download(PACKAGE_NAME pip_markupsafe)
