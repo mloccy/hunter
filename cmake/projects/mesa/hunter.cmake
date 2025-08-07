@@ -15,7 +15,7 @@ hunter_add_version(
     f3501dbf428f895c658983f9125379b86ba9bc70
 )
 
-set(deps zlib flex glslang pip_mako pip_pyyaml LLVM)
+set(deps ZLIB flex glslang pip_mako pip_pyyaml LLVM)
 set(native_file_overrides flex bison llvm-config glslangValidator pkg-config)
 set(native_file_hints flex bison llvm-config glslang pkg-config)
 find_program(pkg_config_path pkg-config)
