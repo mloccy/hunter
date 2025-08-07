@@ -22,7 +22,7 @@ hunter_add_version(
     URL
     "https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-20.1.0.tar.gz"
     SHA1
-    FF95B6A8A507B334EE63C207FD6ADDDD794C19A3
+    d8fbcb07475774e444c47c1b5d476d9fb4ed1b19
 )
 
 hunter_add_version(
