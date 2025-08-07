@@ -2,6 +2,9 @@
 # All rights reserved.
 
 cmake_minimum_required(VERSION 3.10)
+project(Hunter)
+
+include("@HUNTER_SELF@/cmake/Hunter")
 
 # Unpack the archive and copy contents to HUNTER_PACKAGE_INSTALL_PREFIX
 
@@ -9,6 +12,7 @@ list(APPEND CMAKE_MODULE_PATH "@HUNTER_SELF@/cmake/modules")
 
 include(hunter_status_debug)
 include(hunter_assert_not_empty_string)
+include(ExternalProject) # ExternalProject_Add
 
 hunter_status_debug("Scheme: url_sha1_unpack_install")
 
@@ -23,7 +27,9 @@ hunter_assert_not_empty_string("@HUNTER_PACKAGE_INSTALL_PREFIX@")
 hunter_assert_not_empty_string("@HUNTER_PACKAGE_LICENSE_DIR@")
 hunter_assert_not_empty_string("@HUNTER_TLS_VERIFY@")
 
-include(ExternalProject) # ExternalProject_Add
+foreach(dependency ${DEPENDS_ON_PACKAGES})
+  hunter_add_package(${dependency})
+endforeach()
 
 ExternalProject_Add(
     "@HUNTER_EP_NAME@"

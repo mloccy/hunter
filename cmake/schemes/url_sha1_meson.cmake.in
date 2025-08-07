@@ -1,4 +1,4 @@
-# Copyright (c) 2013, 2015 Ruslan Baratov, Alexandre Pretyman
+# Copyright (c) 2013, 2015 Colm Vize
 # All rights reserved.
 
 cmake_minimum_required(VERSION 3.10)
@@ -70,8 +70,10 @@ if (MESON_CONFIGURE_OPTIONS)
 endif()
 
 set(additional_setup_args "")
-
+set(MSVC_SETUP_STEP "")
 if (MSVC)
+    list(APPEND MSVC_SETUP_STEP "@HUNTER_MSVC_VCVARSALL@")
+    list(APPEND MSVC_SETUP_STEP @HUNTER_MSVC_ARCH@)
     list(APPEND additional_setup_args --backend=vs)
 endif()
 
@@ -93,12 +95,11 @@ ExternalProject_Add(
     INSTALL_DIR
       "@HUNTER_PACKAGE_INSTALL_PREFIX@"
     CONFIGURE_COMMAND
-    "@HUNTER_MSVC_VCVARSALL@" "@HUNTER_MSVC_ARCH@"
+        ${MSVC_SETUP_STEP}
     COMMAND
-    ${Python3_EXECUTABLE} -m mesonbuild.mesonmain setup --native-file "${native_file_path}" --prefix @HUNTER_PACKAGE_INSTALL_PREFIX@ ${additional_setup_args} ${meson_configure_args} "${MESON_BUILD_DIR}"
+        ${Python3_EXECUTABLE} -m mesonbuild.mesonmain setup --native-file "${native_file_path}" --prefix @HUNTER_PACKAGE_INSTALL_PREFIX@ ${additional_setup_args} -Dcmake_prefix_path=@HUNTER_PACKAGE_INSTALL_PREFIX@/lib/cmake ${meson_configure_args} "${MESON_BUILD_DIR}"
     BUILD_COMMAND
-    ${Python3_EXECUTABLE} -m mesonbuild.mesonmain compile -C "${MESON_BUILD_DIR}"
-
+        ${Python3_EXECUTABLE} -m mesonbuild.mesonmain compile -C "${MESON_BUILD_DIR}"
     BUILD_IN_SOURCE
         1
     INSTALL_COMMAND

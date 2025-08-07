@@ -9,6 +9,7 @@ include(hunter_cmake_args)
 include(hunter_configuration_types)
 include(hunter_download)
 include(hunter_pick_scheme)
+if (NOT WIN32)
 
 hunter_add_version(
     PACKAGE_NAME
@@ -52,3 +53,19 @@ hunter_download(
     "lib/pkgconfig/gobject-2.0.pc"
     "lib/pkgconfig/gthread-2.0.pc"
 )
+else()
+    hunter_add_version(
+        PACKAGE_NAME
+        glib
+        VERSION
+        2.28.8-1
+        URL
+        "https://download.gnome.org/binaries/win32/glib/2.28/glib_2.28.8-1_win32.zip"
+        SHA1
+        5d158f4c77ca0b5508e1042955be573dd940b574
+    )
+    hunter_pick_scheme(DEFAULT url_sha1_unpack_install)
+    hunter_download(PACKAGE_NAME glib)
+
+
+endif()

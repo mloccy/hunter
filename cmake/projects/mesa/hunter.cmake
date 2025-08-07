@@ -15,16 +15,28 @@ hunter_add_version(
     f3501dbf428f895c658983f9125379b86ba9bc70
 )
 
-set(deps directx-headers flex glslang pip_mako pip_pyyaml LLVM)
-set(hunter_deps directx-headers flex glslang LLVM)
-set(native_file_overrides flex bison llvm-config glslangValidator)
-set(native_file_hints flex bison llvm-config glslang)
-set(meson_configure_args "gallium-drivers=llvmpipe vulkan-drivers=swrast")
+set(deps pkgconf zlib DirectX-Headers flex glslang pip_mako pip_pyyaml LLVM)
+set(native_file_overrides flex bison llvm-config glslangValidator pkg-config)
+set(native_file_hints flex bison llvm-config glslang pkg-config)
+find_program(pkg_config_path pkg-config)
+
+if (NOT pkg_config_path)
+    list(APPEND deps pkgconf)
+    list(APPEND native_file_overrides pkg-config)
+    list(APPEND native_file_hints pkg-config)
+endif()
+
+if(WIN32)
+    list(APPEND deps DirectX-Headers)
+    set(meson_configure_args "gallium-drivers=llvmpipe,d3d12 vulkan-drivers=swrast")
+else()
+    set(meson_configure_args "gallium-drivers=llvmpipe vulkan-drivers=swrast")
+endif()
+
 hunter_cmake_args(mesa
     CMAKE_ARGS
         DEPENDS_ON_PACKAGES=${deps}
-        HUNTER_MANAGED_DEPENDENCIES=${hunter_deps}
-        MESON_NATIVE_PROGRAMS_OVERRIDES_HINTS=${native_file_overrides}
+        MESON_NATIVE_PROGRAMS_OVERRIDES_HINTS=${native_file_hints}
         MESON_NATIVE_PROGRAMS_OVERRIDES_INI_NAMES=${native_file_overrides}
         MESON_CONFIGURE_OPTIONS=${meson_configure_args})
 
