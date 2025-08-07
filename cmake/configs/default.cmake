@@ -87,7 +87,7 @@ hunter_default_version(JsonSpirit VERSION 0.0.4-hunter)
 hunter_default_version(KTX-Software VERSION 4.0.0-efc9f09-p0)
 hunter_default_version(KhronosDataFormat VERSION 1.3.1-1f8c852-p3)
 hunter_default_version(LAPACK VERSION 3.7.1)
-hunter_default_version(LLVM VERSION 13.0.1) # Clang
+hunter_default_version(LLVM VERSION 20.1.0) # Clang
 hunter_default_version(LLVMCompilerRT VERSION 6.0.1) # Clang
 hunter_default_version(Lager VERSION 0.0.0-dbc1fde-p0)
 hunter_default_version(Leathers VERSION 0.1.8)
