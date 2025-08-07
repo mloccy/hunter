@@ -15,13 +15,13 @@ hunter_add_version(
     f3501dbf428f895c658983f9125379b86ba9bc70
 )
 
-set(deps pkgconf zlib DirectX-Headers flex glslang pip_mako pip_pyyaml LLVM)
+set(deps zlib flex glslang pip_mako pip_pyyaml LLVM)
 set(native_file_overrides flex bison llvm-config glslangValidator pkg-config)
 set(native_file_hints flex bison llvm-config glslang pkg-config)
 find_program(pkg_config_path pkg-config)
 
 if (NOT pkg_config_path)
-    list(APPEND deps pkgconf)
+    list(APPEND deps pkg-config)
     list(APPEND native_file_overrides pkg-config)
     list(APPEND native_file_hints pkg-config)
 endif()

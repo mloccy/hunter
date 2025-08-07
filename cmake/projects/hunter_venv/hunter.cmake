@@ -40,7 +40,7 @@ hunter_add_version(
     URL
     "https://github.com/mloccy/hunter_venv/archive/refs/tags/v1.0.3.tar.gz"
     SHA1
-    731706dde8f8d583ae35c301657aace3ecf2c821
+    a9a183347e826ee1d3838a941f8463c64b6c2a77
 )
 
 # DOCUMENTATION_START {

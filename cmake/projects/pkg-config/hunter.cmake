@@ -1,13 +1,14 @@
 include(hunter_add_version)
 include(hunter_cacheable)
 include(hunter_cmake_args)
+include(hunter_configuration_types)
 include(hunter_download)
 include(hunter_pick_scheme)
 
 if (WIN32)
     hunter_add_version(
         PACKAGE_NAME
-        pkgconf
+        pkg-config
         VERSION
         "0.26-1"
         URL
@@ -15,10 +16,11 @@ if (WIN32)
         SHA1
         67c804dec019e667fb602c066ae9020a436727c7)
 else()
-    hunter_pick_scheme(DEFAULT url_sha1_unpack_install)
+    hunter_configuration_types(pkg-config CONFIGURATION_TYPES Release)
+    hunter_pick_scheme(DEFAULT url_sha1_autotools)
     hunter_add_version(
         PACKAGE_NAME
-        pkgconf
+        pkg-config
         VERSION
         "0.26-1"
         URL
@@ -28,5 +30,5 @@ else()
 endif()
 
 set(deps gettext glib)
-hunter_cmake_args(pkgconf CMAKE_ARGS DEPENDS_ON_PACKAGES=${deps})
-hunter_download(PACKAGE_NAME pkgconf)
+hunter_cmake_args(pkg-config CMAKE_ARGS DEPENDS_ON_PACKAGES=${deps})
+hunter_download(PACKAGE_NAME pkg-config)
