@@ -14,6 +14,17 @@ include(hunter_source_subdir)
 include(hunter_set_package_archive_format)
 include(hunter_archive_options)
 
+
+hunter_add_version(
+    PACKAGE_NAME
+    LLVM
+    VERSION
+    "15.0.0"
+    URL
+    "https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-15.0.0.tar.gz"
+    SHA1
+    faf1aa54daa29f6a4ee427b20c21b603dd5ef75d
+)
 hunter_add_version(
     PACKAGE_NAME
     LLVM
