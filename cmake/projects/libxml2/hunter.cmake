@@ -19,6 +19,22 @@ hunter_add_version(
     5d5d6da2a87267f160f76a26c5637cbc48b28784
 )
 
-hunter_pick_scheme(DEFAULT url_sha1_cmake)
+hunter_add_version(
+    PACKAGE_NAME
+    libxml2
+    VERSION
+    "2.14.5"
+    URL
+    "https://github.com/mloccy/libxml2/archive/refs/tags/v2.14.5.tar.gz"
+    SHA1
+    ba40def69c65e53fbe2b20ed40230a059636c8a5
+)
+
 hunter_cacheable(libxml2)
-hunter_download(PACKAGE_NAME libxml2)
+hunter_pick_scheme(DEFAULT url_sha1_cmake)
+
+if (HUNTER_libxml2_VERSION VERSION_GREATER "2.9.7-p0")
+    hunter_download(PACKAGE_NAME libxml2 PACKAGE_UNRELOCATABLE_TEXT_FILES "lib/pkgconfig/libxml-2.0.pc")
+else()
+    hunter_download(PACKAGE_NAME libxml2)
+endif()

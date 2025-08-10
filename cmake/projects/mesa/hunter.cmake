@@ -15,10 +15,24 @@ hunter_add_version(
     f3501dbf428f895c658983f9125379b86ba9bc70
 )
 
-set(deps ZLIB flex glslang pip_mako pip_pyyaml LLVM)
+set(deps ZLIB glslang pip_mako pip_pyyaml LLVM)
 set(native_file_overrides flex bison llvm-config glslangValidator pkg-config)
 set(native_file_hints flex bison llvm-config glslang pkg-config)
 find_program(pkg_config_path pkg-config)
+
+find_program(flex_path flex)
+find_program(bison_path bison)
+
+if (WIN32)
+    if (NOT flex_path OR NOT bison_path)
+        list(APPEND deps flex)
+    endif()
+else()
+    if (NOT flex_path OR NOT bison_path)
+        message(STATUS "Ha ha get FUCKED")
+    endif()
+    list(APPEND deps drm wayland wayland-protocols xcb x11 xext xfixes xshmfence xxf86vm xrandr xau)
+endif()
 
 if (NOT pkg_config_path)
     list(APPEND deps pkg-config)

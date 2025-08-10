@@ -77,4 +77,4 @@ endif()
 
 hunter_pick_scheme(DEFAULT url_sha1_cmake)
 hunter_cacheable(Expat)
-hunter_download(PACKAGE_NAME Expat)
+hunter_download(PACKAGE_NAME Expat PACKAGE_UNRELOCATABLE_TEXT_FILES "lib/pkgconfig/expat.pc")

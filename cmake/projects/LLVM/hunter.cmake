@@ -14,26 +14,15 @@ include(hunter_source_subdir)
 include(hunter_set_package_archive_format)
 include(hunter_archive_options)
 
-
 hunter_add_version(
     PACKAGE_NAME
     LLVM
     VERSION
-    "15.0.0"
-    URL
-    "https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-15.0.0.tar.gz"
+    "13.0.1-p2"
+	URL
+	"https://github.com/mloccy/llvm-project/archive/refs/tags/llvmorg-13.0.1-p2.tar.gz"
     SHA1
-    faf1aa54daa29f6a4ee427b20c21b603dd5ef75d
-)
-hunter_add_version(
-    PACKAGE_NAME
-    LLVM
-    VERSION
-    "14.0.0"
-    URL
-    "https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-14.0.0.tar.gz"
-    SHA1
-    ca5f4590507b3f08f7316f1b3f8d25e9346f03f9
+    dc440ff4fd30853ebc88a539431ec97043a55b5b
 )
 
 
@@ -45,7 +34,7 @@ hunter_add_version(
     URL
     "https://github.com/llvm/llvm-project/archive/llvmorg-13.0.1.tar.gz"
     SHA1
-    FF95B6A8A507B334EE63C207FD6ADDDD794C19A3
+    ff95b6a8a507b334ee63c207fd6adddd794c19a3
 )
 
 hunter_add_version(

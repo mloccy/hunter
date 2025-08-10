@@ -34,6 +34,9 @@ foreach(dependency ${DEPENDS_ON_PACKAGES})
 endforeach()
 
 set(native_file_path "@HUNTER_PACKAGE_DOWNLOAD_DIR@/meson-native.ini")
+file(WRITE ${native_file_path} "[binaries]\n")
+file(APPEND "${native_file_path}" "python = '${Python3_EXECUTABLE}'\n")
+
 set (meson_configure_args "")
 
 if (MESON_NATIVE_PROGRAMS_OVERRIDES_HINTS AND MESON_NATIVE_PROGRAMS_OVERRIDES_INI_NAMES)
@@ -48,7 +51,6 @@ if (MESON_NATIVE_PROGRAMS_OVERRIDES_HINTS AND MESON_NATIVE_PROGRAMS_OVERRIDES_IN
 
     math(EXPR loop_end "${length_1} - 1")
 
-    file(WRITE ${native_file_path} "[binaries]\n")
     foreach (idx RANGE 0 ${loop_end})
         list(GET MESON_NATIVE_PROGRAMS_OVERRIDES_HINTS ${idx} loop_hint)
         list(GET MESON_NATIVE_PROGRAMS_OVERRIDES_INI_NAMES ${idx} loop_name)
@@ -59,11 +61,11 @@ if (MESON_NATIVE_PROGRAMS_OVERRIDES_HINTS AND MESON_NATIVE_PROGRAMS_OVERRIDES_IN
 
     endforeach()
 
-    file(APPEND "${native_file_path}" "python = '${Python3_EXECUTABLE}'\n")
 endif()
 
 if (MESON_CONFIGURE_OPTIONS)
     string(REPLACE " " ";" MESON_ADDITIONAL_ARG_LIST ${MESON_CONFIGURE_OPTIONS})
+
     foreach (dep ${MESON_ADDITIONAL_ARG_LIST})
         list(APPEND meson_configure_args "-D${dep}")
     endforeach()
@@ -97,7 +99,7 @@ ExternalProject_Add(
     CONFIGURE_COMMAND
         ${MSVC_SETUP_STEP}
     COMMAND
-        ${Python3_EXECUTABLE} -m mesonbuild.mesonmain setup --native-file "${native_file_path}" --prefix @HUNTER_PACKAGE_INSTALL_PREFIX@ ${additional_setup_args} -Dcmake_prefix_path=@HUNTER_PACKAGE_INSTALL_PREFIX@/lib/cmake ${meson_configure_args} "${MESON_BUILD_DIR}"
+        ${Python3_EXECUTABLE} -m mesonbuild.mesonmain setup --native-file "${native_file_path}" --libdir lib --prefix @HUNTER_PACKAGE_INSTALL_PREFIX@ ${additional_setup_args} -Dcmake_prefix_path=@HUNTER_PACKAGE_INSTALL_PREFIX@/lib/cmake ${meson_configure_args} "${MESON_BUILD_DIR}"
     BUILD_COMMAND
         ${Python3_EXECUTABLE} -m mesonbuild.mesonmain compile -C "${MESON_BUILD_DIR}"
     BUILD_IN_SOURCE

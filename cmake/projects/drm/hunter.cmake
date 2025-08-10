@@ -33,23 +33,27 @@ hunter_add_version(
     f8daee6cc2e7d2c9eb2dd062a2712172fb9f4e18
 )
 
+hunter_add_version(
+    PACKAGE_NAME
+    drm
+    VERSION
+    "2.4.125"
+    URL
+    "https://dri.freedesktop.org/libdrm/libdrm-2.4.125.tar.xz"
+    SHA1
+    59a98e1298353c0c78085675dffa92508a1ea23e
+)
+
 hunter_configuration_types(drm CONFIGURATION_TYPES Release)
-hunter_pick_scheme(DEFAULT url_sha1_autotools)
+
 set(drm_dependencies
     pciaccess
     pthread-stubs
 )
 
-hunter_cmake_args(
-    drm
-    CMAKE_ARGS         # do not use double quotes on CMAKE_ARGS
-      DEPENDS_ON_PACKAGES=${drm_dependencies}
-)
 hunter_cacheable(drm)
-hunter_download(
-    PACKAGE_NAME drm
-    PACKAGE_INTERNAL_DEPS_ID "4"
-    PACKAGE_UNRELOCATABLE_TEXT_FILES
+
+set(autotools_unrelocatable_text_files
     "lib/libdrm.la"
     "lib/libdrm_amdgpu.la"
     "lib/libdrm_nouveau.la"
@@ -60,5 +64,33 @@ hunter_download(
     "lib/pkgconfig/libdrm_intel.pc"
     "lib/pkgconfig/libdrm_nouveau.pc"
     "lib/pkgconfig/libdrm_radeon.pc"
-    "lib/pkgconfig/libkms.pc"
+    "lib/pkgconfig/libkms.pc")
+
+set (meson_unrelocatable_files "lib/pkgconfig/libdrm.pc"
+    "lib/pkgconfig/libdrm_amdgpu.pc"
+    "lib/pkgconfig/libdrm_intel.pc"
+    "lib/pkgconfig/libdrm_nouveau.pc"
+    "lib/pkgconfig/libdrm_radeon.pc")
+
+set (unrelocatable "")
+if (HUNTER_drm_VERSION VERSION_GREATER "2.4.94")
+    hunter_pick_scheme(DEFAULT url_sha1_meson)
+    set (unrelocatable ${meson_unrelocatable_files})
+else()
+    hunter_pick_scheme(DEFAULT url_sha1_autotools)
+    set (unrelocatable ${autotools_unrelocatable_files})
+endif()
+
+hunter_cmake_args(
+    drm
+    CMAKE_ARGS         # do not use double quotes on CMAKE_ARGS
+      DEPENDS_ON_PACKAGES=${drm_dependencies}
+)
+
+
+hunter_download(
+    PACKAGE_NAME drm
+    PACKAGE_INTERNAL_DEPS_ID "4"
+    PACKAGE_UNRELOCATABLE_TEXT_FILES
+    ${unrelocatable}
 )
