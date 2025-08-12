@@ -151,7 +151,7 @@ if(HUNTER_LLVM_VERSION VERSION_GREATER 6.0.1)
     hunter_source_subdir(LLVM SOURCE_SUBDIR llvm)
 endif()
 
-set(deps python)
+set(deps libxml2 ZLIB python)
 
 
 hunter_cmake_args(
