@@ -3,6 +3,7 @@ include(hunter_cacheable)
 include(hunter_cmake_args)
 include(hunter_download)
 include(hunter_pick_scheme)
+include(hunter_user_error)
 
 hunter_add_version(
     PACKAGE_NAME
@@ -29,9 +30,9 @@ if (WIN32)
     endif()
 else()
     if (NOT flex_path OR NOT bison_path)
-        message(STATUS "Ha ha get FUCKED")
+        hunter_user_error("Please install GNU flex and GNU bison")
     endif()
-    list(APPEND deps drm wayland wayland-protocols xcb x11 xext xfixes xshmfence xxf86vm xrandr xau)
+    list(APPEND deps drm wayland wayland-protocols xfixes xrandr xshmfence xxf86vm)
 endif()
 
 if (NOT pkg_config_path)
@@ -44,7 +45,7 @@ if(WIN32)
     list(APPEND deps DirectX-Headers)
     set(meson_configure_args "gallium-drivers=llvmpipe,d3d12 vulkan-drivers=swrast")
 else()
-    set(meson_configure_args "gallium-drivers=llvmpipe vulkan-drivers=swrast")
+    set(meson_configure_args "gallium-drivers=llvmpipe vulkan-drivers=swrast shared-llvm=false")
 endif()
 
 hunter_cmake_args(mesa

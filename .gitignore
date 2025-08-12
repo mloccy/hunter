@@ -11,7 +11,7 @@ _build*
 */*/_build*
 */*/*/_build*
 */*/*/*/_build*
-
+**/[bBuild]/*
 _testing
 
 # EP_BASE (install, download, build, ...)
