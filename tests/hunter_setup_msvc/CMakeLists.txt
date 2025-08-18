@@ -114,6 +114,9 @@ run_check("1920" "x64" "" "x86_amd64" "x86" "amd64" "16" "2019")
 run_check("1930" "x64" "" "x86_amd64" "x86" "amd64" "17" "2022")
 run_check("1920" "x64" "x64" "amd64" "amd64" "amd64" "16" "2019")
 run_check("1930" "x64" "x64" "amd64" "amd64" "amd64" "17" "2022")
+run_check("1939" "x64" "x64" "amd64" "amd64" "amd64" "17" "2022")
+run_check("1940" "x64" "x64" "amd64" "amd64" "amd64" "17" "2022")
+run_check("1943" "x64" "x64" "amd64" "amd64" "amd64" "17" "2022")
 
 # building for armv7
 run_check("1400" "ARMV7" "" "x86_arm" "x86" "arm" "8" "2005")
