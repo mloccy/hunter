@@ -11,7 +11,7 @@ include(hunter_pick_scheme)
 
 hunter_add_version(
     PACKAGE_NAME
-    Vulkan-Utility-Libraries
+    VUL
     VERSION
     1.4.315-p0
     URL
@@ -21,5 +21,5 @@ hunter_add_version(
 )
 
 hunter_pick_scheme(DEFAULT url_sha1_cmake)
-hunter_cacheable(Vulkan-Utility-Libraries)
-hunter_download(PACKAGE_NAME Vulkan-Utility-Libraries)
+hunter_cacheable(VUL)
+hunter_download(PACKAGE_NAME VUL)
