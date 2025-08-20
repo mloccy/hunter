@@ -9,6 +9,18 @@ include(hunter_cmake_args)
 include(hunter_download)
 include(hunter_pick_scheme)
 
+
+hunter_add_version(
+    PACKAGE_NAME
+    Vulkan-Loader
+    VERSION
+    v1.4.307-p2
+    URL
+    "https://github.com/mloccy/Vulkan-Loader/archive/refs/tags/v1.4.307-p2.tar.gz"
+    SHA1
+    b5402946a37baea8b3aa440d8d9e2113c80965b7
+)
+
 hunter_add_version(
     PACKAGE_NAME
     Vulkan-Loader

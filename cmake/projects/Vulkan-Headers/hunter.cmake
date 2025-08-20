@@ -8,6 +8,7 @@ include(hunter_cacheable)
 include(hunter_cmake_args)
 include(hunter_download)
 include(hunter_pick_scheme)
+include(hunter_configuration_types)
 
 hunter_add_version(
     PACKAGE_NAME
@@ -78,6 +79,7 @@ else()
     )
 endif()
 
+hunter_configuration_types(Vulkan-Headers CONFIGURATION_TYPES Release)
 hunter_pick_scheme(DEFAULT url_sha1_cmake)
 hunter_cacheable(Vulkan-Headers)
 hunter_download(PACKAGE_NAME Vulkan-Headers)
