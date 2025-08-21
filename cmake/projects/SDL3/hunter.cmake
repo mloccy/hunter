@@ -11,6 +11,17 @@ hunter_add_version(
         PACKAGE_NAME
         SDL3
         VERSION
+        "v3.0.5-alpha"
+        URL
+        "https://github.com/mloccy/SDL/archive/refs/tags/v3.0.5-alpha.tar.gz"
+        SHA1
+        ee1c31cebbe72563268511d48b13b50c74fed4cc
+)
+
+hunter_add_version(
+        PACKAGE_NAME
+        SDL3
+        VERSION
         "v3.0.4-alpha"
         URL
         "https://codeload.github.com/mloccy/SDL/tar.gz/refs/tags/v3.0.4-alpha"
