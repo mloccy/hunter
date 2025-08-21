@@ -78,12 +78,14 @@ else()
   )
 endif()
 
+string(COMPARE EQUAL "${CMAKE_GENERATOR}" "Ninja" is_ninja)
 string(COMPARE NOTEQUAL "@HUNTER_JOBS_OPTION@" "" have_jobs)
+
 if(have_jobs)
   string(COMPARE NOTEQUAL "@XCODE_VERSION@" "" is_xcode)
   if(is_xcode)
     set(jobs_option "-jobs" "@HUNTER_JOBS_OPTION@")
-  elseif("@MSVC_IDE@")
+  elseif("@MSVC_IDE@" AND NOT is_ninja)
     set(jobs_option "/maxcpucount:@HUNTER_JOBS_OPTION@")
   else()
     set(jobs_option "-j@HUNTER_JOBS_OPTION@")
@@ -159,6 +161,13 @@ foreach(configuration ${configuration_types})
     set(build_type_opts "-DCMAKE_CONFIGURATION_TYPES=${configuration}")
   endif()
 
+set(MSVC_SETUP_STEP "")
+string(COMPARE EQUAL "${CMAKE_GENERATOR}" "Ninja" is_ninja)
+if (MSVC AND is_ninja)
+    list(APPEND MSVC_SETUP_STEP "@HUNTER_MSVC_VCVARSALL@")
+    list(APPEND MSVC_SETUP_STEP @HUNTER_MSVC_ARCH@)
+endif()
+
   if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.15")
     set(cmake_install_command --install .)
   else()
@@ -184,6 +193,8 @@ foreach(configuration ${configuration_types})
       SOURCE_SUBDIR
       "@HUNTER_PACKAGE_SOURCE_SUBDIR@"
       BUILD_COMMAND
+          ${MSVC_SETUP_STEP}
+      COMMAND
           # Separate build and install stage so we can suppress install log
           # which may consist of a long list of files
           "@CMAKE_COMMAND@"
@@ -191,16 +202,21 @@ foreach(configuration ${configuration_types})
           --config ${configuration}
           --
           ${jobs_option}
-      CMAKE_ARGS
-      "-G@CMAKE_GENERATOR@"
-      "-C@HUNTER_CACHE_FILE@"
-      "-C@HUNTER_ARGS_FILE@"
-      "-D${postfix_name}=${${postfix_name}}"
-      "${build_type_opts}"
-      "-DCMAKE_INSTALL_PREFIX=@HUNTER_PACKAGE_INSTALL_PREFIX@"
-      "-DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}"
-      "${make_args}"
-      ${ios_opts}
+      CONFIGURE_COMMAND
+        ${MSVC_SETUP_STEP}
+        COMMAND
+        "@CMAKE_COMMAND@"
+        "-G@CMAKE_GENERATOR@"
+        "-C@HUNTER_CACHE_FILE@"
+        "-C@HUNTER_ARGS_FILE@"
+        "-D${postfix_name}=${${postfix_name}}"
+        "${build_type_opts}"
+        "-DCMAKE_INSTALL_PREFIX=@HUNTER_PACKAGE_INSTALL_PREFIX@"
+        "-DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}"
+        "${make_args}"
+        ${ios_opts}
+      BUILD_IN_SOURCE
+        1
       INSTALL_COMMAND
           "@CMAKE_COMMAND@"
           ${cmake_install_command}

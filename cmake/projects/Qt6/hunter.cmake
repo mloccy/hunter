@@ -32,10 +32,11 @@ hunter_configuration_types(Qt6 CONFIGURATION_TYPES Release)
 
 set(old_make_program ${CMAKE_MAKE_PROGRAM} )
 set(old_generator ${CMAKE_GENERATOR})
-set(HUNTER_JOBS_NUMBER "0")
+
 set(CMAKE_MAKE_PROGRAM ${NINJA_BUILD})
 set(CMAKE_GENERATOR "Ninja")
+
 hunter_download(PACKAGE_NAME Qt6)
+
 set(CMAKE_GENERATOR "${old_generator}")
 set(CMAKE_MAKE_PROGRAM ${old_make_program})
-unset(HUNTER_JOBS_NUMBER)

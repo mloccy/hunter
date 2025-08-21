@@ -555,6 +555,12 @@ function(hunter_download)
     set(logging_params "OUTPUT_QUIET")
   endif()
 
+  set(MSVC_SETUP_STEP "")
+  if (MSVC)
+      list(APPEND MSVC_SETUP_STEP "${HUNTER_MSVC_VCVARSALL}")
+      list(APPEND MSVC_SETUP_STEP ${HUNTER_MSVC_ARCH})
+  endif()
+
   set(
       cmd
       "${CMAKE_COMMAND}"
@@ -585,15 +591,31 @@ function(hunter_download)
   endif()
 
   hunter_print_cmd("${HUNTER_PACKAGE_HOME_DIR}" "${cmd}")
+  string(COMPARE EQUAL "${CMAKE_GENERATOR}" "Ninja" is_ninja)
 
   # Configure and build downloaded project
-  execute_process(
-      COMMAND ${cmd}
-      WORKING_DIRECTORY "${HUNTER_PACKAGE_HOME_DIR}"
-      RESULT_VARIABLE generate_result
-      ${logging_params}
-  )
+  if (MSVC AND is_ninja)
+    cmake_path(NATIVE_PATH CMAKE_COMMAND WINDOWS_CMAKE_COMMAND)
+    cmake_path(NATIVE_PATH HUNTER_CACHE_FILE WINDOWS_HUNTER_CACHE_FILE)
+    cmake_path(NATIVE_PATH HUNTER_ARGS_FILE WINDOWS_HUNTER_ARGS_FILE)
+    cmake_path(NATIVE_PATH HUNTER_PACKAGE_HOME_DIR WINDOWS_HUNTER_PACKAGE_HOME_DIR)
+    cmake_path(NATIVE_PATH HUNTER_PACKAGE_BUILD_DIR WINDOWS_HUNTER_PACKAGE_BUILD_DIR)
+    cmake_path(NATIVE_PATH HUNTER_DOWNLOAD_TOOLCHAIN WINDOWS_HUNTER_DOWNLOAD_TOOLCHAIN)
+    cmake_path(NATIVE_PATH CMAKE_GENERATOR WINDOWS_CMAKE_GENERATOR)
+    configure_file("${HUNTER_SELF}/scripts/hunter_download_msvc.bat.in" "${HUNTER_PACKAGE_DOWNLOAD_DIR}/hunter_download_msvc.bat" @ONLY)
+      execute_process(
+        COMMAND "${HUNTER_PACKAGE_DOWNLOAD_DIR}/hunter_download_msvc.bat"
+        WORKING_DIRECTORY "${HUNTER_PACKAGE_HOME_DIR}"
+        RESULT_VARIABLE generate_result
+        ${logging_params})
+  else()
+    execute_process(
+        COMMAND ${cmd}
+        WORKING_DIRECTORY "${HUNTER_PACKAGE_HOME_DIR}"
+        RESULT_VARIABLE generate_result
+        ${logging_params})
 
+  endif()
   if(generate_result EQUAL 0)
     hunter_status_debug(
         "Configure step successful (dir: ${HUNTER_PACKAGE_HOME_DIR})"
