@@ -37,12 +37,14 @@ if (NOT WIN32)
     find_program(NINJA_BUILD ninja)
     if (NOT NINJA_BUILD)
         hunter_add_package(ninja-build)
+        find_program(ninja NINJA_BUILD)
     endif()
 endif()
 
 set(native_file_path "@HUNTER_PACKAGE_DOWNLOAD_DIR@/meson-native.ini")
 file(WRITE ${native_file_path} "[binaries]\n")
 file(APPEND "${native_file_path}" "python = '${Python3_EXECUTABLE}'\n")
+file(APPEND "${native_file_path}" "ninja = '${NINJA_BUILD}'\n")
 
 set (meson_configure_args "")
 
