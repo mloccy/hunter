@@ -136,6 +136,13 @@ else()
   set(no_postfix FALSE)
 endif()
 
+
+if (NOT "@HUNTER_PACKAGE_SOURCE_SUBDIR@" STREQUAL "")
+  set(_source_dir "@HUNTER_PACKAGE_SOURCE_DIR@/@HUNTER_PACKAGE_SOURCE_SUBDIR@")
+else()
+  set(_source_dir "@HUNTER_PACKAGE_SOURCE_DIR@")
+endif()
+
 foreach(configuration ${configuration_types})
   # All configurations use the same URL which will be downloaded only once
   # i.e. overhead only for unpacking archive + no files from the previous
@@ -214,7 +221,7 @@ endif()
         "${build_type_opts}"
         "-DCMAKE_INSTALL_PREFIX=@HUNTER_PACKAGE_INSTALL_PREFIX@"
         "-DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}"
-        -S "@HUNTER_PACKAGE_SOURCE_DIR@"
+        -S "${_source_dir}"
         -B "${SUB_BUILD}"
         "${make_args}"
         ${ios_opts}
