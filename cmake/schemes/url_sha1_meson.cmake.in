@@ -33,6 +33,13 @@ foreach(dependency ${DEPENDS_ON_PACKAGES})
   hunter_add_package(${dependency})
 endforeach()
 
+if (NOT WIN32)
+    find_program(NINJA_BUILD ninja)
+    if (NOT NINJA_BUILD)
+        hunter_add_package(ninja-build)
+    endif()
+endif()
+
 set(native_file_path "@HUNTER_PACKAGE_DOWNLOAD_DIR@/meson-native.ini")
 file(WRITE ${native_file_path} "[binaries]\n")
 file(APPEND "${native_file_path}" "python = '${Python3_EXECUTABLE}'\n")
