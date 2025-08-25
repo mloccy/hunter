@@ -14,6 +14,18 @@ hunter_add_version(
     PACKAGE_NAME
     VVL
     VERSION
+    1.4.315-p1
+    URL
+    "https://github.com/mloccy/Vulkan-ValidationLayers/archive/refs/tags/1.4.315-p1.tar.gz"
+    SHA1
+    dc74c1ebd1bcaf8cbc5533214fc1617a634fbd07
+)
+
+
+hunter_add_version(
+    PACKAGE_NAME
+    VVL
+    VERSION
     1.4.315-p0
     URL
     "https://github.com/mloccy/Vulkan-ValidationLayers/archive/refs/tags/1.4.315.tar.gz"
