@@ -37,16 +37,16 @@ if (NOT WIN32)
     find_program(NINJA_BUILD ninja)
     if (NOT NINJA_BUILD)
         hunter_add_package(ninja-build)
-        find_program(ninja NINJA_BUILD)
+        find_program(NINJA_BUILD ninja REQUIRED)
+
     endif()
 endif()
 
+set(_meson_path ${HUNTER_INSTALL_PREFIX}/bin:$ENV{PATH})
 set(native_file_path "@HUNTER_PACKAGE_DOWNLOAD_DIR@/meson-native.ini")
 file(WRITE ${native_file_path} "[binaries]\n")
 file(APPEND "${native_file_path}" "python = '${Python3_EXECUTABLE}'\n")
-file(APPEND "${native_file_path}" "ninja = '${NINJA_BUILD}'\n")
-
-set (meson_configure_args "")
+set(meson_configure_args "")
 
 if (MESON_NATIVE_PROGRAMS_OVERRIDES_HINTS AND MESON_NATIVE_PROGRAMS_OVERRIDES_INI_NAMES)
     list(LENGTH MESON_NATIVE_PROGRAMS_OVERRIDES_HINTS length_1)
@@ -63,18 +63,13 @@ if (MESON_NATIVE_PROGRAMS_OVERRIDES_HINTS AND MESON_NATIVE_PROGRAMS_OVERRIDES_IN
     foreach (idx RANGE 0 ${loop_end})
         list(GET MESON_NATIVE_PROGRAMS_OVERRIDES_HINTS ${idx} loop_hint)
         list(GET MESON_NATIVE_PROGRAMS_OVERRIDES_INI_NAMES ${idx} loop_name)
-
         find_program(${loop_name}_PROGRAM_PATH ${loop_hint} REQUIRED)
-
         file(APPEND "${native_file_path}" "${loop_name} = '${${loop_name}_PROGRAM_PATH}'\n")
-
     endforeach()
-
 endif()
 
 if (MESON_CONFIGURE_OPTIONS)
     string(REPLACE " " ";" MESON_ADDITIONAL_ARG_LIST ${MESON_CONFIGURE_OPTIONS})
-
     foreach (dep ${MESON_ADDITIONAL_ARG_LIST})
         list(APPEND meson_configure_args "-D${dep}")
     endforeach()
@@ -108,12 +103,10 @@ ExternalProject_Add(
     CONFIGURE_COMMAND
         ${MSVC_SETUP_STEP}
     COMMAND
-        ${Python3_EXECUTABLE} -m mesonbuild.mesonmain setup --native-file "${native_file_path}" --libdir lib --prefix @HUNTER_PACKAGE_INSTALL_PREFIX@ ${additional_setup_args} -Dcmake_prefix_path=@HUNTER_PACKAGE_INSTALL_PREFIX@/lib/cmake ${meson_configure_args} "${MESON_BUILD_DIR}"
+        ${CMAKE_COMMAND} -E env PATH=${_meson_path} ${Python3_EXECUTABLE} -m mesonbuild.mesonmain setup --native-file "${native_file_path}" --libdir lib --prefix @HUNTER_PACKAGE_INSTALL_PREFIX@ ${additional_setup_args} -Dcmake_prefix_path=@HUNTER_PACKAGE_INSTALL_PREFIX@/lib/cmake ${meson_configure_args} "${MESON_BUILD_DIR}"
     BUILD_COMMAND
-        ${Python3_EXECUTABLE} -m mesonbuild.mesonmain compile -C "${MESON_BUILD_DIR}"
+        ${CMAKE_COMMAND} -E env PATH=${_meson_path} ${Python3_EXECUTABLE} -m mesonbuild.mesonmain compile -C "${MESON_BUILD_DIR}"
     BUILD_IN_SOURCE
         1
     INSTALL_COMMAND
-    ${Python3_EXECUTABLE} -m mesonbuild.mesonmain install -C "${MESON_BUILD_DIR}"
-
-    )
+        ${CMAKE_COMMAND} -E env PATH=${_meson_path} ${Python3_EXECUTABLE} -m mesonbuild.mesonmain install -C "${MESON_BUILD_DIR}")
