@@ -18,6 +18,16 @@ hunter_add_version(
     30061e33852ae8de4a58a69d6be8027d2e236465
 )
 
+hunter_add_version(
+    PACKAGE_NAME
+    Qt6
+    VERSION
+    "6.10.1"
+    URL
+    "https://github.com/qt/qtbase/archive/refs/tags/v6.10.1.tar.gz"
+    SHA1
+    75bb6896a16c9ff1ab0dc8d4f359bb513d6d4871
+)
 
 find_program(NINJA_BUILD ninja)
 
