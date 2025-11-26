@@ -384,7 +384,7 @@ if(MSVC_VERSION LESS 1600)
   # for VS10 - version without support C++11
   hunter_default_version(jsoncpp VERSION 0.7.0)
 else()
-  hunter_default_version(jsoncpp VERSION 1.9.5-b1)
+  hunter_default_version(jsoncpp VERSION 1.9.6)
 endif()
 
 hunter_default_version(jwt-cpp VERSION 0.6.0)
