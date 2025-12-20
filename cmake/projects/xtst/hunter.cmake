@@ -32,7 +32,7 @@ set(xtst_dependencies
 hunter_cmake_args(
     xtst
     CMAKE_ARGS         # do not use double quotes on CMAKE_ARGS
-      DEPENDS_ON_PACKAGES=${xext_dependencies}
+      DEPENDS_ON_PACKAGES=${xtst_dependencies}
       PKGCONFIG_EXPORT_TARGETS=xtst
 )
 hunter_cacheable(xtst)
