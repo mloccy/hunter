@@ -23,6 +23,15 @@ hunter_add_version(
   SHA1 "984caba9061e21d048b71a49bf553d2e32ac8252"
 )
 
+hunter_add_version(
+  PACKAGE_NAME
+  bison
+  VERSION
+  "3.8.2-p0"
+  URL "https://ftp.gnu.org/gnu/bison/bison-3.8.2.tar.xz"
+  SHA1 "da1522a00f8c23c1abf69dbd2e99078d2a484b96"
+)
+
 hunter_configuration_types(bison CONFIGURATION_TYPES Release)
 hunter_pick_scheme(DEFAULT url_sha1_autotools)
 # bison is not cacheable at this time because it hard codes paths to m4sugar

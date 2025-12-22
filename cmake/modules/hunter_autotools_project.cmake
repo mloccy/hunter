@@ -181,7 +181,6 @@ function(hunter_autotools_project target_name)
 
     set(configure_command ${shell_env} ${autotools_configure_command})
     set(bootstrap_command ${shell_env} ${PARAM_BOOTSTRAP})
-    # hunter_get_toolchain_binaries(OUT_AUTORECONF reconf)
 
     ExternalProject_Add(${target_name}
         URL
