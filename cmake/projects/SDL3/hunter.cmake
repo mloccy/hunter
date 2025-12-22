@@ -15,7 +15,7 @@ hunter_add_version(
         URL
         "https://github.com/mloccy/SDL/archive/refs/tags/SDL3.3.6-hunter-p1.tar.gz"
         SHA1
-        29e7a81fa11ce6beb3cb137c3524a326e4045e02
+        3a4864f7e0fdb5eda7e511443927baf79ddf0f23
 )
 
 hunter_add_version(
