@@ -4,6 +4,7 @@ include(hunter_cmake_args)
 include(hunter_download)
 include(hunter_pick_scheme)
 include(hunter_user_error)
+include(hunter_configuration_types)
 
 hunter_add_version(
     PACKAGE_NAME
@@ -57,4 +58,5 @@ hunter_cmake_args(mesa
 
 hunter_pick_scheme(DEFAULT url_sha1_meson)
 hunter_cacheable(mesa)
+hunter_configuration_types(mesa CONFIGURATION_TYPES Release)
 hunter_download(PACKAGE_NAME mesa)

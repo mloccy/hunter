@@ -107,6 +107,7 @@ function(hunter_calculate_config_sha1 hunter_self hunter_base user_config)
     set(configuration_types "${__HUNTER_USER_CONFIGURATION_TYPES_${x}}")
     set(url "${__HUNTER_USER_URL_${x}}")
     set(keep_package_sources "${__HUNTER_USER_KEEP_PACKAGE_SOURCES_${x}}")
+    set(keep_package_build_dir "${__HUNTER_USER_KEEP_PACKAGE_BUILD_DIR_${x}}")
 
     if(NOT sha1 STREQUAL "")
       file(APPEND "${config_cmake_nolf}" "    SHA1 \"${sha1}\"\n")
@@ -139,6 +140,15 @@ function(hunter_calculate_config_sha1 hunter_self hunter_base user_config)
         hunter_internal_error("Unexpected value: '${keep_package_sources}'")
       endif()
     endif()
+
+    if(NOT keep_package_build_dir STREQUAL "")
+      if(keep_package_build_dir STREQUAL "TRUE")
+        file(APPEND "${config_cmake_nolf}" "    KEEP_PACKAGE_BUILD_DIR\n")
+      else()
+        hunter_internal_error("Unexpected value: '${keep_package_build_dir}'")
+      endif()
+    endif()
+
 
     file(APPEND "${config_cmake_nolf}" ")\n")
   endforeach()

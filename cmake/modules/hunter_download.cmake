@@ -14,6 +14,7 @@ include(hunter_get_cacheable)
 include(hunter_get_cmake_args)
 include(hunter_get_configuration_types)
 include(hunter_get_keep_package_sources)
+include(hunter_get_keep_package_build_dir)
 include(hunter_get_package_sha1)
 include(hunter_get_package_url)
 include(hunter_get_source_subdir)
@@ -374,11 +375,13 @@ function(hunter_download)
     endif()
   endif()
 
+
   file(REMOVE_RECURSE "${HUNTER_PACKAGE_BUILD_DIR}")
   file(REMOVE "${HUNTER_PACKAGE_HOME_DIR}/CMakeLists.txt")
   file(REMOVE "${HUNTER_DOWNLOAD_TOOLCHAIN}")
 
   hunter_get_keep_package_sources(PACKAGE "${package}" OUT keep_sources)
+  hunter_get_keep_package_build_dir(PACKAGE "${package}" OUT keep_build_dir)
 
   file(WRITE "${HUNTER_DOWNLOAD_TOOLCHAIN}" "")
 
@@ -437,6 +440,11 @@ function(hunter_download)
       "${HUNTER_DOWNLOAD_TOOLCHAIN}"
       "set(HUNTER_KEEP_PACKAGE_SOURCES \"${HUNTER_KEEP_PACKAGE_SOURCES}\" CACHE INTERNAL \"\")\n"
   )
+  file(
+    APPEND
+    "${HUNTER_DOWNLOAD_TOOLCHAIN}"
+    "set(HUNTER_KEEP_PACKAGE_BUILD_DIR \"${HUNTER_KEEP_PACKAGE_BUILD_DIR}\" CACHE INTERNAL \"\")\n"
+)
   file(
       APPEND
       "${HUNTER_DOWNLOAD_TOOLCHAIN}"
@@ -675,9 +683,18 @@ function(hunter_download)
 
   hunter_status_debug("Cleaning up build directories...")
 
-  file(REMOVE_RECURSE "${helper_dir_to_remove}")
+  if (NOT "${helper_dir_to_remove}" STREQUAL ${HUNTER_PACKAGE_BUILD_DIR})
+    file(REMOVE_RECURSE "${helper_dir_to_remove}")
+  endif()
+  if (NOT keep_build_dir)
+    hunter_status_debug(
+      "Delete build directory '${HUNTER_PACKAGE_BUILD_DIR}'")
+    file(REMOVE_RECURSE "${HUNTER_PACKAGE_BUILD_DIR}")
+  else()
+    hunter_status_debug(
+      "Keep build directory '${HUNTER_PACKAGE_BUILD_DIR}'")
+  endif()
 
-  file(REMOVE_RECURSE "${HUNTER_PACKAGE_BUILD_DIR}")
   if(HUNTER_PACKAGE_SCHEME_INSTALL)
     if(keep_sources)
       hunter_status_debug(
@@ -702,7 +719,7 @@ function(hunter_download)
   file(WRITE "${HUNTER_PACKAGE_DONE_STAMP}" "")
 
   # Note: will remove 'HUNTER_PACKAGE_BUILD_DIR'
-  hunter_upload_cache()
+  hunter_upload_cache(keep_build_dir)
 
   # In:
   # * HUNTER_PACKAGE_HOME_DIR

@@ -5,6 +5,7 @@ include(hunter_add_version)
 include(hunter_cmake_args)
 include(hunter_download)
 include(hunter_pick_scheme)
+include(hunter_configuration_types)
 
 hunter_add_version(
     PACKAGE_NAME
@@ -27,5 +28,6 @@ hunter_cmake_args(
     MESON_CONFIGURE_OPTIONS=${config_arguments}
 )
 
+hunter_configuration_types(libglvnd CONFIGURATION_TYPES Release)
 hunter_pick_scheme(DEFAULT url_sha1_meson)
 hunter_download(PACKAGE_NAME libglvnd)

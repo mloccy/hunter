@@ -5,6 +5,7 @@ include(hunter_add_version)
 include(hunter_cmake_args)
 include(hunter_download)
 include(hunter_pick_scheme)
+include(hunter_configuration_types)
 
 hunter_add_version(
     PACKAGE_NAME
@@ -26,4 +27,5 @@ hunter_cmake_args(
 )
 
 hunter_pick_scheme(DEFAULT url_sha1_meson)
+hunter_configuration_types(wayland-protocols CONFIGURATION_TYPES Release)
 hunter_download(PACKAGE_NAME wayland-protocols)

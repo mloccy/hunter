@@ -7,12 +7,13 @@ include(hunter_assert_empty_string)
 include(hunter_assert_not_empty_string)
 
 function(hunter_final_config)
-  set(optional KEEP_PACKAGE_SOURCES)
+  set(optional KEEP_PACKAGE_SOURCES KEEP_PACKAGE_BUILD_DIR)
   set(one PACKAGE SHA1 VERSION URL )
   set(multiple CMAKE_ARGS CONFIGURATION_TYPES SOURCE_SUBDIR)
 
   # Introduce:
   # * x_KEEP_PACKAGE_SOURCES
+  # * x_KEEP_PACKAGE_BUILD_DIR
   # * x_PACKAGE
   # * x_SHA1
   # * x_VERSION
@@ -53,6 +54,11 @@ function(hunter_final_config)
 
   if(x_KEEP_PACKAGE_SOURCES)
     set("__HUNTER_FINAL_KEEP_PACKAGE_SOURCES_${package}" TRUE PARENT_SCOPE)
+  endif()
+
+
+  if(x_KEEP_PACKAGE_BUILD_DIR)
+    set("__HUNTER_FINAL_KEEP_PACKAGE_BUILD_DIR_${package}" TRUE PARENT_SCOPE)
   endif()
 
   if(NOT "${x_SOURCE_SUBDIR}" STREQUAL "")

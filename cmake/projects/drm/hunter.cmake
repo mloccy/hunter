@@ -9,6 +9,7 @@ include(hunter_cmake_args)
 include(hunter_configuration_types)
 include(hunter_download)
 include(hunter_pick_scheme)
+include(hunter_configuration_types)
 
 # https://dri.freedesktop.org/libdrm/
 hunter_add_version(
@@ -87,7 +88,7 @@ hunter_cmake_args(
       DEPENDS_ON_PACKAGES=${drm_dependencies}
 )
 
-
+hunter_configuration_types(drm CONFIGURATION_TYPES Release)
 hunter_download(
     PACKAGE_NAME drm
     PACKAGE_INTERNAL_DEPS_ID "4"

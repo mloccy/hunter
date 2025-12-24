@@ -35,12 +35,13 @@ function(hunter_config package)
     )
   endif()
 
-  set(optional KEEP_PACKAGE_SOURCES GIT_SELF)
+  set(optional KEEP_PACKAGE_BUILD_DIR KEEP_PACKAGE_SOURCES GIT_SELF)
   set(one VERSION GIT_SUBMODULE URL SHA1)
   set(multiple CMAKE_ARGS CONFIGURATION_TYPES)
 
   # Introduce:
   # * x_KEEP_PACKAGE_SOURCES
+  # * x_KEEP_PACKAGE_BUILD_DIR
   # * x_GIT_SELF
   # * x_VERSION
   # * x_GIT_SUBMODULE
@@ -144,4 +145,9 @@ function(hunter_config package)
   if(x_KEEP_PACKAGE_SOURCES)
     set("__HUNTER_USER_KEEP_PACKAGE_SOURCES_${package}" "TRUE" PARENT_SCOPE)
   endif()
+
+  if (x_KEEP_PACKAGE_BUILD_DIR)
+    set("__HUNTER_USER_KEEP_PACKAGE_BUILD_DIR_${package}" "TRUE" PARENT_SCOPE)
+  endif()
+
 endfunction()
