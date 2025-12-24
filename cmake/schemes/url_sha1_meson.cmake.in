@@ -42,6 +42,15 @@ if (NOT WIN32)
     endif()
 endif()
 
+set(configuration_types "@HUNTER_PACKAGE_CONFIGURATION_TYPES@")
+list(LENGTH configuration_types len)
+if(len EQUAL "1")
+  set(no_postfix TRUE)
+else()
+  set(no_postfix FALSE)
+endif()
+
+
 set(_meson_path ${HUNTER_INSTALL_PREFIX}/bin:$ENV{PATH})
 set(native_file_path "@HUNTER_PACKAGE_DOWNLOAD_DIR@/meson-native.ini")
 file(WRITE ${native_file_path} "[binaries]\n")
@@ -68,13 +77,6 @@ if (MESON_NATIVE_PROGRAMS_OVERRIDES_HINTS AND MESON_NATIVE_PROGRAMS_OVERRIDES_IN
     endforeach()
 endif()
 
-if (MESON_CONFIGURE_OPTIONS)
-    string(REPLACE " " ";" MESON_ADDITIONAL_ARG_LIST ${MESON_CONFIGURE_OPTIONS})
-    foreach (dep ${MESON_ADDITIONAL_ARG_LIST})
-        list(APPEND meson_configure_args "-D${dep}")
-    endforeach()
-endif()
-
 set(additional_setup_args "")
 set(MSVC_SETUP_STEP "")
 if (MSVC)
@@ -84,29 +86,57 @@ if (MSVC)
 endif()
 
 set(MESON_BUILD_DIR "@HUNTER_PACKAGE_BUILD_DIR@/MesonBuild")
-ExternalProject_Add(
-        "@HUNTER_EP_NAME@"
-    URL
-        "@HUNTER_PACKAGE_URL@"
-    URL_HASH
-        SHA1=@HUNTER_PACKAGE_SHA1@
-    DOWNLOAD_EXTRACT_TIMESTAMP
-        TRUE
-    TLS_VERIFY
-        "@HUNTER_TLS_VERIFY@"
-    DOWNLOAD_DIR
-        "@HUNTER_PACKAGE_DOWNLOAD_DIR@"
-    SOURCE_DIR
-        "@HUNTER_PACKAGE_SOURCE_DIR@"
-    INSTALL_DIR
-      "@HUNTER_PACKAGE_INSTALL_PREFIX@"
-    CONFIGURE_COMMAND
-        ${MSVC_SETUP_STEP}
-    COMMAND
-        ${CMAKE_COMMAND} -E env PATH=${_meson_path} ${Python3_EXECUTABLE} -m mesonbuild.mesonmain setup --native-file "${native_file_path}" --libdir lib --prefix @HUNTER_PACKAGE_INSTALL_PREFIX@ ${additional_setup_args} -Dcmake_prefix_path=@HUNTER_PACKAGE_INSTALL_PREFIX@/lib/cmake ${meson_configure_args} "${MESON_BUILD_DIR}"
-    BUILD_COMMAND
-        ${CMAKE_COMMAND} -E env PATH=${_meson_path} ${Python3_EXECUTABLE} -m mesonbuild.mesonmain compile -C "${MESON_BUILD_DIR}"
-    BUILD_IN_SOURCE
-        1
-    INSTALL_COMMAND
-        ${CMAKE_COMMAND} -E env PATH=${_meson_path} ${Python3_EXECUTABLE} -m mesonbuild.mesonmain install -C "${MESON_BUILD_DIR}")
+if (MESON_CONFIGURE_OPTIONS)
+    string(REPLACE " " ";" MESON_ADDITIONAL_ARG_LIST ${MESON_CONFIGURE_OPTIONS})
+    foreach (dep ${MESON_ADDITIONAL_ARG_LIST})
+        list(APPEND meson_configure_args "-D${dep}")
+    endforeach()
+endif()
+
+foreach(configuration ${configuration_types})
+    string(TOUPPER "${configuration}" configuration_upper)
+    string(COMPARE EQUAL "${configuration_upper}" "RELEASE" is_release)
+    set(meson_build_type "release")
+    if (BUILD_SHARED_LIBS)
+        list(APPEND meson_configure_args "-Ddefault_both_libraries=shared")
+    else()
+        list(APPEND meson_configure_args "-Ddefault_both_libraries=statics")
+    endif()
+
+    if (NOT is_release)
+        set(meson_build_type "debug")
+        list(APPEND meson_configure_args "-Ddebug=true")
+    else()
+        list(APPEND meson_configure_args "-Ddebug=false")
+    endif()
+
+    list(APPEND meson_configure_args "-DbuildType=${meson_build_type}")
+
+    ExternalProject_Add(
+            "@HUNTER_EP_NAME@"
+        URL
+            "@HUNTER_PACKAGE_URL@"
+        URL_HASH
+            SHA1=@HUNTER_PACKAGE_SHA1@
+        DOWNLOAD_EXTRACT_TIMESTAMP
+            TRUE
+        TLS_VERIFY
+            "@HUNTER_TLS_VERIFY@"
+        DOWNLOAD_DIR
+            "@HUNTER_PACKAGE_DOWNLOAD_DIR@"
+        SOURCE_DIR
+            "@HUNTER_PACKAGE_SOURCE_DIR@"
+        INSTALL_DIR
+        "@HUNTER_PACKAGE_INSTALL_PREFIX@"
+        CONFIGURE_COMMAND
+            ${MSVC_SETUP_STEP}
+        COMMAND
+            ${CMAKE_COMMAND} -E env PATH=${_meson_path} ${Python3_EXECUTABLE} -m mesonbuild.mesonmain setup --native-file "${native_file_path}" --libdir lib --prefix @HUNTER_PACKAGE_INSTALL_PREFIX@ ${additional_setup_args} -Dcmake_prefix_path=@HUNTER_PACKAGE_INSTALL_PREFIX@/lib/cmake ${meson_configure_args} "${MESON_BUILD_DIR}"
+        BUILD_COMMAND
+            ${CMAKE_COMMAND} -E env PATH=${_meson_path} ${Python3_EXECUTABLE} -m mesonbuild.mesonmain compile -C "${MESON_BUILD_DIR}"
+        BUILD_IN_SOURCE
+            1
+        INSTALL_COMMAND
+            ${CMAKE_COMMAND} -E env PATH=${_meson_path} ${Python3_EXECUTABLE} -m mesonbuild.mesonmain install -C "${MESON_BUILD_DIR}")
+
+endforeach()
