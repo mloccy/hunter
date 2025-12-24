@@ -17,7 +17,7 @@ hunter_add_version(
     0145501ee1ab8c1a168b9ad3f27b7b5a34fce6a0
 )
 
-set (config_arguments "documentation=false tests=false")
+set (config_arguments  "documentation=false dtd_validation=false tests=false")
 
 set(deps Expat libxml2)
 hunter_cmake_args(

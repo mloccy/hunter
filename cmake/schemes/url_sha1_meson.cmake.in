@@ -43,13 +43,7 @@ if (NOT WIN32)
 endif()
 
 set(configuration_types "@HUNTER_PACKAGE_CONFIGURATION_TYPES@")
-list(LENGTH configuration_types len)
-if(len EQUAL "1")
-  set(no_postfix TRUE)
-else()
-  set(no_postfix FALSE)
-endif()
-
+set(previous_project "")
 
 set(_meson_path ${HUNTER_INSTALL_PREFIX}/bin:$ENV{PATH})
 set(native_file_path "@HUNTER_PACKAGE_DOWNLOAD_DIR@/meson-native.ini")
@@ -94,13 +88,15 @@ if (MESON_CONFIGURE_OPTIONS)
 endif()
 
 foreach(configuration ${configuration_types})
+    set(current_project "@HUNTER_EP_NAME@-${configuration}")
+
     string(TOUPPER "${configuration}" configuration_upper)
     string(COMPARE EQUAL "${configuration_upper}" "RELEASE" is_release)
     set(meson_build_type "release")
     if (BUILD_SHARED_LIBS)
         list(APPEND meson_configure_args "-Ddefault_both_libraries=shared")
     else()
-        list(APPEND meson_configure_args "-Ddefault_both_libraries=statics")
+        list(APPEND meson_configure_args "-Ddefault_both_libraries=static")
     endif()
 
     if (NOT is_release)
@@ -110,10 +106,10 @@ foreach(configuration ${configuration_types})
         list(APPEND meson_configure_args "-Ddebug=false")
     endif()
 
-    list(APPEND meson_configure_args "-DbuildType=${meson_build_type}")
+    list(APPEND meson_configure_args "-Dbuildtype=${meson_build_type}")
 
     ExternalProject_Add(
-            "@HUNTER_EP_NAME@"
+            "${current_project}"
         URL
             "@HUNTER_PACKAGE_URL@"
         URL_HASH
@@ -138,5 +134,17 @@ foreach(configuration ${configuration_types})
             1
         INSTALL_COMMAND
             ${CMAKE_COMMAND} -E env PATH=${_meson_path} ${Python3_EXECUTABLE} -m mesonbuild.mesonmain install -C "${MESON_BUILD_DIR}")
+
+    # Each external project must depends on previous one since they all use
+    # the same building directory
+    string(COMPARE EQUAL "${previous_project}" "" is_empty)
+    if(NOT is_empty)
+        add_dependencies(
+            "${current_project}"
+            "${previous_project}"
+        )
+    endif()
+    set(previous_project "${current_project}")
+
 
 endforeach()
