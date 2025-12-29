@@ -98,10 +98,8 @@ hunter_add_version(
     ea52d7dd15f0204d465f9e4f930c37345602d7e8
 )
 
-
-
 hunter_cmake_args(
-    SPIRV-Tools
+    SPIRV-Headers
     CMAKE_ARGS
       SPIRV_HEADERS_SKIP_EXAMPLES=ON
 )
