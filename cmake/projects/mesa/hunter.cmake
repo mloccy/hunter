@@ -46,7 +46,7 @@ if(WIN32)
     list(APPEND deps DirectX-Headers)
     set(meson_configure_args "gallium-drivers=llvmpipe,d3d12 vulkan-drivers=swrast")
 else()
-    set(meson_configure_args "gallium-drivers=llvmpipe vulkan-drivers=swrast shared-llvm=false")
+    set(meson_configure_args "gallium-drivers=llvmpipe vulkan-drivers=swrast shared-llvm=false c_link_args=-lXau")
 endif()
 
 hunter_cmake_args(mesa
