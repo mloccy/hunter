@@ -16,6 +16,7 @@ _testing
 
 # EP_BASE (install, download, build, ...)
 _Base
+**/[bB]uild/*
 
 # macosx
 .DS_Store

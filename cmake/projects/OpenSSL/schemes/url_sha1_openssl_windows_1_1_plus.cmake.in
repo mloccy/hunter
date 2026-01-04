@@ -80,19 +80,22 @@ if(DEBUG_RUNTIME)
   set(arch "debug-${arch}")
 endif()
 
+set(opt "no-docs")
+list(APPEND opt "no-demos")
+
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "WindowsStore")
   hunter_add_package(NASM) # set NASM_ROOT
-  set(opt "no-async")
+  list(APPEND opt "no-async")
 elseif(ASM_SUPPORT)
   if (MSVC OR MINGW)
     enable_language(C)
     enable_language(CXX)
     hunter_add_package(NASM) # set NASM_ROOT
   endif()
-  set(opt "")
+  list(APPEND "")
 else()
   set(NASM_ROOT "")
-  set(opt "no-asm")
+  list(APPEND "no-asm")
 endif()
 
 if("@MSVC@" AND ${CMAKE_VERSION} VERSION_LESS_EQUAL "2.8.12")

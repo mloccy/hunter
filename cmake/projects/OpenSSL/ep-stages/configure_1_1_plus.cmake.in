@@ -15,6 +15,11 @@ endif()
 execute_process(COMMAND
   perl Configure @arch@ @opt@ @shared@ "--prefix=@openssl_install_dir@" "--libdir=lib" "--openssldir=@openssl_dir@" RESULT_VARIABLE result)
 
+if (HUNTER_STATUS_DEBUG)
+  execute_process(COMMAND
+    perl configdata.pm --dump)
+
+endif()
 if(NOT result EQUAL 0)
   message(FATAL_ERROR "OpenSSL configure failed: ${result}")
 endif()

@@ -43,7 +43,7 @@ hunter_default_version(CLI11 VERSION 2.3.2)
 hunter_default_version(CURL VERSION 8.5.0-p0)
 hunter_default_version(CapnProto VERSION 0.7.0)
 hunter_default_version(Catch VERSION 2.13.9)
-hunter_default_version(Clang VERSION 13.0.1-p2)
+hunter_default_version(Clang VERSION 18.1.8)
 hunter_default_version(ClangToolsExtra VERSION 6.0.1) # Clang
 hunter_default_version(Comet VERSION 4.0.2)
 hunter_default_version(CppNetlib VERSION 0.10.1-hunter-3)
@@ -80,7 +80,7 @@ hunter_default_version(JsonSpirit VERSION 0.0.4-hunter)
 hunter_default_version(KTX-Software VERSION 4.0.0-efc9f09-p0)
 hunter_default_version(KhronosDataFormat VERSION 1.3.1-1f8c852-p3)
 hunter_default_version(LAPACK VERSION 3.7.1)
-hunter_default_version(LLVM VERSION 13.0.1-p2) # Clang
+hunter_default_version(LLVM VERSION 18.1.8) # Clang
 hunter_default_version(LLVMCompilerRT VERSION 6.0.1) # Clang
 hunter_default_version(Lager VERSION 0.0.0-dbc1fde-p0)
 hunter_default_version(Leathers VERSION 0.1.8)

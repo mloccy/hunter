@@ -14,6 +14,18 @@ include(hunter_source_subdir)
 include(hunter_set_package_archive_format)
 include(hunter_archive_options)
 
+
+hunter_add_version(
+    PACKAGE_NAME
+    LLVM
+    VERSION
+    "18.1.8"
+	URL
+	"https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-18.1.8.tar.gz"
+    SHA1
+    a7512056b47bf93929d6d04a17c9b887d12ab83c
+)
+
 hunter_add_version(
     PACKAGE_NAME
     LLVM

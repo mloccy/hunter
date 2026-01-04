@@ -9,6 +9,21 @@ include(hunter_pick_scheme)
 include(hunter_source_subdir)
 include(hunter_cmake_args)
 include(hunter_configuration_types)
+include(hunter_set_package_archive_format)
+include(hunter_archive_options)
+include(hunter_cacheable)
+
+hunter_add_version(
+    PACKAGE_NAME
+    Clang
+    VERSION
+    "18.1.8"
+	URL
+	"https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-18.1.8.tar.gz"
+    SHA1
+    a7512056b47bf93929d6d04a17c9b887d12ab83c
+)
+
 hunter_add_version(
     PACKAGE_NAME
     Clang
@@ -108,5 +123,8 @@ else()
     hunter_pick_scheme(DEFAULT url_sha1_unpack)
 endif()
 
+
+hunter_set_package_archive_format(PACKAGE_NAME Clang FORMAT ${HUNTER_ARCHIVE_LZMA_OPTION})
+hunter_cacheable(Clang)
 hunter_configuration_types(Clang CONFIGURATION_TYPES Release)
 hunter_download(PACKAGE_NAME Clang)
