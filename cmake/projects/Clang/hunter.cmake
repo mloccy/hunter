@@ -6,6 +6,19 @@
 include(hunter_add_version)
 include(hunter_download)
 include(hunter_pick_scheme)
+include(hunter_source_subdir)
+include(hunter_cmake_args)
+include(hunter_configuration_types)
+hunter_add_version(
+    PACKAGE_NAME
+    Clang
+    VERSION
+    "13.0.1-p2"
+	URL
+	"https://github.com/mloccy/llvm-project/archive/refs/tags/llvmorg-13.0.1-p2.tar.gz"
+    SHA1
+    dc440ff4fd30853ebc88a539431ec97043a55b5b
+)
 
 hunter_add_version(
     PACKAGE_NAME
@@ -84,6 +97,16 @@ hunter_add_version(
     add5420b10c3c3a38c4dc2322f8b64ba0a5def97
 )
 
-hunter_pick_scheme(DEFAULT url_sha1_unpack)
+set(deps LLVM)
 
+if(HUNTER_Clang_VERSION VERSION_GREATER "6.0.1-p0")
+    hunter_pick_scheme(DEFAULT url_sha1_cmake)
+    hunter_source_subdir(Clang SOURCE_SUBDIR clang)
+    hunter_cmake_args(Clang CMAKE_ARGS
+        DEPENDS_ON_PACKAGES=${deps})
+else()
+    hunter_pick_scheme(DEFAULT url_sha1_unpack)
+endif()
+
+hunter_configuration_types(Clang CONFIGURATION_TYPES Release)
 hunter_download(PACKAGE_NAME Clang)

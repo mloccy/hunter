@@ -7,6 +7,7 @@ include(hunter_add_version)
 include(hunter_cacheable)
 include(hunter_download)
 include(hunter_pick_scheme)
+include(hunter_cmake_args)
 
 hunter_add_version(
     PACKAGE_NAME
@@ -33,6 +34,15 @@ hunter_add_version(
 hunter_cacheable(libxml2)
 hunter_pick_scheme(DEFAULT url_sha1_cmake)
 
+hunter_cmake_args(
+    libxml2
+    CMAKE_ARGS
+    LIBXML2_WITH_ICONV=Off
+    LIBXML2_WITH_TESTS=Off)
+
+if (MSVC)
+    hunter_configuration_types(libxml2 CONFIGURATION_TYPES Release)
+endif()
 if (HUNTER_libxml2_VERSION VERSION_GREATER "2.9.7-p0")
     hunter_download(PACKAGE_NAME libxml2 PACKAGE_UNRELOCATABLE_TEXT_FILES "lib/pkgconfig/libxml-2.0.pc")
 else()
