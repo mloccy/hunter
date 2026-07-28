@@ -113,7 +113,7 @@ hunter_status_debug("ADDITIONAL MESON OPTIONS: ${MESON_ADDITIONAL_ARG_LIST}")
     endforeach()
 endif()
 
-if (NOT MESON_PACKAGE_SETS_C_ARGS)
+if (NOT MESON_PACKAGE_SETS_C_ARGS AND MESON_ADDITIONAL_LINK_LIBRARIES)
     string(JOIN " -l" meson_c_link_args ${MESON_ADDITIONAL_LINK_LIBRARIES})
     set(meson_c_link_args "-l${meson_c_link_args}")
     set(meson_c_link_args "-L${LIBRARY_DIR} ${meson_c_link_args}")
