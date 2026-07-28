@@ -18,13 +18,14 @@ hunter_add_version(
     ffc0fc6dc44ffa3707da8bfa939c9cef32cc14e5
 )
 
-set (config_arguments "egl=true c_link_args=-lxcb x11=enabled asm=enabled")
-
+set (config_arguments "egl=true x11=enabled asm=enabled")
+set (libs "xcb" "Xau")
 set(deps x11)
 hunter_cmake_args(
     libglvnd
     CMAKE_ARGS
     DEPENDS_ON_PACKAGES=${deps}
+    MESON_ADDITIONAL_LINK_LIBRARIES=${libs}
     MESON_CONFIGURE_OPTIONS=${config_arguments}
 )
 

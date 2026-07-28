@@ -18,13 +18,15 @@ hunter_add_version(
     f487d1e7f5e362b8971e23e354d9eb4bdc51e453
 )
 
-set (config_arguments "enable-docs=false enable-tools=false enable-x11=true enable-wayland=true c_link_args=-lXau")
+set(libs "Xau")
+set(config_arguments "enable-docs=false enable-tools=false enable-x11=true enable-wayland=true")
 
 set(deps bison xcb libxml2)
 hunter_cmake_args(
     xkbcommon
     CMAKE_ARGS
     DEPENDS_ON_PACKAGES=${deps}
+    MESON_ADDITIONAL_LINK_LIBRARIES=${libs}
     MESON_CONFIGURE_OPTIONS=${config_arguments}
 )
 
