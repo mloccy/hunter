@@ -11,6 +11,17 @@ hunter_add_version(
         PACKAGE_NAME
         SDL3
         VERSION
+        "v3.3.6-p2"
+        URL
+        "https://github.com/mloccy/SDL/archive/refs/tags/SDL3.3.6-hunter-p2.tar.gz"
+        SHA1
+        be09810ce58f2009990d65913af7dea2dd11a637
+)
+
+hunter_add_version(
+        PACKAGE_NAME
+        SDL3
+        VERSION
         "v3.3.6-p1"
         URL
         "https://github.com/mloccy/SDL/archive/refs/tags/SDL3.3.6-hunter-p1.tar.gz"
@@ -95,7 +106,7 @@ hunter_add_version(
         d7fea0137a2a5ad03182dafcc066f5c7d6ee04c4
 )
 
-hunter_cmake_args(SDL3 CMAKE_ARGS CMAKE_POSITION_INDEPENDENT_CODE=On)
+hunter_cmake_args(SDL3 CMAKE_ARGS CMAKE_POSITION_INDEPENDENT_CODE=ON SDL_SHARED=ON SDL_STATIC=ON SDL_WAYLAND_SHARED=OFF SDL_X11_SHARED=OFF SDL_TEST_LIBRARY=OFF)
 hunter_pick_scheme(DEFAULT url_sha1_cmake)
 hunter_cacheable(SDL3)
 hunter_download(PACKAGE_NAME SDL3)
