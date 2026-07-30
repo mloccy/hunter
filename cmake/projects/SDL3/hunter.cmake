@@ -7,6 +7,18 @@ include(hunter_pick_scheme)
 include(hunter_cacheable)
 include(hunter_cmake_args)
 
+
+hunter_add_version(
+        PACKAGE_NAME
+        SDL3
+        VERSION
+        "v3.3.6-p3"
+        URL
+        "https://github.com/mloccy/SDL/archive/refs/tags/SDL3.3.6-hunter-p3.tar.gz"
+        SHA1
+        c654e5c125389ed322f2925598f8dafd1da9d2d6
+)
+
 hunter_add_version(
         PACKAGE_NAME
         SDL3
